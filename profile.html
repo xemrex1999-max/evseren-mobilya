@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hesabım | Evseren Mobilya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { background: #f8f9fa; }
+    .profile-layout { display: grid; grid-template-columns: 280px 1fr; gap: 30px; padding: 40px 0; }
+    
+    /* Sidebar (Trendyol Style) */
+    .profile-sidebar { background: white; border-radius: var(--radius-lg); padding: 20px 0; box-shadow: var(--shadow-sm); height: fit-content; }
+    .user-summary { padding: 0 20px 20px; border-bottom: 1px solid #eee; margin-bottom: 15px; display: flex; align-items: center; gap: 12px; }
+    .user-avatar { width: 50px; height: 50px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; }
+    .user-name { font-weight: 600; font-size: 0.95rem; color: var(--primary); }
+    .user-email { font-size: 0.75rem; color: var(--text-light); }
+
+    .side-nav-item { padding: 12px 20px; display: flex; align-items: center; gap: 12px; color: var(--text); cursor: pointer; transition: 0.3s; font-size: 0.9rem; font-weight: 500; border-left: 3px solid transparent; }
+    .side-nav-item:hover, .side-nav-item.active { background: #fff8f0; color: var(--accent); border-left-color: var(--accent); }
+    .side-nav-item i { width: 20px; text-align: center; font-size: 1.1rem; }
+
+    /* Content Area */
+    .profile-content { background: white; border-radius: var(--radius-lg); padding: 30px; box-shadow: var(--shadow-sm); min-height: 500px; }
+    .tab-title { font-family: var(--font-heading); margin-bottom: 25px; font-size: 1.6rem; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; }
+
+    /* Order Cards (Trendyol Style) */
+    .order-card { border: 1px solid #eee; border-radius: 12px; padding: 20px; margin-bottom: 20px; transition: 0.3s; }
+    .order-card:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
+    .order-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px dashed #eee; }
+    .order-date { font-size: 0.85rem; color: var(--text-light); }
+    .order-status-tag { padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; }
+    .status-delivered { background: #e8f5e9; color: #2e7d32; }
+    .status-processing { background: #fff3e0; color: #ef6c00; }
+    
+    .order-body { display: flex; gap: 15px; align-items: center; }
+    .order-img-preview { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; }
+    .order-info-text { flex: 1; }
+    .order-code { font-weight: 700; color: var(--primary); font-size: 0.9rem; }
+    .order-price { font-weight: 700; color: var(--accent); margin-top: 4px; }
+
+    /* Info Form */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.85rem; color: var(--text-light); }
+    .profile-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none; transition: 0.3s; }
+    .profile-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1); }
+
+    @media (max-width: 992px) {
+      .profile-layout { grid-template-columns: 1fr; }
+      .profile-sidebar { position: sticky; top: 80px; z-index: 100; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.jpeg" alt="Evseren Mobilya" style="height: 60px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply;" />
+      </a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
+          <li><a href="products.html" class="nav-link">Ürünler</a></li>
+          <li><a href="track-order.html" class="nav-link">Sipariş Takibi</a></li>
+          <li><a href="about.html" class="nav-link">Hakkımızda</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn" id="logoutBtn" title="Çıkış Yap"><i class="fas fa-sign-out-alt"></i></button>
+        <button class="icon-btn cart-btn" id="cartBtn">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container profile-layout">
+    <aside class="profile-sidebar">
+      <div class="user-summary">
+        <div class="user-avatar" id="avatarInitial">U</div>
+        <div>
+          <div class="user-name" id="profileName">Kullanıcı Adı</div>
+          <div class="user-email" id="profileEmail">email@example.com</div>
+        </div>
+      </div>
+      <div class="side-nav-item active" onclick="switchProfileTab('orders')">
+        <i class="fas fa-box-open"></i> Tüm Siparişlerim
+      </div>
+      <div class="side-nav-item" onclick="switchProfileTab('info')">
+        <i class="fas fa-user-circle"></i> Kullanıcı Bilgilerim
+      </div>
+      <div class="side-nav-item" onclick="switchProfileTab('favs')">
+        <i class="fas fa-heart"></i> Favorilerim
+      </div>
+      <div class="side-nav-item" onclick="switchProfileTab('coupons')">
+        <i class="fas fa-ticket-alt"></i> İndirim Kuponlarım
+      </div>
+      <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px;">
+        <div class="side-nav-item" onclick="handleLogout()" style="color: #d32f2f;">
+          <i class="fas fa-power-off"></i> Çıkış Yap
+        </div>
+      </div>
+    </aside>
+
+    <main class="profile-content">
+      <!-- ORDERS TAB -->
+      <div id="tab-orders" class="profile-tab">
+        <h2 class="tab-title">Siparişlerim</h2>
+        <div id="ordersList">
+           <!-- JS renders here -->
+           <p style="text-align:center; padding:50px; color:#aaa">Henüz bir siparişiniz bulunmuyor.</p>
+        </div>
+      </div>
+
+      <!-- INFO TAB -->
+      <div id="tab-info" class="profile-tab" style="display:none">
+        <h2 class="tab-title">Kullanıcı Bilgilerim</h2>
+        <form id="updateInfoForm">
+          <div class="info-grid">
+            <div class="form-group">
+              <label>Ad Soyad</label>
+              <input type="text" id="infoName" class="profile-input" required />
+            </div>
+            <div class="form-group">
+              <label>E-posta</label>
+              <input type="email" id="infoEmail" class="profile-input" disabled />
+            </div>
+            <div class="form-group">
+              <label>Telefon</label>
+              <input type="tel" id="infoPhone" class="profile-input" placeholder="05XX XXX XX XX" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Adres</label>
+            <textarea id="infoAddr" class="profile-input" rows="3" placeholder="Mahalle, sokak, no..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="padding: 12px 40px">Bilgilerimi Güncelle</button>
+        </form>
+      </div>
+
+      <!-- FAVS TAB -->
+      <div id="tab-favs" class="profile-tab" style="display:none">
+        <h2 class="tab-title">Favorilerim</h2>
+        <div id="favsGrid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
+           <!-- Product cards will render here -->
+        </div>
+      </div>
+
+      <!-- COUPONS TAB -->
+      <div id="tab-coupons" class="profile-tab" style="display:none">
+        <h2 class="tab-title">İndirim Kuponlarım</h2>
+        <div style="background:linear-gradient(135deg, var(--accent), var(--accent-light)); padding:30px; border-radius:12px; color:white; text-align:center;">
+           <i class="fas fa-gift" style="font-size:3rem; margin-bottom:15px"></i>
+           <h3>Müjde! Size Özel İlk Alışveriş İndirimi</h3>
+           <p style="margin-top:10px; font-size:1.2rem; font-weight:700">Kupon Kodu: EVSEREN10</p>
+           <span style="font-size:0.8rem; opacity:0.8">* %10 indirim sağlar. Sepette uygulayabilirsiniz.</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer" style="margin-top: 40px; background: var(--dark2); color:white; padding: 40px 0; text-align:center;">
+    <p>© 2026 Evseren Mobilya - Tüm Hakları Saklıdır.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="profile.js"></script>
+</body>
+</html>

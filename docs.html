@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yasal Bilgilendirme | Evseren Mobilya</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- PAGE HEADER -->
+  <header class="header">
+    <div class="container header-inner" style="height: 70px;">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fas fa-couch"></i></div>
+        <div class="logo-text">
+          <span class="logo-main">EVSEREN</span>
+          <span class="logo-sub">MOBİLYA</span>
+        </div>
+      </a>
+      <a href="index.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Alışverişe Dön</a>
+    </div>
+  </header>
+
+  <main class="docs-page">
+    <div class="container">
+      <div class="product-detail-layout" style="grid-template-columns: 300px 1fr; gap: 40px;">
+        
+        <!-- SIDEBAR -->
+        <aside class="docs-sidebar">
+          <ul class="docs-nav" id="docsNav">
+            <li><a href="?p=mesafeli-satis" data-page="mesafeli-satis">Mesafeli Satış Sözleşmesi</a></li>
+            <li><a href="?p=on-bilgilendirme" data-page="on-bilgilendirme">Ön Bilgilendirme Formu</a></li>
+            <li><a href="?p=gizlilik" data-page="gizlilik">Gizlilik Politikası</a></li>
+            <li><a href="?p=kvkk" data-page="kvkk">KVKK Aydınlatma Metni</a></li>
+            <li><a href="?p=iptal-iade" data-page="iptal-iade">İptal ve İade Şartları</a></li>
+            <li><a href="?p=cerez" data-page="cerez">Çerez Politikası</a></li>
+          </ul>
+        </aside>
+
+        <!-- CONTENT -->
+        <article class="docs-content" id="docsContent">
+          <h1 id="docTitle">Yükleniyor...</h1>
+          <div id="docBody">
+            <p>Lütfen bir döküman seçin.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const docs = {
+      'mesafeli-satis': {
+        title: 'Mesafeli Satış Sözleşmesi',
+        body: `
+          <h3>1. TARAFLAR</h3>
+          <p>İşbu Sözleşme, aşağıda belirtilen taraflar arasında aşağıda belirtilen hüküm ve şartlar çerçevesinde imzalanmıştır.</p>
+          <p><strong>SATICI:</strong> [Evseren Mobilya Tam Ünvanı]<br>Adres: [Adres]<br>E-posta: [E-posta]</p>
+          <p><strong>ALICI:</strong> [Müşteri Bilgileri]</p>
+          <h3>2. KONU</h3>
+          <p>İşbu Sözleşme'nin konusu, ALICI'nın SATICI'ya ait www.evserenmobilya.com internet sitesi üzerinden elektronik ortamda siparişini verdiği ürünün satışı ve teslimi ile ilgili olarak 6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği hükümleri uyarınca tarafların hak ve yükümlülüklerinin belirlenmesidir.</p>
+          <h3>3. CAYMA HAKKI</h3>
+          <p>ALICI; mal satışına ilişkin mesafeli sözleşmelerde, ürünün kendisine veya gösterdiği adresteki kişi/kuruluşa teslim tarihinden itibaren 14 (on dört) gün içerisinde, SATICI'ya bildirmek şartıyla hiçbir hukuki ve cezai sorumluluk üstlenmeksizin ve hiçbir gerekçe göstermeksizin malı reddederek sözleşmeden cayma hakkını kullanabilir.</p>
+        `
+      },
+      'kvkk': {
+        title: 'KVKK Aydınlatma Metni',
+        body: `
+          <p>Veri Sorumlusu: [Şirket Ünvanı]</p>
+          <p>Kişisel verileriniz, 6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) uyarınca, veri sorumlusu sıfatıyla [Şirket Ünvanı] tarafından aşağıda açıklanan kapsamda işlenebilecektir.</p>
+          <h3>Kişisel Verilerin İşlenme Amacı</h3>
+          <p>Toplanan kişisel verileriniz, ürün ve hizmetlerimizin sunulabilmesi, siparişlerin yönetimi, satış sonrası destek hizmetlerinin yürütülmesi ve yasal yükümlülüklerin yerine getirilmesi amaçlarıyla işlenmektedir.</p>
+          <h3>Veri Paylaşımı</h3>
+          <p>Kişisel verileriniz, yasal zorunluluklar ve hizmet ifası gereği iş ortaklarımız (kargo firmaları, ödeme sistemleri) ile paylaşılabilecek olup; üçüncü taraflara izinsiz aktarılmamaktadır.</p>
+        `
+      },
+      'gizlilik': {
+        title: 'Gizlilik Politikası',
+        body: `
+          <p>www.evserenmobilya.com olarak, kullanıcılarımızın kişisel verilerinin korunmasına büyük önem veriyoruz. Bu metin, hangi verileri ne amaçla topladığımızı ve nasıl koruduğumuzu açıklar.</p>
+          <p>Sitemiz üzerinden toplanan isim, telefon, adres gibi veriler yalnızca sipariş işlemlerinin yürütülmesi amacıyla kullanılır. Verileriniz SSL sertifikası ile şifrelenerek korunmaktadır.</p>
+        `
+      },
+      'iptal-iade': {
+        title: 'İptal ve İade Şartları',
+        body: `
+          <p>Evseren Mobilya'dan aldığınız ürünleri, kargo teslim tarihinden itibaren 14 gün içinde iade edebilirsiniz. İade edilecek ürünün orijinal ambalajında, hasarsız ve eksiksiz olması gerekmektedir.</p>
+          <p>Kurulumu yapılmış mobilya ürünlerinde, hijyen kuralları gereği (yatak vb.) veya kişiye özel üretilen ürünlerde iade kabul edilememektedir.</p>
+        `
+      }
+    };
+
+    function loadDoc() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const page = urlParams.get('p') || 'mesafeli-satis';
+      const doc = docs[page] || docs['mesafeli-satis'];
+
+      document.getElementById('docTitle').innerText = doc.title;
+      document.getElementById('docBody').innerHTML = doc.body;
+
+      // Update Nav
+      document.querySelectorAll('#docsNav a').forEach(a => {
+        a.classList.remove('active');
+        if(a.getAttribute('data-page') === page) a.classList.add('active');
+      });
+      
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener('load', loadDoc);
+    window.addEventListener('popstate', loadDoc);
+  </script>
+
+</body>
+</html>

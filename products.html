@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ürünler | Evseren Mobilya</title>
+  <meta name="description" content="Yatak odası, yemek odası, koltuk takımı, köşe takımı, TV ünitesi ve düğün paketleri. Geniş ürün yelpazemizi keşfedin." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="chatbot.css" />
+</head>
+<body>
+
+  <div class="topbar">
+    <span><i class="fas fa-truck"></i> Türkiye Genelinde Ücretsiz Nakliye &amp; Kurulum</span>
+    <span>
+      <a href="tel:+905314602597" style="color:inherit;text-decoration:none;"><i class="fas fa-phone-alt"></i> +90 531 460 25 97</a> | 
+      <a href="tel:+905077567887" style="color:inherit;text-decoration:none;">+90 507 756 78 87</a>
+    </span>
+    <span><i class="fas fa-clock"></i> Pzt–Cts 09:00–18:00</span>
+  </div>
+
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.jpeg" alt="Evseren Mobilya" style="height: 60px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply;" />
+      </a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
+          <li class="nav-dropdown">
+            <a href="products.html" class="nav-link active">Ürünler <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="products.html?cat=dugun">♥ Düğün Paketleri</a></li>
+              <li><a href="products.html?cat=yatak">Yatak Odaları</a></li>
+              <li><a href="products.html?cat=yemek">Yemek Odaları</a></li>
+              <li><a href="products.html?cat=koltuk">Koltuk Takımları</a></li>
+              <li><a href="products.html?cat=kose">Köşe Takımları</a></li>
+              <li><a href="products.html?cat=tv">TV Üniteleri</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html" class="nav-link">Hakkımızda</a></li>
+          <li><a href="contact.html" class="nav-link">İletişim</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn" id="searchToggle" title="Ara"><i class="fas fa-search"></i></button>
+        <button class="icon-btn cart-btn" id="cartBtn" title="Sepet">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="icon-btn menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+    <div class="search-bar" id="searchBar">
+      <div class="container">
+        <input type="text" id="searchInput" placeholder="Ürün arayın..." />
+        <button id="searchClose"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Ana Sayfa</a><span>/</span><span id="breadCat">Tüm Ürünler</span>
+      </div>
+      <h1 id="pageTitle">Tüm Ürünler</h1>
+    </div>
+  </section>
+
+  <!-- PRODUCTS PAGE — SIDEBAR + GRID -->
+  <section class="section" style="padding-top:40px">
+    <div class="container">
+      <div class="products-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="products-sidebar">
+
+          <div class="filter-box">
+            <h3><i class="fas fa-list" style="color:var(--primary);margin-right:8px"></i>Kategoriler</h3>
+            <ul class="filter-list">
+              <li><button class="filter-item active" data-cat="all" id="filterAll">Tüm Ürünler</button></li>
+              <li><button class="filter-item" data-cat="dugun">♥ Düğün Paketleri</button></li>
+              <li><button class="filter-item" data-cat="yatak">Yatak Odası</button></li>
+              <li><button class="filter-item" data-cat="yemek">Yemek Odası</button></li>
+              <li><button class="filter-item" data-cat="koltuk">Koltuk Takımı</button></li>
+              <li><button class="filter-item" data-cat="kose">Köşe Takımı</button></li>
+              <li><button class="filter-item" data-cat="tv">TV Ünitesi</button></li>
+            </ul>
+          </div>
+
+          <div class="filter-box">
+            <h3><i class="fas fa-tag" style="color:var(--primary);margin-right:8px"></i>Fiyat Aralığı</h3>
+            <ul class="filter-list">
+              <li><button class="filter-item price-filter active" data-min="0" data-max="999999">Tümü</button></li>
+              <li><button class="filter-item price-filter" data-min="0" data-max="20000">₺0 – ₺20.000</button></li>
+              <li><button class="filter-item price-filter" data-min="20000" data-max="50000">₺20.000 – ₺50.000</button></li>
+              <li><button class="filter-item price-filter" data-min="50000" data-max="999999">₺50.000 ve üzeri</button></li>
+            </ul>
+          </div>
+
+          <!-- Özellikler kutusu -->
+          <div class="filter-box" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));border:none">
+            <h3 style="color:white;border-color:rgba(255,255,255,.2)">
+              <i class="fas fa-headset" style="color:#D4A843;margin-right:8px"></i>Yardım Lazım mı?
+            </h3>
+            <p style="font-size:.82rem;color:rgba(255,255,255,.8);margin-bottom:14px;line-height:1.6">
+              Ürün seçiminde uzman ekibimiz size yardımcı olsun.
+            </p>
+            <a href="https://wa.me/905314602597"
+               class="btn btn-outline"
+               style="width:100%;justify-content:center;font-size:.82rem;padding:10px 18px"
+               target="_blank">
+              <i class="fab fa-whatsapp"></i> WhatsApp'ta Yaz
+            </a>
+          </div>
+
+          <!-- Kampanya -->
+          <div class="filter-box" style="text-align:center;padding:20px">
+            <div style="font-size:2rem;margin-bottom:8px">🎁</div>
+            <h4 style="font-size:.9rem;color:var(--dark);margin-bottom:6px">Düğün Paketleri</h4>
+            <p style="font-size:.78rem;color:var(--text-light);margin-bottom:12px">%15 indirimle kendi evinizi kurun!</p>
+            <a href="products.html?cat=dugun" class="btn btn-primary" style="font-size:.8rem;padding:8px 18px">Paketleri İncele</a>
+          </div>
+
+        </aside>
+
+        <!-- PRODUCTS MAIN -->
+        <div class="products-main">
+
+          <!-- SORT BAR -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding:14px 18px;background:white;border-radius:var(--radius);border:1px solid var(--border); flex-wrap: wrap; gap: 15px;">
+            <span id="resultCount" style="font-size:.88rem;color:var(--text-light); white-space: nowrap;">Tüm ürünler gösteriliyor</span>
+            
+            <div style="flex:1; min-width: 200px; max-width: 400px; position: relative;">
+                <i class="fas fa-search" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-light);"></i>
+                <input type="text" id="inlineSearchInput" placeholder="Bu sayfada ürün ara..." style="width:100%; padding:8px 12px 8px 35px; border:1px solid var(--border); border-radius:8px; font-family:var(--font-body); outline:none; font-size: .85rem;">
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <label style="font-size:.85rem;color:var(--text-light)">Sırala:</label>
+              <select id="sortSelect" style="border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:.85rem;font-family:var(--font-body);outline:none;background:var(--bg)">
+                <option value="default">Varsayılan</option>
+                <option value="price-asc">Fiyat: Düşük → Yüksek</option>
+                <option value="price-desc">Fiyat: Yüksek → Düşük</option>
+                <option value="new">Yeni Gelenler</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- ÜRÜN GRİDİ -->
+          <div class="products-grid" id="allProducts"></div>
+
+          <!-- BOŞ DURUM -->
+          <div id="noProducts" style="display:none;text-align:center;padding:60px 20px;color:var(--text-light)">
+            <i class="fas fa-search" style="font-size:3rem;margin-bottom:16px;color:var(--border)"></i>
+            <h3 style="font-size:1.2rem;color:var(--dark);margin-bottom:8px">Ürün Bulunamadı</h3>
+            <p>Bu kategoride henüz ürün yok. Diğer kategorileri deneyin.</p>
+          </div>
+
+        </div>
+      </div><!-- .products-layout -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="margin-bottom:16px">
+          <img src="images/logo.jpeg" alt="Evseren Mobilya" style="height: 60px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply;" />
+        </a>
+        <p>Kaliteli mobilyanın doğru adresi. Türkiye geneli ücretsiz nakliye ve kurulum.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/mobilyaevseren/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/p/Evseren-Mobilya-100063699364340/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="https://yandex.com.tr/maps/org/evseren_mobilya/213880097576/" target="_blank" title="Haritada Gör"><i class="fas fa-map-marker-alt"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Kategoriler</h4>
+        <ul>
+          <li><a href="products.html?cat=dugun">♥ Düğün Paketleri</a></li>
+          <li><a href="products.html?cat=yatak">Yatak Odası</a></li>
+          <li><a href="products.html?cat=yemek">Yemek Odası</a></li>
+          <li><a href="products.html?cat=koltuk">Koltuk Takımı</a></li>
+          <li><a href="products.html?cat=kose">Köşe Takımı</a></li>
+          <li><a href="products.html?cat=tv">TV Ünitesi</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hızlı Linkler</h4>
+        <ul>
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="about.html">Hakkımızda</a></li>
+          <li><a href="contact.html">İletişim</a></li>
+          <li><a href="mesafeli-satis.html">Mesafeli Satış Sözleşmesi</a></li>
+          <li><a href="gizlilik.html">Gizlilik Politikası</a></li>
+          <li><a href="kvkk.html">KVKK</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>İletişim</h4>
+        <ul class="footer-contact">
+          <li><i class="fas fa-phone-alt"></i> 
+            <a href="tel:+905314602597" style="color:inherit;text-decoration:none;">+90 531 460 25 97</a><br>
+            <i class="fas fa-phone-alt" style="visibility:hidden"></i> 
+            <a href="tel:+905077567887" style="color:inherit;text-decoration:none;">+90 507 756 78 87</a>
+          </li>
+          <li><i class="fab fa-whatsapp"></i> 
+            <a href="https://wa.me/905314602597" target="_blank" style="color:inherit;text-decoration:none;">WhatsApp Destek (1)</a><br>
+            <i class="fab fa-whatsapp" style="visibility:hidden"></i> 
+            <a href="https://wa.me/905077567887" target="_blank" style="color:inherit;text-decoration:none;">WhatsApp Destek (2)</a>
+          </li>
+          <li><i class="fas fa-envelope"></i> evserenmobilya@gmail.com</li>
+          <li><i class="fas fa-map-marker-alt"></i> 
+            <a href="https://yandex.com.tr/maps/org/evseren_mobilya/213880097576/" target="_blank" style="color:inherit;text-decoration:none;">
+              MAHMUDİYE MH.14 MOB. NİL SK. NO:33<br>İNEGÖL / BURSA (Haritada Gör)
+            </a>
+          </li>
+          <li><i class="fas fa-clock"></i> Pzt–Cts: 09:00–18:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2026 Evseren Mobilya - Tüm hakları saklıdır.</p>
+        <p>
+          <a href="mesafeli-satis.html" style="color:var(--primary-light)">Mesafeli Satış</a> |
+          <a href="gizlilik.html" style="color:var(--primary-light)">Gizlilik</a> |
+          <a href="kvkk.html" style="color:var(--primary-light)">KVKK</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART SIDEBAR -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Sepetim <span id="cartItemCount">(0 ürün)</span></h3>
+      <button class="cart-close" id="cartClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-total-row"><span>Ara Toplam:</span><span id="cartSubtotal" style="text-decoration:line-through;color:var(--text-light)">₺0</span></div>
+      <div class="cart-total-row" style="color:var(--primary);font-weight:600"><span>İndirim Kazancınız:</span><span id="cartDiscount">-₺0</span></div>
+      <div class="cart-total-row"><span>Toplam:</span><strong id="cartTotal">₺0</strong></div>
+      <a href="checkout.html" class="btn btn-primary w-full checkout-btn">Siparişi Tamamla</a>
+    </div>
+  </div>
+
+  <a href="https://wa.me/905314602597" class="whatsapp-float" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+  <button class="scroll-top" id="scrollTop" title="Yukarı"><i class="fas fa-chevron-up"></i></button>
+
+  <script src="script.js"></script>
+  <script src="chatbot.js"></script>
+
+  <!-- SORT + FİLTRE SCRIPT -->
+  <script>
+    // URL parametresinden kategori oku
+    const urlCat = new URLSearchParams(window.location.search).get('cat');
+    if (urlCat) {
+      setTimeout(() => {
+        const btn = document.querySelector(`.filter-item[data-cat="${urlCat}"]`);
+        if (btn) btn.click();
+      }, 200);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sipariş Ver | Evseren Mobilya</title>
+    <meta name="description" content="Güvenli ödeme ile sipariş verin. Türkiye geneli ücretsiz nakliye ve kurulum." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="checkout.css" />
+    <!-- Leaflet.js for Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+        <span><i class="fas fa-lock"></i> Güvenli Ödeme</span>
+        <span><i class="fas fa-truck"></i> Türkiye Geneli Ücretsiz Nakliye</span>
+        <span>
+            <a href="tel:+905314602597" style="color:inherit;text-decoration:none;"><i class="fas fa-phone-alt"></i> +90 531 460 25 97</a> | 
+            <a href="tel:+905077567887" style="color:inherit;text-decoration:none;">+90 507 756 78 87</a>
+        </span>
+    </div>
+
+    <!-- HEADER (Minimal) -->
+    <header class="co-header">
+        <div class="co-header-inner">
+            <a href="index.html" class="logo">
+                <img src="images/logo.jpeg" alt="Evseren Mobilya" style="height: 60px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply;" />
+            </a>
+            <div class="co-secure">
+                <i class="fas fa-shield-alt"></i>
+                <span>256-bit SSL Güvenli Ödeme</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- STEP INDICATOR -->
+    <div class="co-steps-bar">
+        <div class="co-steps-inner">
+            <div class="co-step active" id="step-indicator-1">
+                <div class="co-step-num">1</div>
+                <span>Sepet</span>
+            </div>
+            <div class="co-step-line"></div>
+            <div class="co-step" id="step-indicator-2">
+                <div class="co-step-num">2</div>
+                <span>Teslimat</span>
+            </div>
+            <div class="co-step-line"></div>
+            <div class="co-step" id="step-indicator-3">
+                <div class="co-step-num">3</div>
+                <span>Ödeme</span>
+            </div>
+            <div class="co-step-line"></div>
+            <div class="co-step" id="step-indicator-4">
+                <div class="co-step-num"><i class="fas fa-check"></i></div>
+                <span>Onay</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT BODY -->
+    <main class="co-main">
+        <div class="co-layout">
+
+            <!-- LEFT: STEPS CONTENT -->
+            <div class="co-content">
+
+                <!-- STEP 1: CART REVIEW -->
+                <div class="co-panel active" id="co-step-1">
+                    <h2 class="co-panel-title"><i class="fas fa-shopping-bag"></i> Sepetiniz</h2>
+                    <div id="co-cart-items">
+                        <!-- JS -->
+                    </div>
+                    <div class="co-empty-cart" id="co-empty-cart" style="display:none">
+                        <i class="fas fa-shopping-bag"></i>
+                        <p>Sepetiniz boş</p>
+                        <a href="products.html" class="btn btn-primary">Alışverişe Başla</a>
+                    </div>
+
+                    <!-- COUPON -->
+                    <div class="co-coupon">
+                        <label>Kupon Kodu</label>
+                        <div class="co-coupon-row">
+                            <input type="text" id="couponInput" placeholder="Kupon kodunuz varsa girin" />
+                            <button class="btn btn-outline-dark" id="applyCoupon">Uygula</button>
+                        </div>
+                        <p class="coupon-msg" id="couponMsg"></p>
+                    </div>
+
+                    <div class="co-btns">
+                        <a href="products.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Alışverişe
+                            Devam</a>
+                        <button class="btn btn-primary" id="goToStep2" disabled>
+                            Teslimat Bilgilerine Geç <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: DELIVERY INFO -->
+                <div class="co-panel" id="co-step-2">
+                    <h2 class="co-panel-title"><i class="fas fa-map-marker-alt"></i> Teslimat Bilgileri</h2>
+                    <form id="deliveryForm" novalidate>
+                        <div class="co-form-row">
+                            <div class="form-group">
+                                <label>Ad <span class="req">*</span></label>
+                                <input type="text" id="d-firstName" placeholder="Adınız" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Soyad <span class="req">*</span></label>
+                                <input type="text" id="d-lastName" placeholder="Soyadınız" required />
+                            </div>
+                        </div>
+                        <div class="co-form-row">
+                            <div class="form-group">
+                                <label>Telefon <span class="req">*</span></label>
+                                <input type="tel" id="d-phone" placeholder="05XX XXX XX XX" required />
+                            </div>
+                            <div class="form-group">
+                                <label>E-posta</label>
+                                <input type="email" id="d-email" placeholder="ornek@email.com" />
+                            </div>
+                        </div>
+                        <div class="co-form-row">
+                            <div class="form-group">
+                                <label>İl <span class="req">*</span></label>
+                                <select id="d-city" required>
+                                    <option value="">İl seçin</option>
+                                    <option>Adana</option>
+                                    <option>Adıyaman</option>
+                                    <option>Afyonkarahisar</option>
+                                    <option>Ağrı</option>
+                                    <option>Aksaray</option>
+                                    <option>Amasya</option>
+                                    <option>Ankara</option>
+                                    <option>Antalya</option>
+                                    <option>Ardahan</option>
+                                    <option>Artvin</option>
+                                    <option>Aydın</option>
+                                    <option>Balıkesir</option>
+                                    <option>Bartın</option>
+                                    <option>Batman</option>
+                                    <option>Bayburt</option>
+                                    <option>Bilecik</option>
+                                    <option>Bingöl</option>
+                                    <option>Bitlis</option>
+                                    <option>Bolu</option>
+                                    <option>Burdur</option>
+                                    <option>Bursa</option>
+                                    <option>Çanakkale</option>
+                                    <option>Çankırı</option>
+                                    <option>Çorum</option>
+                                    <option>Denizli</option>
+                                    <option>Diyarbakır</option>
+                                    <option>Düzce</option>
+                                    <option>Edirne</option>
+                                    <option>Elazığ</option>
+                                    <option>Erzincan</option>
+                                    <option>Erzurum</option>
+                                    <option>Eskişehir</option>
+                                    <option>Gaziantep</option>
+                                    <option>Giresun</option>
+                                    <option>Gümüşhane</option>
+                                    <option>Hakkari</option>
+                                    <option>Hatay</option>
+                                    <option>Iğdır</option>
+                                    <option>Isparta</option>
+                                    <option>İstanbul</option>
+                                    <option>İzmir</option>
+                                    <option>Kahramanmaraş</option>
+                                    <option>Karabük</option>
+                                    <option>Karaman</option>
+                                    <option>Kars</option>
+                                    <option>Kastamonu</option>
+                                    <option>Kayseri</option>
+                                    <option>Kırıkkale</option>
+                                    <option>Kırklareli</option>
+                                    <option>Kırşehir</option>
+                                    <option>Kilis</option>
+                                    <option>Kocaeli</option>
+                                    <option>Konya</option>
+                                    <option>Kütahya</option>
+                                    <option>Malatya</option>
+                                    <option>Manisa</option>
+                                    <option>Mardin</option>
+                                    <option>Mersin</option>
+                                    <option>Muğla</option>
+                                    <option>Muş</option>
+                                    <option>Nevşehir</option>
+                                    <option>Niğde</option>
+                                    <option>Ordu</option>
+                                    <option>Osmaniye</option>
+                                    <option>Rize</option>
+                                    <option>Sakarya</option>
+                                    <option>Samsun</option>
+                                    <option>Siirt</option>
+                                    <option>Sinop</option>
+                                    <option>Sivas</option>
+                                    <option>Şanlıurfa</option>
+                                    <option>Şırnak</option>
+                                    <option>Tekirdağ</option>
+                                    <option>Tokat</option>
+                                    <option>Trabzon</option>
+                                    <option>Tunceli</option>
+                                    <option>Uşak</option>
+                                    <option>Van</option>
+                                    <option>Yalova</option>
+                                    <option>Yozgat</option>
+                                    <option>Zonguldak</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>İlçe <span class="req">*</span></label>
+                                <select id="d-district" required>
+                                    <option value="" disabled selected>İlçe Seçin</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- MAP PICKER -->
+                        <div class="form-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Haritadan Konum Seç (Otomatik Doldur)</label>
+                            <div id="addressMap" style="height: 300px; width: 100%; border-radius: 12px; border: 1px solid #ddd; margin-top: 10px; z-index: 10;"></div>
+                            <p style="font-size: 0.75rem; color: #a49a91; margin-top: 5px;">
+                                <i class="fas fa-info-circle"></i> Harita üzerinde tıklayarak adresinizi otomatik doldurabilirsiniz.
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label>Açık Adres <span class="req">*</span></label>
+                            <textarea id="d-address" placeholder="Mahalle, sokak, bina no, daire no..." rows="3"
+                                required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Teslimat Notu (İsteğe bağlı)</label>
+                            <textarea id="d-note" placeholder="Kurulum için özel bir isteğiniz var mı?"
+                                rows="2"></textarea>
+                        </div>
+
+                        <!-- TESLİMAT TARİHİ -->
+                        <div class="co-delivery-options">
+                            <h4>Teslimat & Kurulum Tercihi</h4>
+                            <label class="co-radio-card">
+                                <input type="radio" name="delivery" value="standard" checked />
+                                <div class="co-radio-content">
+                                    <div class="co-radio-header">
+                                        <strong><i class="fas fa-truck"></i> Standart Teslimat</strong>
+                                        <span class="co-free">ÜCRETSİZ</span>
+                                    </div>
+                                    <p>Sipariş onayından sonra 7-14 iş günü içinde teslimat ve kurulum</p>
+                                </div>
+                            </label>
+                            <label class="co-radio-card">
+                                <input type="radio" name="delivery" value="express" />
+                                <div class="co-radio-content">
+                                    <div class="co-radio-header">
+                                        <strong><i class="fas fa-bolt"></i> Hızlı Teslimat</strong>
+                                        <span class="co-paid">+₺499</span>
+                                    </div>
+                                    <p>Sipariş onayından sonra 3-5 iş günü içinde teslimat ve kurulum</p>
+                                </div>
+                            </label>
+                        </div>
+                    </form>
+
+                    <div class="co-btns">
+                        <button class="btn btn-ghost" id="backToStep1"><i class="fas fa-arrow-left"></i> Geri</button>
+                        <button class="btn btn-primary" id="goToStep3">
+                            Ödeme Adımına Geç <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: PAYMENT -->
+                <div class="co-panel" id="co-step-3">
+                    <h2 class="co-panel-title"><i class="fas fa-credit-card"></i> Ödeme Bilgileri</h2>
+
+                    <!-- PAYMENT METHOD -->
+                    <div class="co-payment-methods">
+                        <button class="co-pay-tab active" data-method="card" id="payTabCard">
+                            <i class="fas fa-credit-card"></i> Kredi / Banka Kartı
+                        </button>
+                        <button class="co-pay-tab" data-method="transfer" id="payTabTransfer">
+                            <i class="fas fa-university"></i> Havale / EFT
+                        </button>
+                    </div>
+
+                    <!-- CARD FORM -->
+                    <div class="co-pay-section active" id="pay-card">
+                        <div class="credit-card-preview" id="cardPreview">
+                            <div class="card-chip"><i class="fas fa-microchip"></i></div>
+                            <div class="card-number-preview" id="previewNumber">•••• •••• •••• ••••</div>
+                            <div class="card-bottom">
+                                <div>
+                                    <div class="card-label">Kart Sahibi</div>
+                                    <div class="card-holder-preview" id="previewHolder">AD SOYAD</div>
+                                </div>
+                                <div>
+                                    <div class="card-label">Son Kullanma</div>
+                                    <div class="card-expiry-preview" id="previewExpiry">AA/YY</div>
+                                </div>
+                                <div class="card-logo"><i class="fab fa-cc-visa"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Kart Numarası <span class="req">*</span></label>
+                            <div class="card-input-wrapper">
+                                <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19"
+                                    autocomplete="cc-number" />
+                                <div class="card-type-icons">
+                                    <i class="fab fa-cc-visa"></i>
+                                    <i class="fab fa-cc-mastercard"></i>
+                                    <i class="fab fa-cc-amex"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Kart Üzerindeki Ad <span class="req">*</span></label>
+                            <input type="text" id="cardName" placeholder="AD SOYAD" style="text-transform:uppercase" />
+                        </div>
+                        <div class="co-form-row">
+                            <div class="form-group">
+                                <label>Son Kullanma <span class="req">*</span></label>
+                                <input type="text" id="cardExpiry" placeholder="AA / YY" maxlength="7" />
+                            </div>
+                            <div class="form-group">
+                                <label>CVV <span class="req">*</span></label>
+                                <div class="cvv-wrapper">
+                                    <input type="password" id="cardCVV" placeholder="•••" maxlength="4" />
+                                    <i class="fas fa-question-circle cvv-hint"
+                                        title="Kartınızın arkasındaki 3 veya 4 haneli güvenlik kodu"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- TAKSİT -->
+                        <div class="co-installment">
+                            <h4>Taksit Seçenekleri</h4>
+                            <div class="installment-grid" id="installmentGrid">
+                                <label class="installment-option selected">
+                                    <input type="radio" name="installment" value="1" checked />
+                                    <div><strong>Tek Çekim</strong><span id="inst-1"></span></div>
+                                </label>
+                                <label class="installment-option">
+                                    <input type="radio" name="installment" value="2" />
+                                    <div><strong>2 Taksit</strong><span id="inst-2"></span></div>
+                                </label>
+                                <label class="installment-option">
+                                    <input type="radio" name="installment" value="3" />
+                                    <div><strong>3 Taksit</strong><span id="inst-3"></span></div>
+                                </label>
+                                <label class="installment-option">
+                                    <input type="radio" name="installment" value="4" />
+                                    <div><strong>4 Taksit</strong><span id="inst-4"></span></div>
+                                </label>
+                                <label class="installment-option">
+                                    <input type="radio" name="installment" value="5" />
+                                    <div><strong>5 Taksit</strong><span id="inst-5"></span></div>
+                                </label>
+                                <label class="installment-option">
+                                    <input type="radio" name="installment" value="6" />
+                                    <div><strong>6 Taksit</strong><span id="inst-6"></span></div>
+                                </label>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="co-3d-notice">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Ödemeniz <strong>3D Secure</strong> ile korunmaktadır. Bankanızdan onay SMS'i
+                                gelecektir.</span>
+                        </div>
+                    </div>
+
+                    <!-- TRANSFER -->
+                    <div class="co-pay-section" id="pay-transfer">
+                        <div class="bank-info-card">
+                            <div class="bank-info-header"><i class="fas fa-university"></i> Banka Hesap Bilgileri</div>
+                            <div class="bank-info-row"><span>Banka</span><strong>Ziraat Bankası</strong></div>
+                            <div class="bank-info-row"><span>Hesap Sahibi</span><strong>Evseren Mobilya Ltd.
+                                    Şti.</strong></div>
+                            <div class="bank-info-row"><span>IBAN</span><strong>TR00 0000 0000 0000 0000 0000
+                                    00</strong></div>
+                            <button class="copy-iban-btn" id="copyIban"><i class="fas fa-copy"></i> IBAN
+                                Kopyala</button>
+                        </div>
+                        <div class="co-transfer-note">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Havaleyi yaptıktan sonra sipariş numaranızı ve dekontu <strong>+90 531 460 25 97</strong> veya <strong>+90 507 756 78 87</strong>
+                                numaralı WhatsApp hatlarımıza gönderin. Ödeme onaylandıktan sonra siparişiniz işleme alınır.</p>
+                        </div>
+                    </div>
+
+                    <!-- SÖZLEŞME -->
+                    <div class="co-agreement">
+                        <label class="co-check-label">
+                            <input type="checkbox" id="agreeTerms" />
+                            <span><a href="mesafeli-satis.html" class="link" target="_blank">Mesafeli Satış
+                                    Sözleşmesi</a>'ni ve <a href="gizlilik.html" class="link" target="_blank">Gizlilik
+                                    Politikası</a>'nı okudum, kabul ediyorum.</span>
+                        </label>
+                        <label class="co-check-label" style="margin-top:10px">
+                            <input type="checkbox" id="agreeKVKK" />
+                            <span>Kişisel verilerimin işlenmesine ilişkin <a href="kvkk.html" class="link"
+                                    target="_blank">KVKK Aydınlatma Metni</a>'ni okudum, onaylıyorum.</span>
+                        </label>
+                    </div>
+
+                    <!-- LEGAL CHECKBOXES (Required by Law) -->
+                    <div class="co-legal-checks" style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border);">
+                        <label class="co-checkbox-card" style="display: flex; gap: 10px; cursor: pointer; align-items: flex-start; font-size: 0.82rem; color: var(--text);">
+                            <input type="checkbox" id="acceptTerms" style="margin-top: 3px; accent-color: var(--primary);">
+                            <span>
+                                <a href="docs.html?p=on-bilgilendirme" target="_blank" style="color:var(--primary); font-weight:600;">Ön Bilgilendirme Koşullarını</a> ve 
+                                <a href="docs.html?p=mesafeli-satis" target="_blank" style="color:var(--primary); font-weight:600;">Mesafeli Satış Sözleşmesini</a> 
+                                okudum, onaylıyorum. <span class="req">*</span>
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="co-btns">
+                        <button class="btn-ghost" id="backToStep2"><i class="fas fa-arrow-left"></i> Geri Dön</button>
+                        <button class="btn btn-primary btn-pay" id="placeOrder" disabled>
+                            <i class="fas fa-check-circle"></i> Siparişi Tamamla
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 4: SUCCESS -->
+                <div class="co-panel" id="co-step-4">
+                    <div class="co-success">
+                        <div class="co-success-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h2>Siparişiniz Alındı! 🎉</h2>
+                        <p class="co-success-sub">Teşekkür ederiz! Siparişiniz başarıyla oluşturuldu.</p>
+                        <div class="co-order-box">
+                            <div class="co-order-row">
+                                <span>Sipariş No</span>
+                                <strong id="orderNumber">#MD-000000</strong>
+                            </div>
+                            <div class="co-order-row">
+                                <span>Sipariş Tarihi</span>
+                                <strong id="orderDate">—</strong>
+                            </div>
+                            <div class="co-order-row">
+                                <span>Teslimat Süresi</span>
+                                <strong id="orderDelivery">7-14 iş günü</strong>
+                            </div>
+                            <div class="co-order-row">
+                                <span>Toplam Tutar</span>
+                                <strong id="orderTotal" style="color:var(--primary);font-size:1.1rem">—</strong>
+                            </div>
+                        </div>
+                        <div class="co-success-note">
+                            <i class="fas fa-envelope"></i>
+                            <p>Sipariş detayları <span id="confirmEmail">e-posta adresinize</span> gönderilecektir.</p>
+                        </div>
+                        <div class="co-success-actions">
+                            <a href="index.html" class="btn btn-ghost"><i class="fas fa-home"></i> Ana Sayfa</a>
+                            <button class="btn btn-whatsapp" id="whatsappNotify">
+                                <i class="fab fa-whatsapp"></i> WhatsApp ile Bildir
+                            </button>
+                            <button class="btn btn-print" id="printBtn">
+                                <i class="fas fa-print"></i> Makbuz Yazdır
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- HIDDEN PRINTABLE RECEIPT -->
+            <div id="printableReceipt">
+                <div class="receipt-header">
+                    <div class="receipt-logo">EVSEREN MOBİLYA</div>
+                    <div class="receipt-info">
+                        Ahmet Türkel Çevre Yolu, İnegöl/Bursa<br>
+                        Tel: +90 531 460 25 97<br>
+                        www.evserenmobilya.com
+                    </div>
+                </div>
+                <div class="receipt-divider"></div>
+                <div class="receipt-info">
+                    <strong>Sipariş No:</strong> <span id="r-orderNo"></span><br>
+                    <strong>Tarih:</strong> <span id="r-date"></span><br>
+                    <strong>Müşteri:</strong> <span id="r-customer"></span>
+                </div>
+                <div class="receipt-divider"></div>
+                <div id="r-items">
+                    <!-- Ürünler buraya gelecek -->
+                </div>
+                <div class="receipt-divider"></div>
+                <div class="receipt-total">
+                    <span>TOPLAM</span>
+                    <span id="r-total"></span>
+                </div>
+                <div class="receipt-divider"></div>
+                <div class="receipt-info" style="text-align: center; margin-top: 10px;">
+                    Teşekkür ederiz!<br>
+                    EVSEREN MOBİLYA - İnegöl'den Dünyaya
+                </div>
+            </div>
+
+            <!-- RIGHT: ORDER SUMMARY -->
+            <aside class="co-summary">
+                <div class="co-summary-inner">
+                    <h3>Sipariş Özeti</h3>
+                    <div id="co-summary-items"><!-- JS --></div>
+
+                    <div class="co-summary-divider"></div>
+
+                    <div class="co-summary-row">
+                        <span>Ara Toplam</span>
+                        <span id="sum-subtotal" style="text-decoration:line-through;color:var(--text-light)">₺0</span>
+                    </div>
+                    <div class="co-summary-row" id="sum-discount-row" style="color:var(--primary);font-weight:600">
+                        <span>İndirim Kazancınız</span>
+                        <span id="sum-discount">-₺0</span>
+                    </div>
+                    <div class="co-summary-row">
+                        <span>Nakliye & Kurulum</span>
+                        <span id="sum-shipping" style="color:#00b894">Ücretsiz</span>
+                    </div>
+                    <div class="co-summary-row" id="sum-express-row" style="display:none">
+                        <span>Hızlı Teslimat</span>
+                        <span>+₺499</span>
+                    </div>
+                    <div class="co-summary-divider"></div>
+                    <div class="co-summary-row co-total-row">
+                        <span>TOPLAM</span>
+                        <strong id="sum-total">₺0</strong>
+                    </div>
+                    <div class="co-summary-vat">KDV dahildir</div>
+
+                    <!-- BADGES -->
+                    <div class="co-trust-badges">
+                        <div class="co-badge"><i class="fas fa-shield-alt"></i><span>Güvenli Ödeme</span></div>
+                        <div class="co-badge"><i class="fas fa-undo"></i><span>30 Gün İade</span></div>
+                        <div class="co-badge"><i class="fas fa-award"></i><span>2 Yıl Garanti</span></div>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- FOOTER (Minimal) -->
+    <footer class="co-footer">
+        <div class="co-footer-inner">
+            <span>© 2026 Evseren Mobilya</span>
+            <div class="co-footer-links">
+                <a href="gizlilik.html">Gizlilik</a>
+                <a href="sartlar.html">Kullanım Şartları</a>
+                <a href="kvkk.html">KVKK</a>
+                <a href="contact.html">İletişim</a>
+            </div>
+            <div class="co-footer-pay-icons">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-amex"></i>
+                <i class="fab fa-cc-paypal"></i>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/905314602597" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <script src="script.js"></script>
+    <script src="checkout.js"></script>
+</body>
+
+</html>

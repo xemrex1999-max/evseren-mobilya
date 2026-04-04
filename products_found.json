@@ -1,0 +1,110 @@
+[
+  {
+    "id": 100,
+    "name": "Aynalı Yatak Odası",
+    "price": 45000,
+    "oldPrice": 52000,
+    "cat": "yatak",
+    "img": "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.43.59 (1).jpeg",
+    "badge": ""
+  },
+  {
+    "id": 101,
+    "name": "Aynalı Yemek Odası",
+    "price": 46000,
+    "oldPrice": 53000,
+    "cat": "yemek",
+    "img": "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.04 (2).jpeg",
+    "badge": ""
+  },
+  {
+    "id": 102,
+    "name": "Boğem Yatak odası",
+    "price": 47000,
+    "oldPrice": 54000,
+    "cat": "yatak",
+    "img": "evrensen/Boğem Yatak odası/page1_img24.jpeg",
+    "badge": "YENI"
+  },
+  {
+    "id": 103,
+    "name": "Boğem Yemek Odası",
+    "price": 48000,
+    "oldPrice": 55000,
+    "cat": "yemek",
+    "img": "evrensen/Boğem Yemek Odası/page1_img22.jpeg",
+    "badge": ""
+  },
+  {
+    "id": 104,
+    "name": "Buğlem Yatak Odası",
+    "price": 49000,
+    "oldPrice": 56000,
+    "cat": "yatak",
+    "img": "evrensen/Buğlem Yatak Odası/page1_img17.jpeg",
+    "badge": ""
+  },
+  {
+    "id": 105,
+    "name": "Buğlem Yemek Odası",
+    "price": 50000,
+    "oldPrice": 57000,
+    "cat": "yemek",
+    "img": "evrensen/Buğlem Yemek Odası/page1_img18.jpeg",
+    "badge": "YENI"
+  },
+  {
+    "id": 106,
+    "name": "İnci Yatak Odası",
+    "price": 51000,
+    "oldPrice": 58000,
+    "cat": "yatak",
+    "img": "evrensen/İnci Yatak Odası/page1_img11.jpeg",
+    "badge": ""
+  },
+  {
+    "id": 107,
+    "name": "İnci Yemek Odası",
+    "price": 52000,
+    "oldPrice": 59000,
+    "cat": "yemek",
+    "img": "evrensen/İnci Yemek Odası/page1_img10.jpeg",
+    "badge": ""
+  },
+  {
+    "id": 108,
+    "name": "Alya",
+    "price": 53000,
+    "oldPrice": 60000,
+    "cat": "mobilya",
+    "img": "pirlife/Alya/Ekran Görüntüsü (13).png",
+    "badge": "YENI"
+  },
+  {
+    "id": 109,
+    "name": "Loft",
+    "price": 54000,
+    "oldPrice": 61000,
+    "cat": "mobilya",
+    "img": "pirlife/Loft/WhatsApp Görsel 2025-07-05 saat 18.19.53_674fb5a5.jpg",
+    "badge": ""
+  },
+  {
+    "id": 110,
+    "name": "Neva",
+    "price": 45000,
+    "oldPrice": 52000,
+    "cat": "mobilya",
+    "img": "pirlife/Neva/WhatsApp Görsel 2025-07-05 saat 18.18.15_9cff9ad6.jpg",
+    "badge": ""
+  },
+  {
+    "id": 111,
+    "name": "Tetra",
+    "price": 46000,
+    "oldPrice": 53000,
+    "cat": "mobilya",
+    "img": "pirlife/Tetra/WhatsApp Görsel 2025-07-05 saat 18.21.49_4a9ae345.jpg",
+    "badge": "YENI"
+  }
+]

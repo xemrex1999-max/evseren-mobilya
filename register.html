@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kayıt Ol | Evseren Mobilya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="chatbot.css" />
+  <style>
+    .auth-section { padding: 80px 0; background: var(--bg2); min-height: 60vh; display: flex; align-items: center; }
+    .auth-container { max-width: 400px; margin: 0 auto; padding: 2.5rem; background: #fff; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); width: 100%; }
+    .auth-title { text-align: center; margin-bottom: 2rem; font-family: var(--font-heading); font-size: 2rem; color: var(--primary); }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--dark); }
+    .form-group input { width: 100%; padding: 0.85rem; border: 1px solid var(--border); border-radius: var(--radius); font-family: var(--font-body); transition: border-color 0.3s; }
+    .form-group input:focus { border-color: var(--primary); outline: none; }
+    .auth-btn { width: 100%; padding: 1rem; background: var(--primary); color: #fff; border: none; border-radius: var(--radius); font-weight: 600; cursor: pointer; font-size: 1rem; transition: background 0.3s; margin-top: 1rem; }
+    .auth-btn:hover { background: var(--primary-dark); }
+    .auth-link { text-align: center; margin-top: 1.25rem; display: block; color: var(--text-light); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+    .auth-link:hover { color: var(--primary); }
+    #authError { color: #e74c3c; text-align: center; margin-bottom: 1.5rem; padding: 10px; background: #fdf2f2; border-radius: var(--radius); font-size: 0.9rem; display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <span><i class="fas fa-truck"></i> Türkiye Genelinde Ücretsiz Nakliye & Kurulum</span>
+    <span>
+      <a href="tel:+905314602597" style="color:inherit;text-decoration:none;"><i class="fas fa-phone-alt"></i> +90 531 460 25 97</a> | 
+      <a href="tel:+905077567887" style="color:inherit;text-decoration:none;">+90 507 756 78 87</a>
+    </span>
+    <span><i class="fas fa-clock"></i> Pzt–Cts 09:00–18:00</span>
+  </div>
+
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.jpeg" alt="Evseren Mobilya" style="height: 60px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply;" />
+      </a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
+          <li class="nav-dropdown">
+            <a href="products.html" class="nav-link">Ürünler <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="products.html?cat=dugun">♥ Düğün Paketleri</a></li>
+              <li><a href="products.html?cat=yatak">Yatak Odaları</a></li>
+              <li><a href="products.html?cat=yemek">Yemek Odaları</a></li>
+              <li><a href="products.html?cat=koltuk">Koltuk Takımları</a></li>
+              <li><a href="products.html?cat=kose">Köşe Takımları</a></li>
+              <li><a href="products.html?cat=tv">TV Üniteleri</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html" class="nav-link">Hakkımızda</a></li>
+          <li><a href="contact.html" class="nav-link">İletişim</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="icon-btn" title="Hesabım"><i class="fas fa-user"></i></a>
+        <button class="icon-btn cart-btn" id="cartBtn" title="Sepet">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="auth-section">
+    <div class="container">
+      <div class="auth-container">
+        <h2 class="auth-title">Kayıt Ol</h2>
+        <div id="authError"></div>
+        <form id="registerForm">
+          <div class="form-group">
+            <label>Ad Soyad</label>
+            <input type="text" id="name" placeholder="Adınız ve soyadınız" required />
+          </div>
+          <div class="form-group">
+            <label>E-posta</label>
+            <input type="email" id="email" placeholder="E-posta adresiniz" required />
+          </div>
+          <div class="form-group">
+            <label>Şifre</label>
+            <input type="password" id="password" placeholder="Şifreniz" required />
+          </div>
+          <button type="submit" class="auth-btn">Kayıt Ol</button>
+        </form>
+        <a href="login.html" class="auth-link">Zaten hesabınız var mı? <strong>Giriş Yapın</strong></a>
+        <a href="index.html" class="auth-link" style="margin-top: 10px;"><i class="fas fa-arrow-left"></i> Ana Sayfaya Dön</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="margin-bottom:16px; background: white; padding: 5px; border-radius: 8px; display: inline-block;">
+          <img src="images/logo.jpeg" alt="Evseren Mobilya" style="max-width: 160px; height: auto; display: block; mix-blend-mode: multiply;" />
+        </a>
+        <p>30 yıllık deneyim. Türkiye geneli ücretsiz nakliye ve kurulum.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/mobilyaevseren/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/p/Evseren-Mobilya-100063699364340/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="https://yandex.com.tr/maps/org/evseren_mobilya/213880097576/" target="_blank" title="Haritada Gör"><i class="fas fa-map-marker-alt"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Kategoriler</h4>
+        <ul>
+          <li><a href="products.html?cat=dugun">♥ Düğün Paketleri</a></li>
+          <li><a href="products.html?cat=yatak">Yatak Odası</a></li>
+          <li><a href="products.html?cat=yemek">Yemek Odası</a></li>
+          <li><a href="products.html?cat=koltuk">Koltuk Takımı</a></li>
+          <li><a href="products.html?cat=kose">Köşe Takımı</a></li>
+          <li><a href="products.html?cat=tv">TV Ünitesi</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hızlı Linkler</h4>
+        <ul>
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="about.html">Hakkımızda</a></li>
+          <li><a href="contact.html">İletişim</a></li>
+          <li><a href="mesafeli-satis.html">Mesafeli Satış</a></li>
+          <li><a href="gizlilik.html">Gizlilik</a></li>
+          <li><a href="kvkk.html">KVKK</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>İletişim</h4>
+        <ul class="footer-contact">
+          <li><i class="fas fa-phone-alt"></i> 
+            <a href="tel:+905314602597" style="color:inherit;text-decoration:none;">+90 531 460 25 97</a><br>
+            <i class="fas fa-phone-alt" style="visibility:hidden"></i> 
+            <a href="tel:+905077567887" style="color:inherit;text-decoration:none;">+90 507 756 78 87</a>
+          </li>
+          <li><i class="fab fa-whatsapp"></i> 
+            <a href="https://wa.me/905314602597" target="_blank" style="color:inherit;text-decoration:none;">WhatsApp Destek (1)</a><br>
+            <i class="fab fa-whatsapp" style="visibility:hidden"></i> 
+            <a href="https://wa.me/905077567887" target="_blank" style="color:inherit;text-decoration:none;">WhatsApp Destek (2)</a>
+          </li>
+          <li><i class="fas fa-envelope"></i> evserenmobilya@gmail.com</li>
+          <li><i class="fas fa-map-marker-alt"></i> 
+            <a href="https://yandex.com.tr/maps/org/evseren_mobilya/213880097576/" target="_blank" style="color:inherit;text-decoration:none;">
+              MAHMUDİYE MH.14 MOB. NİL SK. NO:33<br>İNEGÖL / BURSA (Haritada Gör)
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2026 Evseren Mobilya - Tüm hakları saklıdır.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/905314602597" class="whatsapp-float" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+  <script src="script.js"></script>
+  <script src="chatbot.js"></script>
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errEl = document.getElementById('authError');
+      errEl.style.display = 'none';
+
+      try {
+        const res = await fetch('http://localhost:5000/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data));
+          window.location.href = 'profile.html';
+        } else {
+          errEl.innerText = data.message || 'Kayıt başarısız';
+          errEl.style.display = 'block';
+        }
+      } catch (err) {
+        errEl.innerText = 'Bağlantı hatası';
+        errEl.style.display = 'block';
+      }
+    });
+
+    if(localStorage.getItem('token')) {
+        window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
