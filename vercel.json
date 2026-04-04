@@ -1,18 +1,1 @@
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "**/*.{html,css,js,png,jpg,jpeg,svg,json}",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/admin", "dest": "/admin/index.html" },
-    { "src": "/(.*)", "dest": "/$1" }
-  ]
-}
+{" rootDirectory\:\frontend\}
