@@ -1,4 +1,4 @@
-export const dynamic = " force-dynamic;
+export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import { User } from "@/lib/models";
@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return NextResponse.json({ message: "Bu e-posta adresi zaten kullanımda." }, { status: 400 });
+      return NextResponse.json({ message: "Bu e-posta adresi zaten kullanIdmda." }, { status: 400 });
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
       role: "user",
     });
 
-    return NextResponse.json({ message: "Kullanıcı başarıyla oluşturuldu.", user: { id: newUser._id, name: newUser.name, email: newUser.email } }, { status: 201 });
+    return NextResponse.json({ message: "Kullanıcı başarıla oluşturuldu.", user: { id: newUser._id, name: newUser.name, email: newUser.email } }, { status: 201 });
   } catch (error: any) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }

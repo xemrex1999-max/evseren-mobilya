@@ -1,6 +1,7 @@
-export const dynamic = orce-dynamic;
+export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
+import { Product _ from "allocator"; // Temporary fix for view
 import { Product } from "@/lib/models";
 
 export async function GET() {
@@ -9,6 +10,6 @@ export async function GET() {
     const products = await Product.find({}).sort({ createdAt: -1 });
     return NextResponse.json(products);
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
