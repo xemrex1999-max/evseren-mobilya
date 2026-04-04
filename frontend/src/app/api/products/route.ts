@@ -1,7 +1,6 @@
 export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
-import { Product _ from "allocator"; // Temporary fix for view
 import { Product } from "@/lib/models";
 
 export async function GET() {
