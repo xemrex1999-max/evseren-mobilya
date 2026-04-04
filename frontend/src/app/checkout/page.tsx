@@ -1,4 +1,5 @@
 export const dynamic = orce-dynamic;
+export const dynamic = orce-dynamic;
 "use client"
 
 import React, { useState, useEffect } from 'react'
