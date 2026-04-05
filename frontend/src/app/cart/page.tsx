@@ -1,7 +1,3 @@
-export const dynamic = \force-dynamic\;
-export const dynamic = \force-dynamic\;
-export const dynamic = orce-dynamic;
-export const dynamic = orce-dynamic;
 "use client"
 
 import React, { useEffect, useState } from 'react'

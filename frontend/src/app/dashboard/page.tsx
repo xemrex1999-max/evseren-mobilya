@@ -1,7 +1,4 @@
-export const dynamic = " force-dynamic\;
-export const dynamic = " force-dynamic\;
-export const dynamic = " force-dynamic;
-export const dynamic = " force-dynamic;
+export const dynamic = "force-dynamic";
 "use client"
 
 import React, { useEffect, useState } from 'react'
@@ -10,8 +7,6 @@ import { Package, User, MapPin, Settings, LogOut, ChevronRight, Clock } from 'lu
 import { useSession, signOut } from 'next-auth/react'
 import { formatPrice, cn } from '@/lib/utils'
 import Link from 'next/link'
-
-export const dynamic = 'force-dynamic'
 
 export default function DashboardPage() {
   const { data: session } = useSession()
@@ -42,7 +37,7 @@ export default function DashboardPage() {
   return (
     <div className="max-w-7xl mx-auto px-6 py-32">
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
-        
+
         {/* SIDEBAR */}
         <aside className="space-y-8">
           <div className="p-8 bg-neutral-50 rounded-[40px] border border-neutral-100 flex flex-col items-center text-center gap-4">
@@ -61,7 +56,7 @@ export default function DashboardPage() {
               { label: 'Adreslerim', icon: MapPin },
               { label: 'Profil Ayarları', icon: Settings },
             ].map((item) => (
-              <button 
+              <button
                 key={item.label}
                 className={cn(
                   "w-full flex items-center gap-4 p-5 rounded-3xl text-sm font-bold transition-all",
@@ -72,7 +67,7 @@ export default function DashboardPage() {
                 {item.label}
               </button>
             ))}
-            <button 
+            <button
               onClick={() => signOut()}
               className="w-full flex items-center gap-4 p-5 rounded-3xl text-sm font-bold text-red-500 hover:bg-red-50 transition-all mt-8"
             >
@@ -91,7 +86,7 @@ export default function DashboardPage() {
 
           {loading ? (
              <div className="flex justify-center py-20">
-               <div className="w-8 h-8 border-4 border-neutral-100 border-t-neutral-900 rounded-full animate-spin" />
+               <div className="w-8 h-8 border-4 border-neutral-100 border-t-neutral-900 rounded-full animate-spin" />    
              </div>
           ) : orders.length === 0 ? (
             <div className="text-center py-20 bg-neutral-50 rounded-[40px] space-y-6">
@@ -102,7 +97,7 @@ export default function DashboardPage() {
           ) : (
             <div className="space-y-6">
               {orders.map((order: any) => (
-                <Link 
+                <Link
                   key={order._id}
                   href={`/track-order?id=${order.orderCode}`}
                   className="group flex flex-col md:flex-row md:items-center justify-between p-8 bg-white border border-neutral-100 rounded-[40px] hover:shadow-2xl hover:border-neutral-200 transition-all gap-8"
@@ -128,7 +123,7 @@ export default function DashboardPage() {
                     </div>
                     <div className="space-y-1">
                       <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block">Toplam</span>
-                      <span className="text-base font-bold text-neutral-900">{formatPrice(order.totalAmount)}</span>
+                      <span className="text-base font-bold text-neutral-900">{formatPrice(order.totalAmount)}</span>      
                     </div>
                     <div className="p-3 bg-neutral-50 rounded-full text-neutral-300 group-hover:translate-x-2 transition-all">
                       <ChevronRight size={20} />
