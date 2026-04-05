@@ -8,7 +8,7 @@ import { formatPrice, cn } from '@/lib/utils'
 import Link from 'next/link'
 
 export default function DashboardPage() {
-  const { data: session } = ((useSession() || {}) || {})
+  const { data: session } = (((useSession() || {}) || {}) || {})
   const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(true)
 

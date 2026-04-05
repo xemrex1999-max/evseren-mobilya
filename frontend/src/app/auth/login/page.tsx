@@ -1,5 +1,5 @@
-"use client"
-
+"use client";
+export const dynamic = "force-dynamic";
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Mail, Lock, User, ArrowRight } from 'lucide-react'

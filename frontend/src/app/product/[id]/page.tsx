@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import React from 'react';
 import dbConnect from '@/lib/mongodb';
 import { Product } from '@/lib/models';

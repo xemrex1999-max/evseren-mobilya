@@ -1,5 +1,5 @@
-"use client"
-
+"use client";
+export const dynamic = "force-dynamic";
 import React, { useState, useEffect, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { Search, Package, Truck, CheckCircle2, Box, Home, MapPin, Loader2 } from 'lucide-react'
