@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yönetim Paneli | Evseren Mobilya</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --admin-sidebar-width: 260px;
+    }
+    body { background: #f4f7f6; display: flex; min-height: 100vh; overflow-x: hidden; }
+    
+    /* Sidebar */
+    .admin-sidebar {
+      width: var(--admin-sidebar-width);
+      background: var(--dark);
+      color: white;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      padding: 30px 0;
+    }
+    .admin-logo { padding: 0 30px 40px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 30px; }
+    .admin-nav-item {
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: rgba(255,255,255,0.7);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .admin-nav-item:hover, .admin-nav-item.active {
+      color: var(--accent);
+      background: rgba(255,255,255,0.05);
+    }
+    .admin-nav-item.active { border-left: 4px solid var(--accent); }
+
+    /* Main Content */
+    .admin-main {
+      margin-left: var(--admin-sidebar-width);
+      flex: 1;
+      padding: 40px;
+    }
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .admin-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 25px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 30px;
+    }
+    
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th { text-align: left; padding: 15px; border-bottom: 2px solid var(--border); color: var(--text-light); font-size: 0.85rem; text-transform: uppercase; }
+    td { padding: 15px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    
+    .status-badge {
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .status-onaylandi { background: #e3f2fd; color: #1976d2; }
+    .status-hazirlaniyor { background: #fff3e0; color: #f57c00; }
+    .status-kargoda { background: #f3e5f5; color: #7b1fa2; }
+    .status-teslim { background: #e8f5e9; color: #388e3c; }
+
+    .admin-btn-sm {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: white;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .admin-btn-sm:hover { background: var(--bg2); border-color: var(--primary); }
+
+    /* Form */
+    .admin-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .admin-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-top: 5px;
+    }
+    
+    /* Login Overlay */
+    #adminLoginOverlay {
+      position: fixed;
+      inset: 0;
+      background: var(--dark);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-box {
+      background: white;
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Logic Placeholder -->
+  <div id="adminLoginOverlay">
+    <div class="login-box">
+      <h2 style="margin-bottom:20px; font-family:var(--font-heading)">Yönetici Girişi</h2>
+      <div style="margin-bottom:15px">
+        <label>Kullanıcı Adı</label>
+        <input type="text" id="adminUser" class="admin-input" placeholder="admin">
+      </div>
+      <div style="margin-bottom:25px">
+        <label>Şifre</label>
+        <input type="password" id="adminPass" class="admin-input" placeholder="123456">
+      </div>
+      <button onclick="adminLogin()" class="btn btn-primary w-full">Giriş Yap</button>
+    </div>
+  </div>
+
+  <aside class="admin-sidebar" id="sidebar" style="display:none">
+    <div class="admin-logo">
+      <h2 style="color:var(--accent); font-family:var(--font-heading); font-size:1.4rem">EVSEREN PANEL</h2>
+    </div>
+    <div class="admin-nav-item active" onclick="switchTab('orders')">
+      <i class="fas fa-shopping-cart"></i> Siparişler
+    </div>
+    <div class="admin-nav-item" onclick="switchTab('products')">
+      <i class="fas fa-box"></i> Ürünler
+    </div>
+    <div class="admin-nav-item" onclick="adminLogout()">
+      <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+    </div>
+  </aside>
+
+  <main class="admin-main" id="mainContent" style="display:none">
+    <header class="admin-header">
+      <h1 id="tabTitle">Sipariş Yönetimi</h1>
+      <div class="user-info">
+        <span>Hoş Geldin, <strong>Admin</strong></span>
+      </div>
+    </header>
+
+    <!-- ORDERS TAB -->
+    <div id="tab-orders" class="admin-tab">
+      <div class="admin-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Kod</th>
+              <th>Müşteri</th>
+              <th>Tutar</th>
+              <th>Durum</th>
+              <th>Tarih</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <!-- JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PRODUCTS TAB -->
+    <div id="tab-products" class="admin-tab" style="display:none">
+      <div class="admin-card">
+        <h3>Yeni Ürün Ekle</h3>
+        <form id="addProductForm" style="margin-top:20px" onsubmit="event.preventDefault(); addProduct();">
+          <div class="admin-form-grid">
+            <div>
+              <label>Ürün Adı</label>
+              <input type="text" id="pName" class="admin-input" required>
+            </div>
+            <div>
+              <label>Fiyat (TL)</label>
+              <input type="number" id="pPrice" class="admin-input" required>
+            </div>
+            <div>
+              <label>Kategori</label>
+              <select id="pCat" class="admin-input">
+                <option value="yatak">Yatak Odası</option>
+                <option value="yemek">Yemek Odası</option>
+                <option value="koltuk">Koltuk Takımı</option>
+              </select>
+            </div>
+            <div>
+              <label>Resim URL</label>
+              <input type="text" id="pImg" class="admin-input" value="images/yemek_odasi.png">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-40">Ürünü Kaydet</button>
+        </form>
+      </div>
+
+      <div class="admin-card">
+        <h3>Mevcut Ürünler</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Görsel</th>
+              <th>Adı</th>
+              <th>Kategori</th>
+              <th>Fiyat</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
+          <tbody id="productsTableBody">
+            <!-- JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+node_modules/
+.env
+*.tar.gz
+*.zip
+.next/
+frontend/
+backend/
+pirlife/
+*.mp4
+*.MP4
+*.pdf

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sipariş Takibi | Evseren Mobilya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .track-hero {
+      background: var(--dark);
+      padding: 100px 0 60px;
+      text-align: center;
+      color: white;
+    }
+    .track-form-container {
+      max-width: 500px;
+      margin: -40px auto 40px;
+      padding: 30px;
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.jpeg" alt="Evseren Mobilya" style="height: 60px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply;" />
+      </a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
+          <li><a href="products.html" class="nav-link">Ürünler</a></li>
+          <li><a href="track-order.html" class="nav-link active">Sipariş Takibi</a></li>
+          <li><a href="about.html" class="nav-link">Hakkımızda</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="icon-btn"><i class="fas fa-user"></i></a>
+        <button class="icon-btn cart-btn" id="cartBtn">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="track-hero">
+    <h1 style="font-family:var(--font-heading); font-size:3rem;">Sipariş Takibi</h1>
+    <p style="color:rgba(255,255,255,0.7)">Siparişinizin hangi aşamada olduğunu anlık olarak görün.</p>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="track-form-container">
+        <div style="margin-bottom: 20px;">
+          <label style="display:block; margin-bottom:8px; font-weight:600;">Sipariş Kodunuz (ORDER-XXXXXX)</label>
+          <input type="text" id="orderCodeInput" placeholder="Örn: ORDER-123456" class="w-full" 
+                 style="padding:15px; border:1px solid var(--border); border-radius:var(--radius); outline:none;">
+        </div>
+        <button onclick="trackMyOrder()" class="btn btn-primary w-full">Siparişi Sorgula</button>
+      </div>
+
+      <div id="trackingResult">
+        <!-- Timeline JS ile buraya gelecek -->
+        <div style="text-align:center; padding:60px; color:var(--text-light)">
+           <i class="fas fa-truck-loading" style="font-size:3rem; margin-bottom:20px; opacity:0.3"></i>
+           <p>Lütfen kodu girip sorgula butonuna basın.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER SADELEŞTİRİLMİŞ -->
+  <footer class="footer" style="background:var(--dark2); color:white; padding:40px 0; text-align:center;">
+    <p>© 2026 Evseren Mobilya - Tüm hakları saklıdır.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

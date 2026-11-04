@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Evseren Mobilya</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2><i class="fas fa-crown"></i> Evseren Mobilya</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" id="nav-dashboard" class="active" onclick="showTab('dashboard')">
+        <i class="fas fa-chart-line"></i> Dashboard
+      </a>
+      <a href="#" id="nav-products" onclick="showTab('products')">
+        <i class="fas fa-couch"></i> Ürün Katalogu
+      </a>
+      <a href="#" id="nav-orders" onclick="showTab('orders')">
+        <i class="fas fa-shopping-bag"></i> Sipariş Yönetimi
+      </a>
+      <a href="#" id="nav-users" onclick="showTab('users')">
+        <i class="fas fa-users"></i> Müşteriler
+      </a>
+      <a href="/" target="_blank" style="margin-top: 40px; border: 1px solid rgba(255,255,255,0.1);">
+        <i class="fas fa-external-link-alt"></i> Siteyi Görüntüle
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn-logout" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+    
+    <!-- DASHBOARD TAB -->
+    <section id="dashboardTab" class="content-tab">
+      <div class="page-header">
+        <h1>Dashboard</h1>
+        <div id="currentTime" style="color: #666; font-size: 0.9rem;"></div>
+      </div>
+
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+          <div class="stat-icon revenue"><i class="fas fa-lira-sign"></i></div>
+          <div class="stat-info">
+            <h3>Toplam Satış</h3>
+            <span class="value" id="stat-revenue">0 TL</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orders"><i class="fas fa-shopping-cart"></i></div>
+          <div class="stat-info">
+            <h3>Toplam Sipariş</h3>
+            <span class="value" id="stat-orders">0</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon products"><i class="fas fa-box"></i></div>
+          <div class="stat-info">
+            <h3>Aktif Ürün</h3>
+            <span class="value" id="stat-products">0</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon users"><i class="fas fa-user-friends"></i></div>
+          <div class="stat-info">
+            <h3>Üye Sayısı</h3>
+            <span class="value" id="stat-users">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+        <!-- Son Siparişler -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Son Siparişler</h3>
+            <a href="#" onclick="showTab('orders')" style="color: var(--admin-primary); font-size: 0.85rem; font-weight: 600;">Hepsini Gör</a>
+          </div>
+          <div class="table-responsive">
+            <table id="recentOrdersTable">
+              <thead><tr><th>Üye</th><th>Tutar</th><th>Durum</th><th>Tarih</th></tr></thead>
+              <tbody id="recentOrdersBody"></tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- Re-stock Alerts / AI Info -->
+        <div class="card">
+          <div class="card-header"><h3>AI Özet</h3></div>
+          <div style="padding: 24px; font-size: 0.9rem; color: #666; line-height: 1.6;">
+            <p><i class="fas fa-info-circle"></i> Ürün eklerken <strong>AI Üret</strong> butonunu kullanarak trendlere uygun açıklamalar oluşturabilirsiniz.</p>
+            <hr style="margin: 20px 0; border: none; border-top: 1px solid #eee;">
+            <p>Sistem şu an stabil çalışıyor. Son 24 saatte hata raporlanmadı.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS TAB -->
+    <section id="productsTab" class="content-tab" style="display:none">
+      <div class="page-header">
+        <h1>Ürün Katalogu</h1>
+        <button class="btn btn-primary" onclick="openProductModal()">
+          <i class="fas fa-plus"></i> Yeni Ürün Ekle
+        </button>
+      </div>
+      <div class="card">
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>Görsel</th><th>Ürün Adı</th><th>Kategori</th><th>Fiyat</th><th>İşlem</th></tr></thead>
+            <tbody id="productsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDERS TAB -->
+    <section id="ordersTab" class="content-tab" style="display:none">
+      <div class="page-header">
+        <h1>Sipariş Yönetimi</h1>
+      </div>
+      <div class="card">
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>Sipariş No</th><th>Müşteri</th><th>Tutar</th><th>Ödeme Durumu</th><th>Tarih</th></tr></thead>
+            <tbody id="ordersBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- USERS TAB -->
+    <section id="usersTab" class="content-tab" style="display:none">
+      <div class="page-header">
+        <h1>Kayıtlı Müşteriler</h1>
+      </div>
+      <div class="card">
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>İsim Soyisim</th><th>E-posta</th><th>Rol</th><th>Kayıt Tarihi</th></tr></thead>
+            <tbody id="usersBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PRODUCT MODAL -->
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Yeni Ürün Ekle</h3>
+        <button class="btn btn-icon" onclick="closeProductModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- AI SECTION -->
+        <div class="ai-box">
+          <h4><i class="fas fa-wand-magic-sparkles"></i> AI Akıllı İçerik Üretici</h4>
+          <div class="form-group" style="margin-bottom:0">
+            <div style="display:flex; gap:10px;">
+               <input type="text" id="pSearchQuery" class="form-control" placeholder="Ürün resmi URL'sini girin (Pexels, Unsplash vb.)...">
+               <button class="btn" style="background:#5b21b6; color:white;" onclick="generateAIContent()">
+                 <i class="fas fa-robot"></i> Üret
+               </button>
+            </div>
+            <small id="aiStatus" style="color:#7c3aed; display:block; margin-top:8px; font-weight:500;"></small>
+          </div>
+        </div>
+
+        <hr style="margin: 24px 0; border: none; border-top: 1px solid #eee;">
+
+        <div class="form-group">
+          <label>Ürün Adı</label>
+          <input type="text" id="pName" class="form-control" placeholder="Örn: Ayça Yatak Odası">
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+          <div class="form-group">
+            <label>Kategori</label>
+            <select id="pCat" class="form-control">
+              <option value="yatak">Yatak Odası</option>
+              <option value="yemek">Yemek Odası</option>
+              <option value="koltuk">Koltuk Takımı</option>
+              <option value="dugun">Düğün Paketi</option>
+              <option value="mobilya">Genel Mobilya</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Fiyat (TL)</label>
+            <input type="number" id="pPrice" class="form-control" placeholder="0">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Açıklama</label>
+          <textarea id="pDesc" class="form-control" placeholder="Ürün detaylarını buraya yazın..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Görsel Yolu / URL</label>
+          <input type="text" id="pImg" class="form-control" placeholder="Örn: images/products/xyz.jpg">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" id="editProductId" value="">
+        <button class="btn" style="background:#eee;" onclick="closeProductModal()">İptal</button>
+        <button class="btn btn-primary" onclick="saveProduct()">Bilgileri Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // AUTH & SETUP
+    const token = localStorage.getItem('token');
+    const userRole = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).role : null;
+    
+    if (!token || userRole !== 'admin') { 
+        alert('Erişim reddedildi. Admin hesabı ile giriş yapmalısınız.');
+        window.location.href = '/login.html'; 
+    }
+    
+    const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token };
+    let currentTab = 'dashboard';
+
+    // TAB MANAGEMENT
+    function showTab(tab) {
+      document.querySelectorAll('.content-tab').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+      
+      document.getElementById(tab + 'Tab').style.display = 'block';
+      document.getElementById('nav-' + tab).classList.add('active');
+      currentTab = tab;
+
+      if(tab === 'dashboard') loadDashboard();
+      if(tab === 'products') loadProducts();
+      if(tab === 'orders') loadOrders();
+      if(tab === 'users') loadUsers();
+    }
+
+    // DASHBOARD DATA
+    async function loadDashboard() {
+      document.getElementById('currentTime').innerText = new Date().toLocaleString('tr-TR');
+      try {
+        const res = await fetch('/api/admin/stats', { headers });
+        const data = await res.json();
+        
+        document.getElementById('stat-revenue').innerText = data.revenue.toLocaleString('tr-TR') + ' TL';
+        document.getElementById('stat-orders').innerText = data.counts.orders;
+        document.getElementById('stat-products').innerText = data.counts.products;
+        document.getElementById('stat-users').innerText = data.counts.users;
+
+        // Recent Orders
+        document.getElementById('recentOrdersBody').innerHTML = data.recent.orders.map(o => `
+          <tr>
+            <td>
+              <div style="font-weight:600">${o.user ? o.user.name : 'Misafir'}</div>
+              <div style="font-size:0.75rem; color:#888">${o.user ? o.user.email : ''}</div>
+            </td>
+            <td style="font-weight:600">${o.totalAmount} TL</td>
+            <td><span class="badge badge-${o.status}">${translateStatus(o.status)}</span></td>
+            <td style="color:#666">${new Date(o.createdAt).toLocaleDateString('tr-TR')}</td>
+          </tr>
+        `).join('');
+      } catch (e) {
+        console.error("Dashboard error", e);
+      }
+    }
+
+    function translateStatus(s) {
+      const t = { pending:'Bekliyor', paid:'Ödendi', shipped:'Yolda', delivered:'Teslim', failed:'İptal' };
+      return t[s] || s;
+    }
+
+    // PRODUCT MANAGEMENT
+    async function loadProducts() {
+      const res = await fetch('/api/admin/products', { headers });
+      const data = await res.json();
+      document.getElementById('productsBody').innerHTML = data.map(p => `
+        <tr>
+          <td><img src="${p.image.startsWith('http') ? p.image : '/' + p.image}" class="product-thumb"></td>
+          <td style="font-weight:600">${p.name}</td>
+          <td><span class="badge" style="background:#eee">${p.category}</span></td>
+          <td style="font-weight:700">${p.price.toLocaleString('tr-TR')} TL</td>
+          <td>
+            <button class="btn btn-sm" style="background:rgba(139,94,60,0.1); color:var(--admin-primary);" onclick="editProduct('${p._id}')">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" onclick="deleteProduct('${p._id}')">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openProductModal(id = null) {
+      document.getElementById('productModal').style.display = 'flex';
+      document.getElementById('modalTitle').innerText = id ? 'Ürünü Düzenle' : 'Yeni Ürün Ekle';
+      document.getElementById('editProductId').value = id || '';
+      if(!id) {
+        document.getElementById('pName').value = '';
+        document.getElementById('pPrice').value = '';
+        document.getElementById('pCat').value = 'yatak';
+        document.getElementById('pDesc').value = '';
+        document.getElementById('pImg').value = '';
+      }
+    }
+
+    function closeProductModal() {
+      document.getElementById('productModal').style.display = 'none';
+    }
+
+    async function editProduct(id) {
+      const res = await fetch('/api/admin/products', { headers });
+      const data = await res.json();
+      const product = data.find(p => p._id === id);
+      if(product) {
+        openProductModal(id);
+        document.getElementById('pName').value = product.name;
+        document.getElementById('pCat').value = product.category;
+        document.getElementById('pPrice').value = product.price;
+        document.getElementById('pDesc').value = product.description;
+        document.getElementById('pImg').value = product.image;
+      }
+    }
+
+    async function saveProduct() {
+      const id = document.getElementById('editProductId').value;
+      const pData = {
+        name: document.getElementById('pName').value,
+        category: document.getElementById('pCat').value,
+        price: parseInt(document.getElementById('pPrice').value),
+        description: document.getElementById('pDesc').value,
+        image: document.getElementById('pImg').value
+      };
+      
+      const method = id ? 'PUT' : 'POST';
+      const body = id ? JSON.stringify({id, ...pData}) : JSON.stringify(pData);
+      
+      const res = await fetch('/api/admin/products', { method, headers, body });
+      if(res.ok) {
+        closeProductModal();
+        loadProducts();
+      } else {
+        alert("Ürün kaydedilemedi.");
+      }
+    }
+
+    async function deleteProduct(id) {
+      if(!confirm('Bu ürünü silmek istediğinize emin misiniz?')) return;
+      await fetch('/api/admin/products', { method: 'DELETE', headers, body: JSON.stringify({id}) });
+      loadProducts();
+    }
+
+    // ORDER MANAGEMENT
+    async function loadOrders() {
+      const res = await fetch('/api/admin/orders', { headers });
+      const data = await res.json();
+      document.getElementById('ordersBody').innerHTML = data.map(o => `
+        <tr>
+          <td style="font-weight:700">#${o._id.substring(o._id.length-6).toUpperCase()}</td>
+          <td>
+            <div style="font-weight:600">${o.user ? o.user.name : 'Misafir'}</div>
+            <div style="font-size:0.75rem; color:#888">${o.user ? o.user.email : ''}</div>
+          </td>
+          <td style="font-weight:700">${o.totalAmount.toLocaleString('tr-TR')} TL</td>
+          <td>
+            <select onchange="updateOrderStatus('${o._id}', this.value)" class="form-control" style="width: auto; padding: 4px 8px; font-size: 0.85rem;">
+              <option value="pending" ${o.status==='pending'?'selected':''}>Bekliyor</option>
+              <option value="paid" ${o.status==='paid'?'selected':''}>Ödendi</option>
+              <option value="shipped" ${o.status==='shipped'?'selected':''}>Kargolandı</option>
+              <option value="delivered" ${o.status==='delivered'?'selected':''}>Teslim Edildi</option>
+              <option value="failed" ${o.status==='failed'?'selected':''}>İptal</option>
+            </select>
+          </td>
+          <td style="color:#666">${new Date(o.createdAt).toLocaleDateString('tr-TR')}</td>
+        </tr>
+      `).join('');
+    }
+
+    async function updateOrderStatus(id, status) {
+      await fetch('/api/admin/orders', { method: 'PUT', headers, body: JSON.stringify({id, status}) });
+    }
+
+    // USER MANAGEMENT
+    async function loadUsers() {
+      const res = await fetch('/api/admin/users', { headers });
+      const data = await res.json();
+      document.getElementById('usersBody').innerHTML = data.map(u => `
+        <tr>
+          <td style="font-weight:600">${u.name}</td>
+          <td>${u.email}</td>
+          <td><span class="badge" style="background:#eee">${u.role}</span></td>
+          <td style="color:#666">${new Date(u.createdAt).toLocaleDateString('tr-TR')}</td>
+        </tr>
+      `).join('');
+    }
+
+    // AI Generation integration
+    async function generateAIContent() {
+      const query = document.getElementById('pSearchQuery').value;
+      const statusLabel = document.getElementById('aiStatus');
+      if(!query) {
+        statusLabel.innerText = "Lütfen bir ürün resmi URL'si girin!"; return;
+      }
+      statusLabel.innerText = "⚡ AI Analiz ediyor... Lütfen bekleyin.";
+      document.getElementById('pImg').value = query;
+      try {
+        const res = await fetch('/api/admin/ai-generate', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ imageUrl: query })
+        });
+        const data = await res.json();
+        if(res.ok) {
+           document.getElementById('pName').value = data.name || '';
+           document.getElementById('pDesc').value = data.description || '';
+           document.getElementById('pPrice').value = data.price || 0;
+           document.getElementById('pCat').value = data.category || 'mobilya';
+           statusLabel.innerText = "✅ İçerik başarıyla üretildi!";
+        } else {
+           statusLabel.innerText = "❌ Hata: " + (data.message || 'Üretilemedi.');
+        }
+      } catch (e) {
+        statusLabel.innerText = "❌ Bağlantı hatası.";
+      }
+    }
+
+    function logout() {
+      if(confirm('Çıkış yapmak istediğinize emin misiniz?')) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/login.html';
+      }
+    }
+
+    // INIT
+    loadDashboard();
+  </script>
+</body>
+</html>
