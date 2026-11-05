@@ -237,7 +237,7 @@ function initAdmin() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.getItem('adminToken')) {
+  if (localStorage.getItem('adminToken') || localStorage.getItem('token')) {
     document.getElementById('adminLoginOverlay').style.display = 'none';
     document.getElementById('sidebar').style.display = 'flex';
     document.getElementById('mainContent').style.display = 'block';

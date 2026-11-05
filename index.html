@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css?v=20261105c" />
+  <link rel="stylesheet" href="style.css?v=20261105e" />
   <link rel="stylesheet" href="chatbot.css" />
   
   <!-- JSON-LD LocalBusiness Structured Data -->
@@ -220,6 +220,65 @@
     @media (max-width: 600px) {
       .cat-grid { grid-template-columns: 1fr !important; }
     }
+  
+/* ==========================================
+   HEADER ACTIONS & USER PILL FIX
+   ========================================== */
+.header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-shrink: 0 !important;
+}
+.icon-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  min-width: 42px;
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 50px !important;
+  border: 1px solid #e5dec9 !important;
+  background: #ffffff !important;
+  color: #1f2937 !important;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none !important;
+  position: relative;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+}
+.icon-btn:hover {
+  border-color: #B8860B !important;
+  color: #B8860B !important;
+  background: #fdfbf7 !important;
+}
+.icon-btn .user-name-header {
+  display: inline-block;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1a1209;
+  margin-left: 2px !important;
+}
+.menu-btn {
+  display: none !important;
+}
+@media (max-width: 900px) {
+  .menu-btn {
+    display: inline-flex !important;
+  }
+  .icon-btn .user-name-header {
+    max-width: 75px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -2480,7 +2539,7 @@
   <a href="https://wa.me/905077567887" class="whatsapp-float" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
   <button class="scroll-top" id="scrollTop" title="Yukarı"><i class="fas fa-chevron-up"></i></button>
 
-  <script src="script.js?v=20261105c"></script>
+  <script src="script.js?v=20261105e"></script>
   <script src="chatbot.js"></script>
 </body>
 </html>

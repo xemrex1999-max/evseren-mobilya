@@ -1,11 +1,12 @@
-const API_URL = 'http://localhost:5000/api';
-let cart = JSON.parse(localStorage.getItem('mobilya_cart')) || [];
+const cart_init = () => {
+    try { return JSON.parse(localStorage.getItem('mobilya_cart')) || []; } catch(e) { return []; }
+};
+let cart = cart_init();
 let currentStep = 1;
 let discount = 0;
 let expressShipping = false;
 let selectedInstallment = 1;
 
-// ILCE VERISI (Ornek Liste - Proje buyudukce JSON'a tasiyabiliriz)
 const cityDistrictData = {
     "İstanbul": ["Adalar", "Arnavutköy", "Ataşehir", "Avcılar", "Bağcılar", "Bahçelievler", "Bakırköy", "Başakşehir", "Bayrampaşa", "Beşiktaş", "Beykoz", "Beylikdüzü", "Beyoğlu", "Büyükçekmece", "Çatalca", "Çekmeköy", "Esenler", "Esenyurt", "Eyüpsultan", "Fatih", "Gaziosmanpaşa", "Güngören", "Kadıköy", "Kağıthane", "Kartal", "Küçükçekmece", "Maltepe", "Pendik", "Sancaktepe", "Sarıyer", "Silivri", "Sultanbeyli", "Sultangazi", "Şile", "Şişli", "Tuzla", "Ümraniye", "Üsküdar", "Zeytinburnu"],
     "Ankara": ["Akyurt", "Altındağ", "Ayaş", "Bala", "Beypazarı", "Çamlıdere", "Çankaya", "Çubuk", "Elmadağ", "Etimesgut", "Evren", "Gölbaşı", "Güdül", "Haymana", "Kahramankazan", "Kalecik", "Keçiören", "Kızılcahamam", "Mamak", "Nallıhan", "Polatlı", "Pursaklar", "Sincan", "Şereflikoçhisar", "Yenimahalle"],
@@ -14,12 +15,10 @@ const cityDistrictData = {
     "Antalya": ["Akseki", "Aksu", "Alanya", "Demre", "Döşemealtı", "Elmalı", "Finike", "Gazipaşa", "Gündoğmuş", "İbradı", "Kaş", "Kemer", "Kepez", "Konyaaltı", "Korkuteli", "Kumluca", "Manavgat", "Muratpaşa", "Serik"],
     "Konya": ["Ahırlı", "Akören", "Akşehir", "Altınekin", "Beyşehir", "Bozkır", "Cihanbeyli", "Çeltik", "Çumra", "Derbent", "Derebucak", "Doğanhisar", "Emirgazi", "Ereğli", "Güneysınır", "Hadim", "Halkapınar", "Hüyük", "Ilgın", "Kadınhanı", "Karapınar", "Karatay", "Kulu", "Meram", "Sarayönü", "Selçuklu", "Seydişehir", "Taşkent", "Tuzlukçu", "Yalıhüyük", "Yunak"],
     "Adana": ["Aladağ", "Ceyhan", "Çukurova", "Feke", "İmamoğlu", "Karaisalı", "Karataş", "Kozan", "Pozantı", "Saimbeyli", "Sarıçam", "Seyhan", "Tufanbeyli", "Yumurtalık", "Yüreğir"]
-    // Diger sehirler ihtiyaca gore eklenebilir veya default liste atanabilir.
 };
 
-// YARDIMCILAR (script.js'den gelmezse diye yedek)
 const formatPrice = window.formatPrice || function(val) {
-    return '\u20BA' + val.toLocaleString('tr-TR');
+    return '\u20BA' + Number(val || 0).toLocaleString('tr-TR');
 };
 
 function saveCart() {
@@ -28,6 +27,22 @@ function saveCart() {
 
 /* ---- ADIM GECISI ---- */
 function goToStep(step) {
+    if (step === 2 && (!cart || cart.length === 0)) {
+        alert('Sepetiniz boş! Lütfen önce sepetinize ürün ekleyin.');
+        return;
+    }
+    if (step === 3) {
+        const fn = document.getElementById('d-firstName')?.value.trim();
+        const ln = document.getElementById('d-lastName')?.value.trim();
+        const ph = document.getElementById('d-phone')?.value.trim();
+        const ct = document.getElementById('d-city')?.value;
+        const ad = document.getElementById('d-address')?.value.trim();
+        if (!fn || !ln || !ph || !ct || !ad) {
+            alert('Lütfen teslimat için Ad, Soyad, Telefon, İl ve Açık Adres alanlarını doldurun.');
+            return;
+        }
+    }
+
     document.querySelectorAll('.co-panel').forEach(p => p.classList.remove('active'));
     const target = document.getElementById(`co-step-${step}`);
     if (target) target.classList.add('active');
@@ -47,7 +62,6 @@ function goToStep(step) {
     currentStep = step;
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // HARITA GUNCELLEME (Fix for grey tiles when initial hidden)
     if (step === 2 && typeof map !== 'undefined' && map) {
         setTimeout(() => {
             map.invalidateSize();
@@ -61,21 +75,23 @@ function renderSummary() {
     if (!container) return;
 
     if (!cart || cart.length === 0) {
-        container.innerHTML = '<p style="color:#a49a91;font-size:0.85rem;padding:10px 0">Sepet bos</p>';
+        container.innerHTML = '<p style="color:#a49a91;font-size:0.85rem;padding:10px 0">Sepetinizde ürün bulunmuyor.</p>';
     } else {
         container.innerHTML = cart.map(item => {
-            const itemPrice = item.price || 0;
-            const itemOldPrice = item.oldPrice || itemPrice;
+            const itemPrice = Number(item.price) || 0;
+            const itemOldPrice = Number(item.oldPrice) || itemPrice;
+            const qty = Number(item.qty) || 1;
+            const imgSrc = encodeURI(item.img || 'images/hero_living_room.png');
             return `
       <div class="co-summary-item">
-        <img src="${item.img}" alt="${item.name}" />
+        <img src="${imgSrc}" alt="${item.name}" />
         <div style="flex:1">
           <div class="co-summary-item-name">${item.name}</div>
-          <div class="co-summary-item-qty">${item.qty} adet</div>
+          <div class="co-summary-item-qty">${qty} adet</div>
         </div>
         <div class="co-summary-item-price">
-          ${formatPrice(itemPrice * item.qty)}
-          ${item.oldPrice ? `<div style="text-decoration:line-through;color:#a49a91;font-size:0.75rem;font-weight:400">${formatPrice(itemOldPrice * item.qty)}</div>` : ''}
+          ${formatPrice(itemPrice * qty)}
+          ${itemOldPrice > itemPrice ? `<div style="text-decoration:line-through;color:#a49a91;font-size:0.75rem;font-weight:400">${formatPrice(itemOldPrice * qty)}</div>` : ''}
         </div>
       </div>
     `;
@@ -100,28 +116,33 @@ function renderCartItems() {
 
     if (emptyEl) emptyEl.style.display = 'none';
     container.style.display = 'block';
-    if (goBtn) goBtn.disabled = false;
+    if (goBtn) {
+        goBtn.disabled = false;
+        goBtn.removeAttribute('disabled');
+    }
 
     container.innerHTML = cart.map(item => {
-        const itemPrice = item.price || 0;
-        const itemOldPrice = item.oldPrice || itemPrice;
+        const itemPrice = Number(item.price) || 0;
+        const itemOldPrice = Number(item.oldPrice) || itemPrice;
+        const qty = Number(item.qty) || 1;
+        const imgSrc = encodeURI(item.img || 'images/hero_living_room.png');
         return `
     <div class="co-cart-item" id="coitem-${item.id}">
-      <img src="${item.img}" alt="${item.name}" />
+      <img src="${imgSrc}" alt="${item.name}" />
       <div class="co-cart-item-info">
         <div class="co-cart-item-name">${item.name}</div>
         <div class="co-cart-item-cat">${window.getCatName ? window.getCatName(item.cat || '') : ''}</div>
         <div class="co-qty-row">
-          <button class="co-qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
-          <span class="co-qty-val">${item.qty}</span>
-          <button class="co-qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+          <button type="button" class="co-qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+          <span class="co-qty-val">${qty}</span>
+          <button type="button" class="co-qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
         </div>
       </div>
       <div style="text-align:right">
-        <div class="co-cart-item-price">${formatPrice(itemPrice * item.qty)}</div>
-        ${item.oldPrice ? `<div style="text-decoration:line-through;color:#a49a91;font-size:0.8rem">${formatPrice(itemOldPrice * item.qty)}</div>` : ''}
+        <div class="co-cart-item-price">${formatPrice(itemPrice * qty)}</div>
+        ${itemOldPrice > itemPrice ? `<div style="text-decoration:line-through;color:#a49a91;font-size:0.8rem">${formatPrice(itemOldPrice * qty)}</div>` : ''}
       </div>
-      <button class="co-cart-item-remove" onclick="removeFromCartCO(${item.id})" title="Kaldir">
+      <button type="button" class="co-cart-item-remove" onclick="removeFromCartCO(${item.id})" title="Kaldır">
         <i class="fas fa-times"></i>
       </button>
     </div>
@@ -129,21 +150,21 @@ function renderCartItems() {
     }).join('');
 }
 
-function changeQty(id, delta) {
-    const item = cart.find(x => x.id === id);
+window.changeQty = function(id, delta) {
+    const item = cart.find(x => String(x.id) === String(id));
     if (!item) return;
-    item.qty += delta;
+    item.qty = (Number(item.qty) || 1) + delta;
     if (item.qty <= 0) {
-        cart = cart.filter(x => x.id !== id);
+        cart = cart.filter(x => String(x.id) !== String(id));
     }
     saveCart();
     renderCartItems();
     renderSummary();
     if (window.updateCartUI) window.updateCartUI();
-}
+};
 
-function removeFromCartCO(id) {
-    cart = cart.filter(x => x.id !== id);
+window.removeFromCartCO = function(id) {
+    cart = cart.filter(x => String(x.id) !== String(id));
     saveCart();
     renderCartItems();
     renderSummary();
@@ -152,20 +173,21 @@ function removeFromCartCO(id) {
         const btn = document.getElementById('goToStep2');
         if (btn) btn.disabled = true;
     }
-}
+};
 
 /* ---- TOPLAM HESAPLA ---- */
 function updateTotals() {
-    const originalSubtotal = (cart || []).reduce((s, x) => s + ((x.oldPrice || x.price) * x.qty), 0);
-    const currentSubtotal = (cart || []).reduce((s, x) => s + (x.price * x.qty), 0);
+    const originalSubtotal = (cart || []).reduce((s, x) => s + ((Number(x.oldPrice) || Number(x.price) || 0) * (Number(x.qty) || 1)), 0);
+    const currentSubtotal = (cart || []).reduce((s, x) => s + ((Number(x.price) || 0) * (Number(x.qty) || 1)), 0);
     const expressExtra = expressShipping ? 499 : 0;
     
-    // Toplam Indirim (oldPrice'dan gelen + kupon indirimi)
-    const totalSavings = originalSubtotal - currentSubtotal + discount;
+    const totalSavings = (originalSubtotal - currentSubtotal) + discount;
     const total = Math.max(0, originalSubtotal - totalSavings + expressExtra);
 
-    document.getElementById('sum-subtotal').textContent = formatPrice(originalSubtotal);
-    document.getElementById('sum-total').textContent = formatPrice(total);
+    const subEl = document.getElementById('sum-subtotal');
+    const totEl = document.getElementById('sum-total');
+    if (subEl) subEl.textContent = formatPrice(originalSubtotal);
+    if (totEl) totEl.textContent = formatPrice(total);
 
     const discRow = document.getElementById('sum-discount-row');
     const discEl = document.getElementById('sum-discount');
@@ -198,20 +220,28 @@ function updateTotals() {
 
 /* ---- KUPON ---- */
 const coupons = { 'MOBILYA10': 0.10, 'DUGUN15': 0.15, 'YENI5': 0.05, 'INEGOL20': 0.20, 'EVSEREN10': 0.10 };
-document.getElementById('applyCoupon')?.addEventListener('click', () => {
-    const code = document.getElementById('couponInput').value.trim().toUpperCase();
+document.getElementById('applyCoupon')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const code = (document.getElementById('couponInput')?.value || '').trim().toUpperCase();
     const msg = document.getElementById('couponMsg');
-    const subtotal = cart.reduce((s, x) => s + x.price * x.qty, 0);
-    if (!code) { msg.textContent = 'Lutfen kod girin.'; msg.className = 'coupon-msg error'; return; }
+    const subtotal = (cart || []).reduce((s, x) => s + (Number(x.price) || 0) * (Number(x.qty) || 1), 0);
+    if (!code) {
+        if (msg) { msg.textContent = 'Lütfen bir kupon kodu girin (Örn: EVSEREN10).'; msg.className = 'coupon-msg error'; }
+        return;
+    }
     if (coupons[code]) {
         discount = Math.round(subtotal * coupons[code]);
-        msg.textContent = `Basarili! %${coupons[code]*100} indirim.`;
-        msg.className = 'coupon-msg success';
+        if (msg) {
+            msg.textContent = `Tebrikler! %${coupons[code]*100} kupon indirimi (${formatPrice(discount)}) uygulandı.`;
+            msg.className = 'coupon-msg success';
+        }
         updateTotals();
         renderSummary();
     } else {
-        msg.textContent = 'Gecersiz kod.';
-        msg.className = 'coupon-msg error';
+        if (msg) {
+            msg.textContent = 'Geçersiz kupon kodu. (Geçerli kodlar: EVSEREN10, DUGUN15)';
+            msg.className = 'coupon-msg error';
+        }
     }
 });
 
@@ -241,6 +271,19 @@ document.getElementById('cardNumber')?.addEventListener('input', function () {
     if (preview) preview.textContent = val || '•••• •••• •••• ••••';
 });
 
+document.getElementById('cardHolder')?.addEventListener('input', function () {
+    const preview = document.getElementById('previewHolder');
+    if (preview) preview.textContent = (this.value || 'AD SOYAD').toUpperCase();
+});
+
+document.getElementById('cardExpiry')?.addEventListener('input', function () {
+    let val = this.value.replace(/\D/g, '').substring(0, 4);
+    if (val.length >= 3) val = val.slice(0, 2) + '/' + val.slice(2);
+    this.value = val;
+    const preview = document.getElementById('previewExpiry');
+    if (preview) preview.textContent = val || 'MM/YY';
+});
+
 /* ---- ODEME TAB ---- */
 document.querySelectorAll('.co-pay-tab').forEach(tab => {
     tab?.addEventListener('click', () => {
@@ -256,45 +299,40 @@ let map, marker, isMapUpdating = false;
 
 function initMap() {
     const mapEl = document.getElementById('addressMap');
-    if (!mapEl) return;
+    if (!mapEl || typeof L === 'undefined') return;
 
-    map = L.map('addressMap', {
-        zoomSnap: 1,
-        zoomDelta: 1
-    }).setView([39.9334, 32.8597], 6);
+    try {
+        map = L.map('addressMap', { zoomSnap: 1, zoomDelta: 1 }).setView([39.9334, 32.8597], 6);
+        L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            attribution: '© Google Maps',
+            maxZoom: 20
+        }).addTo(map);
 
-    // Yandex Benzeri Net ve Detaylı Harita (Google/Yandex kalitesinde)
-    L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-        attribution: '© Google Maps',
-        maxZoom: 20
-    }).addTo(map);
+        marker = L.marker([39.9334, 32.8597], { draggable: true }).addTo(map);
 
-    marker = L.marker([39.9334, 32.8597], { draggable: true }).addTo(map);
+        map.on('click', function (e) {
+            const { lat, lng } = e.latlng;
+            isMapUpdating = true;
+            marker.setLatLng([lat, lng]);
+            reverseGeocode(lat, lng);
+            map.setView([lat, lng], 16);
+            setTimeout(() => { isMapUpdating = false; }, 2000);
+        });
 
-    map.on('click', function (e) {
-        const { lat, lng } = e.latlng;
-        isMapUpdating = true;
-        marker.setLatLng([lat, lng]);
-        reverseGeocode(lat, lng);
-        map.setView([lat, lng], 16);
-        setTimeout(() => { isMapUpdating = false; }, 2000);
-    });
+        marker.on('dragend', function () {
+            const { lat, lng } = marker.getLatLng();
+            isMapUpdating = true;
+            reverseGeocode(lat, lng);
+            map.setView([lat, lng], 16);
+            setTimeout(() => { isMapUpdating = false; }, 2000);
+        });
 
-    marker.on('dragend', function (e) {
-        const { lat, lng } = marker.getLatLng();
-        isMapUpdating = true;
-        reverseGeocode(lat, lng);
-        map.setView([lat, lng], 16);
-        setTimeout(() => { isMapUpdating = false; }, 2000);
-    });
-
-    setTimeout(() => { map.invalidateSize(); }, 500);
+        setTimeout(() => { map.invalidateSize(); }, 500);
+    } catch (e) {}
 }
 
-// SEHIR/ILCE DEGISTIGINDE HARITAYI ORAYA KAYDIR
 async function zoomToCity(city, district = '') {
-    if (isMapUpdating) return; // Harita tıklamasından geliyorsa ekranı kaydırma!
-
+    if (isMapUpdating || !map) return;
     try {
         const query = district ? `${district}, ${city}, Turkey` : `${city}, Turkey`;
         const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`);
@@ -317,11 +355,9 @@ async function reverseGeocode(lat, lng) {
             const city = addr.province || addr.city || addr.state || "";
             const cleanCity = city.replace(" İli", "").replace(" Province", "");
             const district = addr.town || addr.borough || addr.district || addr.suburb || addr.county || "";
-            
             const neighborhood = addr.neighbourhood || addr.suburb || addr.village || "";
             const road = addr.road || "";
             const houseNum = addr.house_number || "";
-            
             updateAddressFields(cleanCity, district, `${neighborhood} ${road} No:${houseNum}`.trim());
         }
     } catch (err) {}
@@ -336,16 +372,14 @@ function updateAddressFields(city, district, fullAddr) {
         for (let opt of cityEl.options) {
             if (opt.text.toLowerCase().includes(city.toLowerCase())) {
                 cityEl.value = opt.value;
-                // Ilceleri yukle ama haritayi merkeze atma (isMapUpdating sayesinde)
-                const event = new Event('change');
-                cityEl.dispatchEvent(event); 
+                cityEl.dispatchEvent(new Event('change'));
                 break;
             }
         }
     }
 
     setTimeout(() => {
-        if (distEl) {
+        if (distEl && district) {
             let found = false;
             for (let opt of distEl.options) {
                 if (opt.text.toLowerCase().includes(district.toLowerCase())) {
@@ -354,7 +388,7 @@ function updateAddressFields(city, district, fullAddr) {
                     break;
                 }
             }
-            if (!found && district) {
+            if (!found) {
                 const newOpt = new Option(district, district);
                 distEl.add(newOpt);
                 distEl.value = district;
@@ -365,17 +399,17 @@ function updateAddressFields(city, district, fullAddr) {
     if (addrEl && fullAddr) addrEl.value = fullAddr;
 }
 
-// SEHIR DEGISTIGINDE ILCE LISTESINI VE HARITAYI GUNCELLE
 document.getElementById('d-city')?.addEventListener('change', function() {
     const city = this.value;
     const distEl = document.getElementById('d-district');
     if (!distEl) return;
 
     distEl.innerHTML = '<option value="" disabled selected>İlçe Seçin</option>';
-    const districts = cityDistrictData[city] || [];
+    const districts = cityDistrictData[city] || ['Merkez'];
     districts.forEach(d => {
         const opt = document.createElement('option');
-        opt.value = d; opt.textContent = d;
+        opt.value = d;
+        opt.textContent = d;
         distEl.appendChild(opt);
     });
 
@@ -397,7 +431,7 @@ document.getElementById('acceptTerms')?.addEventListener('change', (e) => {
 
 /* ---- SIPARIS TAMAMLA ---- */
 document.getElementById('placeOrder')?.addEventListener('click', async () => {
-    if (!document.getElementById('acceptTerms').checked) {
+    if (!document.getElementById('acceptTerms')?.checked) {
         return alert('Lütfen Mesafeli Satış Sözleşmesi\'ni onaylayın.');
     }
     
@@ -406,14 +440,15 @@ document.getElementById('placeOrder')?.addEventListener('click', async () => {
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> İşleniyor...';
     btn.disabled = true;
 
-    const cart = JSON.parse(localStorage.getItem('mobilya_cart')) || [];
-    if (cart.length === 0) {
+    const currentCart = JSON.parse(localStorage.getItem('mobilya_cart')) || cart || [];
+    if (currentCart.length === 0) {
         btn.innerHTML = originalText;
         btn.disabled = false;
         return alert('Sepetiniz boş!');
     }
 
-    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    const subtotal = currentCart.reduce((sum, item) => sum + ((Number(item.price) || 0) * (Number(item.qty) || 1)), 0);
+    const totalPrice = Math.max(0, subtotal - discount + (expressShipping ? 499 : 0));
     const firstName = document.getElementById('d-firstName')?.value || '';
     const lastName = document.getElementById('d-lastName')?.value || '';
     const customerName = (firstName + ' ' + lastName).trim() || 'Değerli Müşterimiz';
@@ -431,10 +466,10 @@ document.getElementById('placeOrder')?.addEventListener('click', async () => {
         _id: 'ord_' + Date.now(),
         orderCode: generatedCode,
         userEmail: currentUser?.email || customerEmail || '',
-        products: cart.map(item => ({
+        products: currentCart.map(item => ({
             productId: item.id,
             name: item.name,
-            quantity: item.qty,
+            quantity: item.qty || 1,
             price: item.price,
             img: item.img
         })),
@@ -450,14 +485,12 @@ document.getElementById('placeOrder')?.addEventListener('click', async () => {
         }
     };
 
-    // Save locally for User Profile, Order Tracking, and Admin Panel
     try {
         const existingOrders = JSON.parse(localStorage.getItem('evseren_orders') || '[]');
         existingOrders.unshift(newOrder);
         localStorage.setItem('evseren_orders', JSON.stringify(existingOrders));
     } catch (e) {}
 
-    // Send email notification via FormSubmit to evserenmobilya@gmail.com
     try {
         fetch('https://formsubmit.co/ajax/evserenmobilya@gmail.com', {
             method: 'POST',
@@ -469,29 +502,31 @@ document.getElementById('placeOrder')?.addEventListener('click', async () => {
                 Telefon: customerPhone,
                 Eposta: customerEmail,
                 Adres: customerAddrFull,
-                Urunler: cart.map(i => i.name + ' (x' + i.qty + ')').join(', '),
+                Urunler: currentCart.map(i => i.name + ' (x' + (i.qty || 1) + ')').join(', '),
                 Toplam_Tutar: formatPrice(totalPrice),
                 Tarih: new Date().toLocaleString('tr-TR')
             })
         }).catch(() => {});
     } catch (e) {}
 
-    // Populate Step 4 UI
+    cart = [];
     localStorage.setItem('mobilya_cart', '[]');
-    document.getElementById('orderNumber').textContent = newOrder.orderCode;
-    document.getElementById('orderDate').textContent = new Date().toLocaleDateString('tr-TR');
-    document.getElementById('orderTotal').textContent = formatPrice(totalPrice);
+    if (document.getElementById('orderNumber')) document.getElementById('orderNumber').textContent = newOrder.orderCode;
+    if (document.getElementById('orderDate')) document.getElementById('orderDate').textContent = new Date().toLocaleDateString('tr-TR');
+    if (document.getElementById('orderTotal')) document.getElementById('orderTotal').textContent = formatPrice(totalPrice);
     
-    document.getElementById('r-orderNo').textContent = newOrder.orderCode;
-    document.getElementById('r-date').textContent = new Date().toLocaleDateString('tr-TR');
-    document.getElementById('r-customer').textContent = customerName;
-    document.getElementById('r-items').innerHTML = cart.map(item => `
-        <div class="receipt-item">
-            <span>${item.name} (x${item.qty})</span>
-            <span>${formatPrice(item.price * item.qty)}</span>
-        </div>
-    `).join('');
-    document.getElementById('r-total').textContent = formatPrice(totalPrice);
+    if (document.getElementById('r-orderNo')) document.getElementById('r-orderNo').textContent = newOrder.orderCode;
+    if (document.getElementById('r-date')) document.getElementById('r-date').textContent = new Date().toLocaleDateString('tr-TR');
+    if (document.getElementById('r-customer')) document.getElementById('r-customer').textContent = customerName;
+    if (document.getElementById('r-items')) {
+        document.getElementById('r-items').innerHTML = currentCart.map(item => `
+            <div class="receipt-item">
+                <span>${item.name} (x${item.qty || 1})</span>
+                <span>${formatPrice(item.price * (item.qty || 1))}</span>
+            </div>
+        `).join('');
+    }
+    if (document.getElementById('r-total')) document.getElementById('r-total').textContent = formatPrice(totalPrice);
 
     const sendWA = () => {
         const text = `🛋️ *Evseren Mobilya - Yeni Sipariş*\n` +
@@ -502,7 +537,7 @@ document.getElementById('placeOrder')?.addEventListener('click', async () => {
                      `📍 *Adres:* ${customerAddrFull}\n` +
                      `-----------------------------\n` +
                      `🛒 *Ürünler:*\n` +
-                     cart.map(i => `- ${i.name} (x${i.qty}) - ${formatPrice(i.price*i.qty)}`).join('\n') +
+                     currentCart.map(i => `- ${i.name} (x${i.qty || 1}) - ${formatPrice(i.price*(i.qty || 1))}`).join('\n') +
                      `\n-----------------------------\n` +
                      `💰 *Toplam:* ${formatPrice(totalPrice)}\n` +
                      `✨ _Bilgilerimi teyit ediyorum._`;
@@ -518,419 +553,6 @@ document.getElementById('placeOrder')?.addEventListener('click', async () => {
     btn.disabled = false;
 });
 
-document.getElementById('goToStep2');
-    if (!container) return;
-
-    if (!cart || cart.length === 0) {
-        container.style.display = 'none';
-        if (emptyEl) emptyEl.style.display = 'block';
-        if (goBtn) goBtn.disabled = true;
-        return;
-    }
-
-    if (emptyEl) emptyEl.style.display = 'none';
-    container.style.display = 'block';
-    if (goBtn) goBtn.disabled = false;
-
-    container.innerHTML = cart.map(item => {
-        const itemPrice = item.price || 0;
-        const itemOldPrice = item.oldPrice || itemPrice;
-        return `
-    <div class="co-cart-item" id="coitem-${item.id}">
-      <img src="${item.img}" alt="${item.name}" />
-      <div class="co-cart-item-info">
-        <div class="co-cart-item-name">${item.name}</div>
-        <div class="co-cart-item-cat">${window.getCatName ? window.getCatName(item.cat || '') : ''}</div>
-        <div class="co-qty-row">
-          <button class="co-qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
-          <span class="co-qty-val">${item.qty}</span>
-          <button class="co-qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
-        </div>
-      </div>
-      <div style="text-align:right">
-        <div class="co-cart-item-price">${formatPrice(itemPrice * item.qty)}</div>
-        ${item.oldPrice ? `<div style="text-decoration:line-through;color:#a49a91;font-size:0.8rem">${formatPrice(itemOldPrice * item.qty)}</div>` : ''}
-      </div>
-      <button class="co-cart-item-remove" onclick="removeFromCartCO(${item.id})" title="Kaldir">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    `;
-    }).join('');
-}
-
-function changeQty(id, delta) {
-    const item = cart.find(x => x.id === id);
-    if (!item) return;
-    item.qty += delta;
-    if (item.qty <= 0) {
-        cart = cart.filter(x => x.id !== id);
-    }
-    saveCart();
-    renderCartItems();
-    renderSummary();
-    if (window.updateCartUI) window.updateCartUI();
-}
-
-function removeFromCartCO(id) {
-    cart = cart.filter(x => x.id !== id);
-    saveCart();
-    renderCartItems();
-    renderSummary();
-    if (window.updateCartUI) window.updateCartUI();
-    if (cart.length === 0) {
-        const btn = document.getElementById('goToStep2');
-        if (btn) btn.disabled = true;
-    }
-}
-
-/* ---- TOPLAM HESAPLA ---- */
-function updateTotals() {
-    const originalSubtotal = (cart || []).reduce((s, x) => s + ((x.oldPrice || x.price) * x.qty), 0);
-    const currentSubtotal = (cart || []).reduce((s, x) => s + (x.price * x.qty), 0);
-    const expressExtra = expressShipping ? 499 : 0;
-    
-    // Toplam Indirim (oldPrice'dan gelen + kupon indirimi)
-    const totalSavings = originalSubtotal - currentSubtotal + discount;
-    const total = Math.max(0, originalSubtotal - totalSavings + expressExtra);
-
-    document.getElementById('sum-subtotal').textContent = formatPrice(originalSubtotal);
-    document.getElementById('sum-total').textContent = formatPrice(total);
-
-    const discRow = document.getElementById('sum-discount-row');
-    const discEl = document.getElementById('sum-discount');
-    if (discRow && discEl) {
-        if (totalSavings > 0) {
-            discRow.style.display = 'flex';
-            discEl.textContent = '- ' + formatPrice(totalSavings);
-        } else {
-            discRow.style.display = 'none';
-        }
-    }
-
-    const expRow = document.getElementById('sum-express-row');
-    if (expRow) expRow.style.display = expressShipping ? 'flex' : 'none';
-
-    const instElements = {
-        'inst-1': total,
-        'inst-2': Math.ceil(total / 2),
-        'inst-3': Math.ceil(total / 3),
-        'inst-4': Math.ceil(total / 4),
-        'inst-5': Math.ceil(total / 5),
-        'inst-6': Math.ceil(total / 6)
-    };
-
-    for (let id in instElements) {
-        const el = document.getElementById(id);
-        if (el) el.textContent = formatPrice(instElements[id]) + (id === 'inst-1' ? '' : '/ay');
-    }
-}
-
-/* ---- KUPON ---- */
-const coupons = { 'MOBILYA10': 0.10, 'DUGUN15': 0.15, 'YENI5': 0.05, 'INEGOL20': 0.20, 'EVSEREN10': 0.10 };
-document.getElementById('applyCoupon')?.addEventListener('click', () => {
-    const code = document.getElementById('couponInput').value.trim().toUpperCase();
-    const msg = document.getElementById('couponMsg');
-    const subtotal = cart.reduce((s, x) => s + x.price * x.qty, 0);
-    if (!code) { msg.textContent = 'Lutfen kod girin.'; msg.className = 'coupon-msg error'; return; }
-    if (coupons[code]) {
-        discount = Math.round(subtotal * coupons[code]);
-        msg.textContent = `Basarili! %${coupons[code]*100} indirim.`;
-        msg.className = 'coupon-msg success';
-        updateTotals();
-        renderSummary();
-    } else {
-        msg.textContent = 'Gecersiz kod.';
-        msg.className = 'coupon-msg error';
-    }
-});
-
-/* ---- TESLIMAT SECEGI ---- */
-document.querySelectorAll('input[name="delivery"]').forEach(radio => {
-    radio?.addEventListener('change', () => {
-        expressShipping = radio.value === 'express';
-        updateTotals();
-    });
-});
-
-/* ---- TAKSIT SECEGI ---- */
-document.querySelectorAll('input[name="installment"]').forEach(radio => {
-    radio?.addEventListener('change', function() {
-        document.querySelectorAll('.installment-option').forEach(opt => opt.classList.remove('selected'));
-        this.closest('.installment-option')?.classList.add('selected');
-        selectedInstallment = parseInt(this.value);
-    });
-});
-
-/* ---- KART ONIZLEME ---- */
-document.getElementById('cardNumber')?.addEventListener('input', function () {
-    let val = this.value.replace(/\D/g, '').substring(0, 16);
-    val = val.replace(/(.{4})/g, '$1 ').trim();
-    this.value = val;
-    const preview = document.getElementById('previewNumber');
-    if (preview) preview.textContent = val || '•••• •••• •••• ••••';
-});
-
-/* ---- ODEME TAB ---- */
-document.querySelectorAll('.co-pay-tab').forEach(tab => {
-    tab?.addEventListener('click', () => {
-        document.querySelectorAll('.co-pay-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.co-pay-section').forEach(s => s.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById(`pay-${tab.dataset.method}`)?.classList.add('active');
-    });
-});
-
-/* ---- HARITA & ILCE MANTIGI ---- */
-let map, marker, isMapUpdating = false;
-
-function initMap() {
-    const mapEl = document.getElementById('addressMap');
-    if (!mapEl) return;
-
-    map = L.map('addressMap', {
-        zoomSnap: 1,
-        zoomDelta: 1
-    }).setView([39.9334, 32.8597], 6);
-
-    // Yandex Benzeri Net ve Detaylı Harita (Google/Yandex kalitesinde)
-    L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-        attribution: '© Google Maps',
-        maxZoom: 20
-    }).addTo(map);
-
-    marker = L.marker([39.9334, 32.8597], { draggable: true }).addTo(map);
-
-    map.on('click', function (e) {
-        const { lat, lng } = e.latlng;
-        isMapUpdating = true;
-        marker.setLatLng([lat, lng]);
-        reverseGeocode(lat, lng);
-        map.setView([lat, lng], 16);
-        setTimeout(() => { isMapUpdating = false; }, 2000);
-    });
-
-    marker.on('dragend', function (e) {
-        const { lat, lng } = marker.getLatLng();
-        isMapUpdating = true;
-        reverseGeocode(lat, lng);
-        map.setView([lat, lng], 16);
-        setTimeout(() => { isMapUpdating = false; }, 2000);
-    });
-
-    setTimeout(() => { map.invalidateSize(); }, 500);
-}
-
-// SEHIR/ILCE DEGISTIGINDE HARITAYI ORAYA KAYDIR
-async function zoomToCity(city, district = '') {
-    if (isMapUpdating) return; // Harita tıklamasından geliyorsa ekranı kaydırma!
-
-    try {
-        const query = district ? `${district}, ${city}, Turkey` : `${city}, Turkey`;
-        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`);
-        const data = await res.json();
-        if (data && data.length > 0) {
-            const { lat, lon } = data[0];
-            const newPos = [parseFloat(lat), parseFloat(lon)];
-            map.setView(newPos, district ? 15 : 11);
-            marker.setLatLng(newPos);
-        }
-    } catch (e) {}
-}
-
-async function reverseGeocode(lat, lng) {
-    try {
-        const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`);
-        const data = await res.json();
-        if (data && data.address) {
-            const addr = data.address;
-            const city = addr.province || addr.city || addr.state || "";
-            const cleanCity = city.replace(" İli", "").replace(" Province", "");
-            const district = addr.town || addr.borough || addr.district || addr.suburb || addr.county || "";
-            
-            const neighborhood = addr.neighbourhood || addr.suburb || addr.village || "";
-            const road = addr.road || "";
-            const houseNum = addr.house_number || "";
-            
-            updateAddressFields(cleanCity, district, `${neighborhood} ${road} No:${houseNum}`.trim());
-        }
-    } catch (err) {}
-}
-
-function updateAddressFields(city, district, fullAddr) {
-    const cityEl = document.getElementById('d-city');
-    const distEl = document.getElementById('d-district');
-    const addrEl = document.getElementById('d-address');
-
-    if (cityEl) {
-        for (let opt of cityEl.options) {
-            if (opt.text.toLowerCase().includes(city.toLowerCase())) {
-                cityEl.value = opt.value;
-                // Ilceleri yukle ama haritayi merkeze atma (isMapUpdating sayesinde)
-                const event = new Event('change');
-                cityEl.dispatchEvent(event); 
-                break;
-            }
-        }
-    }
-
-    setTimeout(() => {
-        if (distEl) {
-            let found = false;
-            for (let opt of distEl.options) {
-                if (opt.text.toLowerCase().includes(district.toLowerCase())) {
-                    distEl.value = opt.value;
-                    found = true;
-                    break;
-                }
-            }
-            if (!found && district) {
-                const newOpt = new Option(district, district);
-                distEl.add(newOpt);
-                distEl.value = district;
-            }
-        }
-    }, 100);
-
-    if (addrEl && fullAddr) addrEl.value = fullAddr;
-}
-
-// SEHIR DEGISTIGINDE ILCE LISTESINI VE HARITAYI GUNCELLE
-document.getElementById('d-city')?.addEventListener('change', function() {
-    const city = this.value;
-    const distEl = document.getElementById('d-district');
-    if (!distEl) return;
-
-    distEl.innerHTML = '<option value="" disabled selected>İlçe Seçin</option>';
-    const districts = cityDistrictData[city] || [];
-    districts.forEach(d => {
-        const opt = document.createElement('option');
-        opt.value = d; opt.textContent = d;
-        distEl.appendChild(opt);
-    });
-
-    if (!isMapUpdating) zoomToCity(city);
-});
-
-document.getElementById('d-district')?.addEventListener('change', function() {
-    if (!isMapUpdating) {
-        const city = document.getElementById('d-city').value;
-        zoomToCity(city, this.value);
-    }
-});
-
-/* ---- LEGAL CHECKBOX LOGIC ---- */
-document.getElementById('acceptTerms')?.addEventListener('change', (e) => {
-    const btn = document.getElementById('placeOrder');
-    if (btn) btn.disabled = !e.target.checked;
-});
-
-/* ---- SIPARIS TAMAMLA ---- */
-document.getElementById('placeOrder')?.addEventListener('click', async () => {
-    if (!document.getElementById('acceptTerms').checked) {
-        return alert('Lütfen Mesafeli Satış Sözleşmesi\'ni onaylayın.');
-    }
-    
-    const btn = document.getElementById('placeOrder');
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> İşleniyor...';
-    btn.disabled = true;
-
-    const cart = JSON.parse(localStorage.getItem('mobilya_cart')) || [];
-    if (cart.length === 0) return alert('Sepetiniz boş!');
-
-    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-    const orderData = {
-        products: cart.map(item => ({
-            productId: item.id.length > 10 ? item.id : undefined, // Check if it's a mongo ID
-            name: item.name, // Fallback for original site items
-            quantity: item.qty,
-            price: item.price
-        })),
-        totalPrice: totalPrice,
-        customerInfo: {
-            name: document.getElementById('d-firstName').value + ' ' + document.getElementById('d-lastName').value,
-            phone: document.getElementById('d-phone').value,
-            address: document.getElementById('d-address').value,
-            city: document.getElementById('d-city').value
-        }
-    };
-
-    try {
-        const res = await fetch(`${API_URL}/orders`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(orderData)
-        });
-        const data = await res.json();
-        
-        if (res.ok && data.order) {
-            // SUCCESS!
-            const order = data.order;
-            const customerName = document.getElementById('d-firstName').value + ' ' + document.getElementById('d-lastName').value;
-            const customerPhone = document.getElementById('d-phone').value;
-            const customerAddr = (document.getElementById('d-city').value + ', ' + document.getElementById('d-district').value + ', ' + document.getElementById('d-address').value);
-            
-            localStorage.setItem('mobilya_cart', '[]'); // Clear cart
-            document.getElementById('orderNumber').textContent = order.orderCode;
-            document.getElementById('orderDate').textContent = new Date().toLocaleDateString('tr-TR');
-            document.getElementById('orderTotal').textContent = formatPrice(totalPrice);
-            
-            // Prepare Print View
-            document.getElementById('r-orderNo').textContent = order.orderCode;
-            document.getElementById('r-date').textContent = new Date().toLocaleDateString('tr-TR');
-            document.getElementById('r-customer').textContent = customerName;
-            document.getElementById('r-items').innerHTML = cart.map(item => `
-                <div class="receipt-item">
-                    <span>${item.name} (x${item.qty})</span>
-                    <span>${formatPrice(item.price * item.qty)}</span>
-                </div>
-            `).join('');
-            document.getElementById('r-total').textContent = formatPrice(totalPrice);
-
-            // WhatsApp Logic (Automatic Trigger)
-            const sendWA = () => {
-                const text = `🛋️ *Evseren Mobilya - Yeni Sipariş*\n` +
-                             `-----------------------------\n` +
-                             `📦 *Sipariş No:* ${order.orderCode}\n` +
-                             `👤 *Müşteri:* ${customerName}\n` +
-                             `📞 *Tel:* ${customerPhone}\n` +
-                             `📍 *Adres:* ${customerAddr}\n` +
-                             `-----------------------------\n` +
-                             `🛒 *Ürünler:*\n` +
-                             cart.map(i => `- ${i.name} (x${i.qty}) - ${formatPrice(i.price*i.qty)}`).join('\n') +
-                             `\n-----------------------------\n` +
-                             `💰 *Toplam:* ${formatPrice(totalPrice)}\n` +
-                             `✨ _Bilgilerimi teyit ediyorum._`;
-                window.open(`https://wa.me/905077567887?text=${encodeURIComponent(text)}`, '_blank');
-            };
-
-            // Buttons still exist for manual retry
-            document.getElementById('whatsappNotify').onclick = sendWA;
-            document.getElementById('printBtn').onclick = () => window.print();
-
-            // AUTOMATIC TRIGGERS
-            goToStep(4);
-            if (window.updateCartUI) window.updateCartUI();
-            
-            // Give a tiny moment for the UI to update before printing/opening WA
-            setTimeout(() => {
-                window.print(); // Open Print Dialog
-                sendWA();      // Open WhatsApp (Note: Browsers may block popups)
-            }, 1000);
-        } else {
-            alert('Sipariş oluşturulamadı: ' + (data.message || 'Hata'));
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-        }
-    } catch (err) {
-        console.error(err);
-        alert('Bağlantı hatası: Sunucu kapalı olabilir.');
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-    }
-});
-
 document.getElementById('goToStep2')?.addEventListener('click', () => goToStep(2));
 document.getElementById('backToStep1')?.addEventListener('click', () => goToStep(1));
 document.getElementById('goToStep3')?.addEventListener('click', () => goToStep(3));
@@ -938,27 +560,27 @@ document.getElementById('backToStep2')?.addEventListener('click', () => goToStep
 
 /* ---- INIT ---- */
 document.addEventListener('DOMContentLoaded', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const status = urlParams.get('status');
-    const orderId = urlParams.get('orderId');
-
-    if (status === 'success') {
-        cart = [];
-        localStorage.setItem('mobilya_cart', JSON.stringify([]));
-        document.getElementById('orderNumber').textContent = orderId ? ('#MD-' + orderId.slice(-6)) : ('#MD-' + Math.floor(100000 + Math.random() * 900000));
-        goToStep(4);
-    } else if (status === 'failed' || status === 'error') {
-        alert('Ödeme tamamlanamadı. Lütfen tekrar deneyin.');
-        goToStep(3);
-    }
-
-    if (typeof cart === 'undefined' || !cart || cart.length === 0) {
-        cart = JSON.parse(localStorage.getItem('mobilya_cart')) || [];
-    }
+    cart = cart_init();
     renderCartItems();
     renderSummary();
     updateTotals();
     initMap();
+
+    // Pre-fill user details if logged in
+    try {
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        if (user) {
+            const parts = (user.name || '').split(' ');
+            const fnEl = document.getElementById('d-firstName');
+            const lnEl = document.getElementById('d-lastName');
+            const emEl = document.getElementById('d-email');
+            const phEl = document.getElementById('d-phone');
+            if (fnEl && !fnEl.value && parts[0]) fnEl.value = parts[0];
+            if (lnEl && !lnEl.value && parts.length > 1) lnEl.value = parts.slice(1).join(' ');
+            if (emEl && !emEl.value && user.email) emEl.value = user.email;
+            if (phEl && !phEl.value && user.phone) phEl.value = user.phone;
+        }
+    } catch(e) {}
 
     const copyIbanBtn = document.getElementById('copyIban');
     if (copyIbanBtn) {
@@ -974,4 +596,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-

@@ -247,14 +247,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (userBtn) {
         const token = localStorage.getItem('token');
         let user = null;
-        try { user = JSON.parse(localStorage.getItem('user') || 'null'); } catch(e) { console.error("User parse error", e); }
+        try { user = JSON.parse(localStorage.getItem('user') || 'null'); } catch(e) {}
         
-        if (token && user && user.name) {
-            userBtn.innerHTML = `<i class="fas fa-user-circle" style="color:var(--accent)"></i> <span class="user-name-header" style="font-size:0.8rem; font-weight:600; margin-left:5px">${user.name.split(' ')[0]}</span>`;
-            userBtn.title = "Hesabım";
+        if (token && user && (user.name || user.email)) {
+            const rawName = user.firstName || user.name || user.email || 'Hesabım';
+            const cleanShortName = rawName.split('@')[0].split(' ')[0].slice(0, 12);
+            userBtn.innerHTML = `<i class="fas fa-user-circle" style="color:var(--accent); font-size:1.05rem;"></i><span class="user-name-header">${cleanShortName}</span>`;
+            userBtn.title = "Hesabım (" + (user.email || cleanShortName) + ")";
             userBtn.href = "profile.html";
             userBtn.onclick = (e) => { e.preventDefault(); window.location.href = "profile.html"; };
         } else {
+            userBtn.innerHTML = `<i class="fas fa-user"></i><span class="user-name-header">Giriş Yap</span>`;
+            userBtn.title = "Giriş Yap / Üye Ol";
             userBtn.href = "login.html";
             userBtn.onclick = (e) => { e.preventDefault(); window.location.href = "login.html"; };
         }

@@ -1703,3 +1703,62 @@ body.cart-open .scroll-top.visible {
 @media (max-width: 600px) {
   .cat-grid { grid-template-columns: 1fr; }
 }
+
+
+/* ==========================================
+   HEADER ACTIONS & USER PILL FIX
+   ========================================== */
+.header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-shrink: 0 !important;
+}
+.icon-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  min-width: 42px;
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 50px !important;
+  border: 1px solid #e5dec9 !important;
+  background: #ffffff !important;
+  color: #1f2937 !important;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none !important;
+  position: relative;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+}
+.icon-btn:hover {
+  border-color: #B8860B !important;
+  color: #B8860B !important;
+  background: #fdfbf7 !important;
+}
+.icon-btn .user-name-header {
+  display: inline-block;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1a1209;
+  margin-left: 2px !important;
+}
+.menu-btn {
+  display: none !important;
+}
+@media (max-width: 900px) {
+  .menu-btn {
+    display: inline-flex !important;
+  }
+  .icon-btn .user-name-header {
+    max-width: 75px;
+  }
+}
