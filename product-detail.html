@@ -340,6 +340,25 @@
     </div>
   </div>
   <script>
+    window.syncCurtainProductPhoto = function() {
+      try {
+        const pid = new URLSearchParams(window.location.search).get('id');
+        if (!pid) return;
+        const list = (window.getEffectiveProducts && window.getEffectiveProducts()) || window.allProductsData || window.fallbackProductsData || [];
+        const prod = list.find(p => String(p.id) === String(pid));
+        if (prod) {
+          const rawImg = (prod.images && prod.images[0]) ? prod.images[0] : prod.img;
+          const src = rawImg && rawImg.startsWith('data:') ? rawImg : encodeURI(rawImg || '');
+          const l = document.getElementById('evserenCurtainLeftImg');
+          const r = document.getElementById('evserenCurtainRightImg');
+          const b = document.getElementById('evserenCurtainBadge');
+          if (l && src) l.src = src;
+          if (r && src) r.src = src;
+          if (b && prod.name) b.innerText = 'EVSEREN MOBİLYA • ' + prod.name.toUpperCase();
+        }
+      } catch(e) {}
+    };
+    document.addEventListener('DOMContentLoaded', window.syncCurtainProductPhoto);
     window.openEvserenSplitCurtain = function() {
       const el = document.getElementById('evserenSplitCurtain');
       if (el && !el.classList.contains('curtain-opened')) {
