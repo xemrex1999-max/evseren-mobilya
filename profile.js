@@ -53,15 +53,11 @@ function switchProfileTab(tabName) {
 async function fetchUserOrders() {
     const user = checkAuth();
     if (!user) return;
-
     try {
-        const res = await fetch(`${API_URL}/orders/${user._id}`, {
-            headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
-        });
-        const orders = await res.json();
-        renderOrdersList(orders);
+        const localOrders = JSON.parse(localStorage.getItem('evseren_orders') || '[]');
+        renderOrdersList(localOrders);
     } catch (e) {
-        console.error(e);
+        renderOrdersList([]);
     }
 }
 

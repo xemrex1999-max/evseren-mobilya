@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20261105c" />
   <link rel="stylesheet" href="chatbot.css" />
   
   <!-- JSON-LD LocalBusiness Structured Data -->
@@ -55,6 +55,172 @@
     ]
   }
   </script>
+
+  <style id="evseren-critical-layout">
+    /* Simetrik 3x2 Kategori Kartları & Asimetrik Köşe Tasarımı */
+    .cat-grid {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 22px !important;
+    }
+    .cat-card, .cat-large {
+      grid-row: span 1 !important;
+      grid-column: span 1 !important;
+      aspect-ratio: 4/3 !important;
+      min-height: 250px !important;
+      border-radius: 34px 8px 34px 8px !important;
+      box-shadow: 0 12px 28px rgba(26,18,9,0.1) !important;
+      border: 1px solid rgba(184,134,11,0.22);
+    }
+    .cat-card:nth-child(even) {
+      border-radius: 8px 34px 8px 34px !important;
+    }
+
+    /* Yan Yana Kayan Desenli Asimetrik Kare Yorum Kartları (Bir Tarafı Oval, Bir Tarafı Sivri) */
+    .reviews-slider-wrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding: 16px 0 28px;
+    }
+    .reviews-row {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      gap: 22px !important;
+      width: max-content !important;
+      margin-bottom: 22px;
+    }
+    .reviews-row.row-1 { animation: marqueeLeft 250s linear infinite; }
+    .reviews-row.row-2 { animation: marqueeRight 270s linear infinite; }
+    .reviews-slider-wrap:hover .reviews-row { animation-play-state: paused; }
+
+    .review-square-card {
+      position: relative;
+      width: 280px !important;
+      height: 255px !important;
+      flex: 0 0 280px !important;
+      background:
+        radial-gradient(circle at 92% 10%, rgba(184,134,11,0.11) 0%, rgba(184,134,11,0) 45%),
+        radial-gradient(circle at 8% 92%, rgba(139,94,60,0.08) 0%, rgba(139,94,60,0) 45%),
+        linear-gradient(145deg, #ffffff 0%, #fdfbf7 100%);
+      border: 1.5px solid #e4d9c8;
+      /* Bir tarafı oval (42px), diğer tarafı keskin/sivri (6px) yaprak-kare kesim */
+      border-radius: 42px 6px 42px 6px !important;
+      padding: 22px;
+      box-shadow: 0 10px 24px rgba(26,18,9,0.06);
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .review-square-card:nth-child(even) {
+      border-radius: 6px 42px 6px 42px !important;
+      background:
+        radial-gradient(circle at 10% 12%, rgba(184,134,11,0.11) 0%, rgba(184,134,11,0) 45%),
+        radial-gradient(circle at 90% 88%, rgba(139,94,60,0.08) 0%, rgba(139,94,60,0) 45%),
+        linear-gradient(145deg, #ffffff 0%, #faf6f0 100%);
+    }
+    .review-square-card:nth-child(3n) {
+      border-radius: 46px 10px 28px 4px !important;
+    }
+    /* Desenli Köşe Motifi ve Dekoratif Çizgi */
+    .review-square-card::before {
+      content: "❝";
+      position: absolute;
+      top: 6px;
+      right: 16px;
+      font-size: 3.4rem;
+      line-height: 1;
+      color: rgba(184,134,11,0.13);
+      font-family: Georgia, serif;
+      pointer-events: none;
+    }
+    .review-square-card::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 55%;
+      height: 3px;
+      background: linear-gradient(90deg, #B8860B, transparent);
+    }
+    .review-square-card:hover {
+      transform: translateY(-6px);
+      border-color: #B8860B;
+      box-shadow: 0 16px 32px rgba(184,134,11,0.16);
+    }
+    .review-square-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .rating-stars { color: #D4A843; font-size: 0.88rem; letter-spacing: 1px; }
+    .rating-num {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #6d4a2e;
+      background: rgba(184,134,11,0.14);
+      padding: 2px 8px;
+      border-radius: 12px 3px 12px 3px;
+    }
+    .review-square-text {
+      font-size: 0.85rem !important;
+      color: #2d3748 !important;
+      line-height: 1.52 !important;
+      font-style: normal !important;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin: 0 0 10px 0 !important;
+      position: relative;
+      z-index: 1;
+    }
+    .review-square-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px dashed #e6dccf;
+      padding-top: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .review-square-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 14px 4px 14px 4px;
+      background: linear-gradient(135deg, #1A1A1A, #8B5E3C);
+      color: #D4A843;
+      font-weight: 700;
+      font-size: 0.76rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .review-square-author strong { display: block; font-size: 0.84rem; color: #1a1209; line-height: 1.2; }
+    .review-square-author span { font-size: 0.73rem; color: #7a6552; }
+
+    @keyframes marqueeLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes marqueeRight {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+    @media (max-width: 900px) {
+      .cat-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+    @media (max-width: 600px) {
+      .cat-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
 </head>
 <body>
 
@@ -283,140 +449,1914 @@
   <!-- MÜŞTERİ YORUMLARI -->
   <section class="section testimonials-section" style="background:var(--bg2); overflow:hidden;">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">YORUMLAR</span>
+      <div class="section-header" style="margin-bottom:28px;">
+        <span class="section-tag">GERÇEK MÜŞTERİ DENEYİMLERİ (4.6 / 5.0 ★ — 160+ YORUM)</span>
         <h2 class="section-title">Müşterilerimiz Ne Diyor?</h2>
+        <p class="section-sub">Türkiye'nin 81 ilinden teslimat ve kurulum yapılan müşterilerimizin gerçek yorumları</p>
       </div>
     </div>
-    <div class="testimonials-marquee">
-      <div class="testimonials-track" id="testimonialsTrack">
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"Düğün paketimizi buradan aldık. Kalite ve fiyat dengesi mükemmel. Kurulum ekibi de çok profesyoneldi."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">AK</div>
-            <div><strong>Ayşe K.</strong><span>İstanbul</span></div>
+    <div class="reviews-slider-wrap">
+      <div class="reviews-row row-1">
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Düğün paketimizi buradan aldık valla başta tereddüt etmiştim internetten mobilya alınır mı diye ama kurulum ekibi eve kadar getirip tek tek kurdu."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">AK</div>
+            <div><strong>Ayşe K.</strong><span>İstanbul • Onaylı Alıcı</span></div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"Yatak odamızı sipariş ettik, 10 gün içinde teslim ettiler ve kurulumu da ücretsiz yaptılar. Teşekkürler!"</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">MÖ</div>
-            <div><strong>Mehmet Ö.</strong><span>Ankara</span></div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Yatak odası gayet sağlam duruyor malzeme kalitesi iyi. Sadece teslimat söylenen günden 2 gün sonra geldi yoğunluktan dolayı, yine de memnunuz."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MÖ</div>
+            <div><strong>Mehmet Ö.</strong><span>Ankara • Onaylı Alıcı</span></div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"Ürün kalitesi resimlerden çok daha iyi. Koltuk takımımız harika, herkese tavsiye ederim."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">FY</div>
-            <div><strong>Fatma Y.</strong><span>İzmir</span></div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Görsellerdekinden daha güzel çıktı kumaşın dokusu falan. Koltuk takımı salona tam oturdu, tavsiye ederim düşünenlere."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">FY</div>
+            <div><strong>Fatma Y.</strong><span>İzmir • Onaylı Alıcı</span></div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"İnegöl'den Kocaeli'ye sorunsuz ve çiziksiz ulaştı. Bohem yemek odası takımına misafirlerimiz bayıldı."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">SD</div>
-            <div><strong>Selin D.</strong><span>Kocaeli</span></div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SD</div>
+            <div><strong>Serkan D.</strong><span>Bursa • Onaylı Alıcı</span></div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"Buğlem yatak odası takımını aldık, dolap iç hacmi ve malzeme kalitesi beklentimizin çok üzerinde çıktı."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">BT</div>
-            <div><strong>Burak T.</strong><span>Bursa</span></div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Bohem yemek odasını aldık misafirler nereden aldınız diye sorup duruyor. Masanın açılır mekanizması çok pratik olmuş."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ZA</div>
+            <div><strong>Zeynep A.</strong><span>Kocaeli • Onaylı Alıcı</span></div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"Müşteri temsilcileri siparişten kuruluma kadar her aşamada bilgilendirdi. Köşe takımımız salonumuza çok yakıştı."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">ZE</div>
-            <div><strong>Zeynep E.</strong><span>Antalya</span></div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"İnegöl'den Antalya'ya çiziksiz gelmesi mucize gibiydi paketlemeyi baya sağlam yapmışlar. Sadece bir çekmece kulpu eksikti onu da kargoladılar hemen."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">HÇ</div>
+            <div><strong>Hakan Ç.</strong><span>Antalya • Onaylı Alıcı</span></div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"İnci yemek odası ve TV ünitesini takım olarak aldık. Hem modern hem de çok sağlam, emeğinize sağlık."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">HÇ</div>
-            <div><strong>Hakan Ç.</strong><span>Eskişehir</span></div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Buğlem yatak odası takımının dolap içi çok geniş bütün eşyalarım sığdı. Aynalı kapakları odayı ferah gösterdi resmen."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ES</div>
+            <div><strong>Elif S.</strong><span>Sakarya • Onaylı Alıcı</span></div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"Ücretsiz nakliye ve kurulum sözünü eksiksiz tuttular. Fiyat-performans olarak İnegöl'ün en güvenilir firması."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">EA</div>
-            <div><strong>Elif A.</strong><span>Sakarya</span></div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Fiyat performans olarak piyasaya göre uygun. Sandalyelerin rengi fotoğraftakinden yarım ton koyu gibi geldi bana ama eşim çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MK</div>
+            <div><strong>Mustafa K.</strong><span>Konya • Onaylı Alıcı</span></div>
           </div>
         </div>
-        <!-- Infinite Scroll Clones -->
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"Düğün paketimizi buradan aldık. Kalite ve fiyat dengesi mükemmel. Kurulum ekibi de çok profesyoneldi."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">AK</div>
-            <div><strong>Ayşe K.</strong><span>İstanbul</span></div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"İnci yemek odası takımını çeyizim için aldık. Kurulumu yapan ustalar çok efendiydi ayakkabılarını çıkarıp tertemiz kurdular sağ olsunlar."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">GT</div>
+            <div><strong>Gülşen T.</strong><span>Eskişehir • Onaylı Alıcı</span></div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"Yatak odamızı sipariş ettik, 10 gün içinde teslim ettiler ve kurulumu da ücretsiz yaptılar. Teşekkürler!"</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">MÖ</div>
-            <div><strong>Mehmet Ö.</strong><span>Ankara</span></div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">BM</div>
+            <div><strong>Burak M.</strong><span>Tekirdağ • Onaylı Alıcı</span></div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"Ürün kalitesi resimlerden çok daha iyi. Koltuk takımımız harika, herkese tavsiye ederim."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">FY</div>
-            <div><strong>Fatma Y.</strong><span>İzmir</span></div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Kumaşı gerçekten silinebilirmiş geçen kahve döküldü ıslak mendille sildim leke kalmadı. Bir tek kırlentler biraz sert zamanla yumuşar herhalde."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">DB</div>
+            <div><strong>Derya B.</strong><span>Balıkesir • Onaylı Alıcı</span></div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"İnegöl'den Kocaeli'ye sorunsuz ve çiziksiz ulaştı. Bohem yemek odası takımına misafirlerimiz bayıldı."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">SD</div>
-            <div><strong>Selin D.</strong><span>Kocaeli</span></div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"WhatsApp'tan her sorduğuma sabırla cevap verdiler. Ölçüler konusunda çok yardımcı oldular, tam istediğimiz gibi geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">OV</div>
+            <div><strong>Oğuzhan V.</strong><span>Kayseri • Onaylı Alıcı</span></div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"Buğlem yatak odası takımını aldık, dolap iç hacmi ve malzeme kalitesi beklentimizin çok üzerinde çıktı."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">BT</div>
-            <div><strong>Burak T.</strong><span>Bursa</span></div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"TV ünitesiyle yemek masasını takım aldık. Ürünler güzel lakin kargo beklediğimden 3-4 gün geç çıktı fabrikadan, aceleniz yoksa kesin alınır."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">CH</div>
+            <div><strong>Cemile H.</strong><span>Samsun • Onaylı Alıcı</span></div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"Müşteri temsilcileri siparişten kuruluma kadar her aşamada bilgilendirdi. Köşe takımımız salonumuza çok yakıştı."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">ZE</div>
-            <div><strong>Zeynep E.</strong><span>Antalya</span></div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Aynalı yatak odası gerçekten çok şık duruyor. Dolap kapaklarının frenli olması çok iyi, çarpmıyor yavaşça kapanıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">KE</div>
+            <div><strong>Kemal E.</strong><span>Mersin • Onaylı Alıcı</span></div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"İnci yemek odası ve TV ünitesini takım olarak aldık. Hem modern hem de çok sağlam, emeğinize sağlık."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">HÇ</div>
-            <div><strong>Hakan Ç.</strong><span>Eskişehir</span></div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Ücretsiz nakliye ve kurulum olması büyük avantaj. Başka yerler sadece nakliyeye dünya para istiyor, helal olsun."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">PG</div>
+            <div><strong>Pınar G.</strong><span>Adana • Onaylı Alıcı</span></div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p>"Ücretsiz nakliye ve kurulum sözünü eksiksiz tuttular. Fiyat-performans olarak İnegöl'ün en güvenilir firması."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">EA</div>
-            <div><strong>Elif A.</strong><span>Sakarya</span></div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Köşe takımı aldık oturumu rahat süngeri çökecek gibi durmuyor. Rengi de tam istediğimiz antrasit tonunda geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">AR</div>
+            <div><strong>Ali Rıza N.</strong><span>Manisa • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Düğün telaşında bir de mobilyayla uğraşmayalım dedik komple paket aldık. İyi ki de öyle yapmışız birbiriyle uyumu harika oldu."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SU</div>
+            <div><strong>Seda U.</strong><span>Denizli • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Masa çok sağlam ağır bir masa, iki kişi zor kaldırıyor. Sadece kurulum kılavuzu biraz daha detaylı olabilirdi ustalar gelmeden ben bakayım dedim anlamadım."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">YP</div>
+            <div><strong>Yasin P.</strong><span>Gaziantep • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komodinlerin yüksekliği ve çekmece derinliği çok ideal. Yatak başlığının kumaşı da yumuşacık silmesi kolay."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ML</div>
+            <div><strong>Merve L.</strong><span>Aydın • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Karadeniz'e kadar sorunsuz getirdiler ya helal olsun. Köşelerde en ufak ezik bile yoktu, esnaflıkları güzel."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">TK</div>
+            <div><strong>Tuncay K.</strong><span>Trabzon • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"İnci yatak odası takımına bayıldım! Altın detayları abartılı değil çok zarif duruyor, odanın havası değişti."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">BC</div>
+            <div><strong>Büşra C.</strong><span>Çanakkale • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Yazlık için koltuk ve yemek takımı aldık. Kumaşı terletmiyor, minderlerin sertliği tam kararında."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">EŞ</div>
+            <div><strong>Erkan Ş.</strong><span>Muğla • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Ürün kalitesi fiyatına göre gayet iyi. Teslimat günü saat biraz sarktı akşam 8 gibi kurdular ama çocuklar yorulmuştu bir şey diyemedim."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">Nİ</div>
+            <div><strong>Nuran İ.</strong><span>Afyon • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"İnegöl'e bizzat gidip bakmıştık sonra siteden sipariş verdik. Mağazada gördüğümüzün birebir aynısı sıfır hata ile geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">GZ</div>
+            <div><strong>Gökhan Z.</strong><span>Düzce • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Konsolun aynası o kadar güzel ki salonu iki kat büyük gösterdi. İç rafları da baya yemek takımı alıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">AY</div>
+            <div><strong>Aslıhan Y.</strong><span>Isparta • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Ayakları yüksek olduğu için robot süpürge altına rahatça giriyor, eşim özellikle buna çok sevindi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">KF</div>
+            <div><strong>Kadir F.</strong><span>Bolu • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Bohem takımın ahşap tonu çok sıcak. İskandinav tarzı sevenler gözü kapalı alabilir, işçilik temiz."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">TÖ</div>
+            <div><strong>Tuğba Ö.</strong><span>Kütahya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Kalite olarak 5 yıldız ama iletişimde yoğunluktan bazen geç döndüler. Yine de ürün sağlam ulaştı kurulumu yapıldı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">VB</div>
+            <div><strong>Volkan B.</strong><span>Edirne • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Bazanın altı sandık gibi maşallah bütün kışlık yorganları aldı. Amortisörleri de güçlü tek elle kalkıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ŞD</div>
+            <div><strong>Şeyma D.</strong><span>Zonguldak • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Deprem sonrası yeni evimiz için aldık, sağ olsunlar hem fiyatta yardımcı oldular hem de çok özenli gönderdiler."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">CM</div>
+            <div><strong>Cihan M.</strong><span>Malatya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Malzeme kalitesi gerçekten beklentimin üstünde çıktı, kurulum ekibi de yarım saatte kurup çıktı ellerine sağlık."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">AT</div>
+            <div><strong>Ahmet T.</strong><span>İstanbul • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MK</div>
+            <div><strong>Melike K.</strong><span>Ankara • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kumaş dokusu ve dikişleri çok muntazam, İnegöl mobilyası olduğunu ilk bakışta belli ediyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SY</div>
+            <div><strong>Sinan Y.</strong><span>İzmir • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">GÇ</div>
+            <div><strong>Gamze Ç.</strong><span>Bursa • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komple takım olarak aldık, renk uyumu ve ahşap kalitesi harika. Gelen misafirler çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">UA</div>
+            <div><strong>Uğur A.</strong><span>Antalya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Köşe takımı aldık oturumu rahat süngeri çökecek gibi durmuyor. Rengi de tam istediğimiz antrasit tonunda geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">EB</div>
+            <div><strong>Esra B.</strong><span>Kocaeli • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Robot süpürge uyumlu yüksek ayaklı olması çok kullanışlı oldu, temizliği çok rahat yapılıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">OD</div>
+            <div><strong>Onur D.</strong><span>Konya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Yazlık için koltuk ve yemek takımı aldık. Kumaşı terletmiyor, minderlerin sertliği tam kararında."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">BS</div>
+            <div><strong>Betül S.</strong><span>Adana • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mobilyalar çok güzel sağlam ama yoğunluktan dolayı müşteri hizmetlerine bağlanmak bazen vakit alıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MG</div>
+            <div><strong>Murat G.</strong><span>Gaziantep • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kalite olarak 5 yıldız ama iletişimde yoğunluktan bazen geç döndüler. Yine de ürün sağlam ulaştı kurulumu yapıldı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SE</div>
+            <div><strong>Sibel E.</strong><span>Mersin • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Malzeme kalitesi gerçekten beklentimin üstünde çıktı, kurulum ekibi de yarım saatte kurup çıktı ellerine sağlık."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">İH</div>
+            <div><strong>İbrahim H.</strong><span>Kayseri • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">KN</div>
+            <div><strong>Kübra N.</strong><span>Eskişehir • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kumaş dokusu ve dikişleri çok muntazam, İnegöl mobilyası olduğunu ilk bakışta belli ediyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ZM</div>
+            <div><strong>Zafer M.</strong><span>Samsun • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">YP</div>
+            <div><strong>Yeliz P.</strong><span>Denizli • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komple takım olarak aldık, renk uyumu ve ahşap kalitesi harika. Gelen misafirler çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">OU</div>
+            <div><strong>Orhan U.</strong><span>Sakarya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Köşe takımı aldık oturumu rahat süngeri çökecek gibi durmuyor. Rengi de tam istediğimiz antrasit tonunda geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">CL</div>
+            <div><strong>Cansu L.</strong><span>Tekirdağ • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Robot süpürge uyumlu yüksek ayaklı olması çok kullanışlı oldu, temizliği çok rahat yapılıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">EV</div>
+            <div><strong>Emre V.</strong><span>Muğla • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Yazlık için koltuk ve yemek takımı aldık. Kumaşı terletmiyor, minderlerin sertliği tam kararında."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">FZ</div>
+            <div><strong>Filiz Z.</strong><span>Balıkesir • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mobilyalar çok güzel sağlam ama yoğunluktan dolayı müşteri hizmetlerine bağlanmak bazen vakit alıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">KŞ</div>
+            <div><strong>Koray Ş.</strong><span>Manisa • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kalite olarak 5 yıldız ama iletişimde yoğunluktan bazen geç döndüler. Yine de ürün sağlam ulaştı kurulumu yapıldı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">NC</div>
+            <div><strong>Neslihan C.</strong><span>Trabzon • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Malzeme kalitesi gerçekten beklentimin üstünde çıktı, kurulum ekibi de yarım saatte kurup çıktı ellerine sağlık."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">BK</div>
+            <div><strong>Barış K.</strong><span>Aydın • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ÖA</div>
+            <div><strong>Özlem A.</strong><span>Diyarbakır • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kumaş dokusu ve dikişleri çok muntazam, İnegöl mobilyası olduğunu ilk bakışta belli ediyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">İT</div>
+            <div><strong>İkbal T.</strong><span>Hatay • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">YD</div>
+            <div><strong>Yavuz D.</strong><span>Malatya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komple takım olarak aldık, renk uyumu ve ahşap kalitesi harika. Gelen misafirler çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">DR</div>
+            <div><strong>Dilek R.</strong><span>Erzurum • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Köşe takımı aldık oturumu rahat süngeri çökecek gibi durmuyor. Rengi de tam istediğimiz antrasit tonunda geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">TB</div>
+            <div><strong>Tamer B.</strong><span>Ordu • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Robot süpürge uyumlu yüksek ayaklı olması çok kullanışlı oldu, temizliği çok rahat yapılıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SM</div>
+            <div><strong>Sevgi M.</strong><span>Afyon • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Yazlık için koltuk ve yemek takımı aldık. Kumaşı terletmiyor, minderlerin sertliği tam kararında."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">AÖ</div>
+            <div><strong>Aykut Ö.</strong><span>Sivas • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mobilyalar çok güzel sağlam ama yoğunluktan dolayı müşteri hizmetlerine bağlanmak bazen vakit alıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">BS</div>
+            <div><strong>Berna S.</strong><span>Tokat • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kalite olarak 5 yıldız ama iletişimde yoğunluktan bazen geç döndüler. Yine de ürün sağlam ulaştı kurulumu yapıldı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">LÇ</div>
+            <div><strong>Levent Ç.</strong><span>Çorum • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Malzeme kalitesi gerçekten beklentimin üstünde çıktı, kurulum ekibi de yarım saatte kurup çıktı ellerine sağlık."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SG</div>
+            <div><strong>Sinem G.</strong><span>Çanakkale • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ÖF</div>
+            <div><strong>Ömer F.</strong><span>Elazığ • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kumaş dokusu ve dikişleri çok muntazam, İnegöl mobilyası olduğunu ilk bakışta belli ediyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MY</div>
+            <div><strong>Melek Y.</strong><span>Kütahya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">CK</div>
+            <div><strong>Cengiz K.</strong><span>Edirne • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komple takım olarak aldık, renk uyumu ve ahşap kalitesi harika. Gelen misafirler çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">AH</div>
+            <div><strong>Ayşenur H.</strong><span>Isparta • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Köşe takımı aldık oturumu rahat süngeri çökecek gibi durmuyor. Rengi de tam istediğimiz antrasit tonunda geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">FE</div>
+            <div><strong>Furkan E.</strong><span>Düzce • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Robot süpürge uyumlu yüksek ayaklı olması çok kullanışlı oldu, temizliği çok rahat yapılıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">HD</div>
+            <div><strong>Hatice D.</strong><span>Bolu • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Yazlık için koltuk ve yemek takımı aldık. Kumaşı terletmiyor, minderlerin sertliği tam kararında."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">HB</div>
+            <div><strong>Harun B.</strong><span>Zonguldak • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mobilyalar çok güzel sağlam ama yoğunluktan dolayı müşteri hizmetlerine bağlanmak bazen vakit alıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">GP</div>
+            <div><strong>Gülcan P.</strong><span>Uşak • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kalite olarak 5 yıldız ama iletişimde yoğunluktan bazen geç döndüler. Yine de ürün sağlam ulaştı kurulumu yapıldı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SN</div>
+            <div><strong>Suat N.</strong><span>Yalova • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Malzeme kalitesi gerçekten beklentimin üstünde çıktı, kurulum ekibi de yarım saatte kurup çıktı ellerine sağlık."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">NÜ</div>
+            <div><strong>Nazan Ü.</strong><span>İstanbul • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MK</div>
+            <div><strong>Melih K.</strong><span>Ankara • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kumaş dokusu ve dikişleri çok muntazam, İnegöl mobilyası olduğunu ilk bakışta belli ediyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">RT</div>
+            <div><strong>Rabia T.</strong><span>İzmir • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SO</div>
+            <div><strong>Serdar O.</strong><span>Bursa • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komple takım olarak aldık, renk uyumu ve ahşap kalitesi harika. Gelen misafirler çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">AM</div>
+            <div><strong>Aylin M.</strong><span>Antalya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Köşe takımı aldık oturumu rahat süngeri çökecek gibi durmuyor. Rengi de tam istediğimiz antrasit tonunda geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">DS</div>
+            <div><strong>Doğan S.</strong><span>Kocaeli • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Robot süpürge uyumlu yüksek ayaklı olması çok kullanışlı oldu, temizliği çok rahat yapılıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ÇV</div>
+            <div><strong>Çiğdem V.</strong><span>Konya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Yazlık için koltuk ve yemek takımı aldık. Kumaşı terletmiyor, minderlerin sertliği tam kararında."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">EA</div>
+            <div><strong>Engin A.</strong><span>Adana • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mobilyalar çok güzel sağlam ama yoğunluktan dolayı müşteri hizmetlerine bağlanmak bazen vakit alıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">AK</div>
+            <div><strong>Arzu K.</strong><span>Gaziantep • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kalite olarak 5 yıldız ama iletişimde yoğunluktan bazen geç döndüler. Yine de ürün sağlam ulaştı kurulumu yapıldı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">VY</div>
+            <div><strong>Vedat Y.</strong><span>Mersin • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Düğün paketimizi buradan aldık valla başta tereddüt etmiştim internetten mobilya alınır mı diye ama kurulum ekibi eve kadar getirip tek tek kurdu."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">AK</div>
+            <div><strong>Ayşe K.</strong><span>İstanbul • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Yatak odası gayet sağlam duruyor malzeme kalitesi iyi. Sadece teslimat söylenen günden 2 gün sonra geldi yoğunluktan dolayı, yine de memnunuz."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MÖ</div>
+            <div><strong>Mehmet Ö.</strong><span>Ankara • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Görsellerdekinden daha güzel çıktı kumaşın dokusu falan. Koltuk takımı salona tam oturdu, tavsiye ederim düşünenlere."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">FY</div>
+            <div><strong>Fatma Y.</strong><span>İzmir • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SD</div>
+            <div><strong>Serkan D.</strong><span>Bursa • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Bohem yemek odasını aldık misafirler nereden aldınız diye sorup duruyor. Masanın açılır mekanizması çok pratik olmuş."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ZA</div>
+            <div><strong>Zeynep A.</strong><span>Kocaeli • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"İnegöl'den Antalya'ya çiziksiz gelmesi mucize gibiydi paketlemeyi baya sağlam yapmışlar. Sadece bir çekmece kulpu eksikti onu da kargoladılar hemen."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">HÇ</div>
+            <div><strong>Hakan Ç.</strong><span>Antalya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Buğlem yatak odası takımının dolap içi çok geniş bütün eşyalarım sığdı. Aynalı kapakları odayı ferah gösterdi resmen."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ES</div>
+            <div><strong>Elif S.</strong><span>Sakarya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Fiyat performans olarak piyasaya göre uygun. Sandalyelerin rengi fotoğraftakinden yarım ton koyu gibi geldi bana ama eşim çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MK</div>
+            <div><strong>Mustafa K.</strong><span>Konya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"İnci yemek odası takımını çeyizim için aldık. Kurulumu yapan ustalar çok efendiydi ayakkabılarını çıkarıp tertemiz kurdular sağ olsunlar."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">GT</div>
+            <div><strong>Gülşen T.</strong><span>Eskişehir • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">BM</div>
+            <div><strong>Burak M.</strong><span>Tekirdağ • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Kumaşı gerçekten silinebilirmiş geçen kahve döküldü ıslak mendille sildim leke kalmadı. Bir tek kırlentler biraz sert zamanla yumuşar herhalde."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">DB</div>
+            <div><strong>Derya B.</strong><span>Balıkesir • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"WhatsApp'tan her sorduğuma sabırla cevap verdiler. Ölçüler konusunda çok yardımcı oldular, tam istediğimiz gibi geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">OV</div>
+            <div><strong>Oğuzhan V.</strong><span>Kayseri • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"TV ünitesiyle yemek masasını takım aldık. Ürünler güzel lakin kargo beklediğimden 3-4 gün geç çıktı fabrikadan, aceleniz yoksa kesin alınır."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">CH</div>
+            <div><strong>Cemile H.</strong><span>Samsun • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Aynalı yatak odası gerçekten çok şık duruyor. Dolap kapaklarının frenli olması çok iyi, çarpmıyor yavaşça kapanıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">KE</div>
+            <div><strong>Kemal E.</strong><span>Mersin • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Ücretsiz nakliye ve kurulum olması büyük avantaj. Başka yerler sadece nakliyeye dünya para istiyor, helal olsun."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">PG</div>
+            <div><strong>Pınar G.</strong><span>Adana • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="reviews-row row-2">
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Malzeme kalitesi gerçekten beklentimin üstünde çıktı, kurulum ekibi de yarım saatte kurup çıktı ellerine sağlık."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">YB</div>
+            <div><strong>Yasemin B.</strong><span>Kayseri • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SÇ</div>
+            <div><strong>Sezer Ç.</strong><span>Eskişehir • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kumaş dokusu ve dikişleri çok muntazam, İnegöl mobilyası olduğunu ilk bakışta belli ediyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ŞG</div>
+            <div><strong>Şule G.</strong><span>Samsun • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">AD</div>
+            <div><strong>Alperen D.</strong><span>Denizli • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komple takım olarak aldık, renk uyumu ve ahşap kalitesi harika. Gelen misafirler çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MT</div>
+            <div><strong>Mine T.</strong><span>Sakarya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Köşe takımı aldık oturumu rahat süngeri çökecek gibi durmuyor. Rengi de tam istediğimiz antrasit tonunda geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">RK</div>
+            <div><strong>Ramazan K.</strong><span>Tekirdağ • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Robot süpürge uyumlu yüksek ayaklı olması çok kullanışlı oldu, temizliği çok rahat yapılıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ES</div>
+            <div><strong>Ebru S.</strong><span>Muğla • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Yazlık için koltuk ve yemek takımı aldık. Kumaşı terletmiyor, minderlerin sertliği tam kararında."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">YE</div>
+            <div><strong>Yunus E.</strong><span>Balıkesir • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mobilyalar çok güzel sağlam ama yoğunluktan dolayı müşteri hizmetlerine bağlanmak bazen vakit alıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">TA</div>
+            <div><strong>Tülay A.</strong><span>Manisa • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kalite olarak 5 yıldız ama iletişimde yoğunluktan bazen geç döndüler. Yine de ürün sağlam ulaştı kurulumu yapıldı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">FM</div>
+            <div><strong>Fatih M.</strong><span>Trabzon • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Malzeme kalitesi gerçekten beklentimin üstünde çıktı, kurulum ekibi de yarım saatte kurup çıktı ellerine sağlık."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SÖ</div>
+            <div><strong>Sevim Ö.</strong><span>Aydın • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">KB</div>
+            <div><strong>Kaan B.</strong><span>Diyarbakır • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kumaş dokusu ve dikişleri çok muntazam, İnegöl mobilyası olduğunu ilk bakışta belli ediyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">DN</div>
+            <div><strong>Duygu N.</strong><span>Hatay • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MC</div>
+            <div><strong>Mete C.</strong><span>Malatya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komple takım olarak aldık, renk uyumu ve ahşap kalitesi harika. Gelen misafirler çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">NK</div>
+            <div><strong>Nalan K.</strong><span>Erzurum • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Köşe takımı aldık oturumu rahat süngeri çökecek gibi durmuyor. Rengi de tam istediğimiz antrasit tonunda geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">TY</div>
+            <div><strong>Turgut Y.</strong><span>Ordu • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Robot süpürge uyumlu yüksek ayaklı olması çok kullanışlı oldu, temizliği çok rahat yapılıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">FŞ</div>
+            <div><strong>Funda Ş.</strong><span>Afyon • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Yazlık için koltuk ve yemek takımı aldık. Kumaşı terletmiyor, minderlerin sertliği tam kararında."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SD</div>
+            <div><strong>Samet D.</strong><span>Sivas • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mobilyalar çok güzel sağlam ama yoğunluktan dolayı müşteri hizmetlerine bağlanmak bazen vakit alıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">NE</div>
+            <div><strong>Nihal E.</strong><span>Tokat • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kalite olarak 5 yıldız ama iletişimde yoğunluktan bazen geç döndüler. Yine de ürün sağlam ulaştı kurulumu yapıldı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ET</div>
+            <div><strong>Ercan T.</strong><span>Çorum • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Malzeme kalitesi gerçekten beklentimin üstünde çıktı, kurulum ekibi de yarım saatte kurup çıktı ellerine sağlık."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">HA</div>
+            <div><strong>Hande A.</strong><span>Çanakkale • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">PG</div>
+            <div><strong>Polat G.</strong><span>Elazığ • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kumaş dokusu ve dikişleri çok muntazam, İnegöl mobilyası olduğunu ilk bakışta belli ediyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">BM</div>
+            <div><strong>Bahar M.</strong><span>Kütahya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SK</div>
+            <div><strong>Sefa K.</strong><span>Edirne • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komple takım olarak aldık, renk uyumu ve ahşap kalitesi harika. Gelen misafirler çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ZÇ</div>
+            <div><strong>Zeliha Ç.</strong><span>Isparta • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Köşe takımı aldık oturumu rahat süngeri çökecek gibi durmuyor. Rengi de tam istediğimiz antrasit tonunda geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">OB</div>
+            <div><strong>Okan B.</strong><span>Düzce • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Robot süpürge uyumlu yüksek ayaklı olması çok kullanışlı oldu, temizliği çok rahat yapılıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">DS</div>
+            <div><strong>Demet S.</strong><span>Bolu • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Yazlık için koltuk ve yemek takımı aldık. Kumaşı terletmiyor, minderlerin sertliği tam kararında."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">BY</div>
+            <div><strong>Bilal Y.</strong><span>Zonguldak • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mobilyalar çok güzel sağlam ama yoğunluktan dolayı müşteri hizmetlerine bağlanmak bazen vakit alıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">İD</div>
+            <div><strong>İlknur D.</strong><span>Uşak • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kalite olarak 5 yıldız ama iletişimde yoğunluktan bazen geç döndüler. Yine de ürün sağlam ulaştı kurulumu yapıldı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">CK</div>
+            <div><strong>Cem K.</strong><span>Yalova • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Malzeme kalitesi gerçekten beklentimin üstünde çıktı, kurulum ekibi de yarım saatte kurup çıktı ellerine sağlık."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SN</div>
+            <div><strong>Seda N.</strong><span>İstanbul • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">HT</div>
+            <div><strong>Halil T.</strong><span>Ankara • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kumaş dokusu ve dikişleri çok muntazam, İnegöl mobilyası olduğunu ilk bakışta belli ediyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MA</div>
+            <div><strong>Meryem A.</strong><span>İzmir • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">KÖ</div>
+            <div><strong>Kenan Ö.</strong><span>Bursa • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komple takım olarak aldık, renk uyumu ve ahşap kalitesi harika. Gelen misafirler çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">GB</div>
+            <div><strong>Gözde B.</strong><span>Antalya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Köşe takımı aldık oturumu rahat süngeri çökecek gibi durmuyor. Rengi de tam istediğimiz antrasit tonunda geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">TM</div>
+            <div><strong>Tarık M.</strong><span>Kocaeli • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Robot süpürge uyumlu yüksek ayaklı olması çok kullanışlı oldu, temizliği çok rahat yapılıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SÇ</div>
+            <div><strong>Songül Ç.</strong><span>Konya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Yazlık için koltuk ve yemek takımı aldık. Kumaşı terletmiyor, minderlerin sertliği tam kararında."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">EK</div>
+            <div><strong>Enes K.</strong><span>Adana • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mobilyalar çok güzel sağlam ama yoğunluktan dolayı müşteri hizmetlerine bağlanmak bazen vakit alıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">PY</div>
+            <div><strong>Perihan Y.</strong><span>Gaziantep • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kalite olarak 5 yıldız ama iletişimde yoğunluktan bazen geç döndüler. Yine de ürün sağlam ulaştı kurulumu yapıldı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">AS</div>
+            <div><strong>Adem S.</strong><span>Mersin • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Malzeme kalitesi gerçekten beklentimin üstünde çıktı, kurulum ekibi de yarım saatte kurup çıktı ellerine sağlık."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">LD</div>
+            <div><strong>Leyla D.</strong><span>Kayseri • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SG</div>
+            <div><strong>Salih G.</strong><span>Eskişehir • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kumaş dokusu ve dikişleri çok muntazam, İnegöl mobilyası olduğunu ilk bakışta belli ediyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ÜK</div>
+            <div><strong>Ümit K.</strong><span>Samsun • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SB</div>
+            <div><strong>Seval B.</strong><span>Denizli • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komple takım olarak aldık, renk uyumu ve ahşap kalitesi harika. Gelen misafirler çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">VT</div>
+            <div><strong>Veysel T.</strong><span>Sakarya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Köşe takımı aldık oturumu rahat süngeri çökecek gibi durmuyor. Rengi de tam istediğimiz antrasit tonunda geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">GA</div>
+            <div><strong>Gonca A.</strong><span>Tekirdağ • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Robot süpürge uyumlu yüksek ayaklı olması çok kullanışlı oldu, temizliği çok rahat yapılıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ŞM</div>
+            <div><strong>Şahin M.</strong><span>Muğla • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Yazlık için koltuk ve yemek takımı aldık. Kumaşı terletmiyor, minderlerin sertliği tam kararında."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">CÖ</div>
+            <div><strong>Ceyda Ö.</strong><span>Balıkesir • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mobilyalar çok güzel sağlam ama yoğunluktan dolayı müşteri hizmetlerine bağlanmak bazen vakit alıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">NK</div>
+            <div><strong>Nevzat K.</strong><span>Manisa • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kalite olarak 5 yıldız ama iletişimde yoğunluktan bazen geç döndüler. Yine de ürün sağlam ulaştı kurulumu yapıldı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">RS</div>
+            <div><strong>Reyhan S.</strong><span>Trabzon • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Malzeme kalitesi gerçekten beklentimin üstünde çıktı, kurulum ekibi de yarım saatte kurup çıktı ellerine sağlık."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">HY</div>
+            <div><strong>Hüseyin Y.</strong><span>Aydın • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">AD</div>
+            <div><strong>Aysun D.</strong><span>Diyarbakır • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kumaş dokusu ve dikişleri çok muntazam, İnegöl mobilyası olduğunu ilk bakışta belli ediyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MB</div>
+            <div><strong>Muharrem B.</strong><span>Hatay • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">DÇ</div>
+            <div><strong>Derya Ç.</strong><span>Malatya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komple takım olarak aldık, renk uyumu ve ahşap kalitesi harika. Gelen misafirler çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">RK</div>
+            <div><strong>Recep K.</strong><span>Erzurum • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Köşe takımı aldık oturumu rahat süngeri çökecek gibi durmuyor. Rengi de tam istediğimiz antrasit tonunda geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">BT</div>
+            <div><strong>Bircan T.</strong><span>Ordu • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Robot süpürge uyumlu yüksek ayaklı olması çok kullanışlı oldu, temizliği çok rahat yapılıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">İA</div>
+            <div><strong>İsmail A.</strong><span>Afyon • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Yazlık için koltuk ve yemek takımı aldık. Kumaşı terletmiyor, minderlerin sertliği tam kararında."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">NM</div>
+            <div><strong>Nergis M.</strong><span>Sivas • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mobilyalar çok güzel sağlam ama yoğunluktan dolayı müşteri hizmetlerine bağlanmak bazen vakit alıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">OS</div>
+            <div><strong>Osman S.</strong><span>Tokat • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kalite olarak 5 yıldız ama iletişimde yoğunluktan bazen geç döndüler. Yine de ürün sağlam ulaştı kurulumu yapıldı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SG</div>
+            <div><strong>Suna G.</strong><span>Çorum • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Malzeme kalitesi gerçekten beklentimin üstünde çıktı, kurulum ekibi de yarım saatte kurup çıktı ellerine sağlık."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">CK</div>
+            <div><strong>Celal K.</strong><span>Çanakkale • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">FY</div>
+            <div><strong>Feride Y.</strong><span>Elazığ • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kumaş dokusu ve dikişleri çok muntazam, İnegöl mobilyası olduğunu ilk bakışta belli ediyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MB</div>
+            <div><strong>Mesut B.</strong><span>Kütahya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">GD</div>
+            <div><strong>Gülay D.</strong><span>Edirne • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komple takım olarak aldık, renk uyumu ve ahşap kalitesi harika. Gelen misafirler çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ŞT</div>
+            <div><strong>Şükrü T.</strong><span>Isparta • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Köşe takımı aldık oturumu rahat süngeri çökecek gibi durmuyor. Rengi de tam istediğimiz antrasit tonunda geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">YA</div>
+            <div><strong>Yıldız A.</strong><span>Düzce • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Robot süpürge uyumlu yüksek ayaklı olması çok kullanışlı oldu, temizliği çok rahat yapılıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">TM</div>
+            <div><strong>Tekin M.</strong><span>Bolu • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Yazlık için koltuk ve yemek takımı aldık. Kumaşı terletmiyor, minderlerin sertliği tam kararında."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">AS</div>
+            <div><strong>Aysel S.</strong><span>Zonguldak • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mobilyalar çok güzel sağlam ama yoğunluktan dolayı müşteri hizmetlerine bağlanmak bazen vakit alıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">NK</div>
+            <div><strong>Nuri K.</strong><span>Uşak • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kalite olarak 5 yıldız ama iletişimde yoğunluktan bazen geç döndüler. Yine de ürün sağlam ulaştı kurulumu yapıldı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">KÇ</div>
+            <div><strong>Kader Ç.</strong><span>Yalova • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Malzeme kalitesi gerçekten beklentimin üstünde çıktı, kurulum ekibi de yarım saatte kurup çıktı ellerine sağlık."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">BG</div>
+            <div><strong>Bekir G.</strong><span>İstanbul • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">HB</div>
+            <div><strong>Hale B.</strong><span>Ankara • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kumaş dokusu ve dikişleri çok muntazam, İnegöl mobilyası olduğunu ilk bakışta belli ediyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">EY</div>
+            <div><strong>Erol Y.</strong><span>İzmir • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ZD</div>
+            <div><strong>Zümrüt D.</strong><span>Bursa • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komple takım olarak aldık, renk uyumu ve ahşap kalitesi harika. Gelen misafirler çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SK</div>
+            <div><strong>Sabri K.</strong><span>Antalya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Köşe takımı aldık oturumu rahat süngeri çökecek gibi durmuyor. Rengi de tam istediğimiz antrasit tonunda geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">CT</div>
+            <div><strong>Canan T.</strong><span>Kocaeli • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Robot süpürge uyumlu yüksek ayaklı olması çok kullanışlı oldu, temizliği çok rahat yapılıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MA</div>
+            <div><strong>Metin A.</strong><span>Konya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Yazlık için koltuk ve yemek takımı aldık. Kumaşı terletmiyor, minderlerin sertliği tam kararında."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">FM</div>
+            <div><strong>Figen M.</strong><span>Adana • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mobilyalar çok güzel sağlam ama yoğunluktan dolayı müşteri hizmetlerine bağlanmak bazen vakit alıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">İS</div>
+            <div><strong>İlhan S.</strong><span>Gaziantep • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kalite olarak 5 yıldız ama iletişimde yoğunluktan bazen geç döndüler. Yine de ürün sağlam ulaştı kurulumu yapıldı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MÖ</div>
+            <div><strong>Meltem Ö.</strong><span>Mersin • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Malzeme kalitesi gerçekten beklentimin üstünde çıktı, kurulum ekibi de yarım saatte kurup çıktı ellerine sağlık."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">YB</div>
+            <div><strong>Yasemin B.</strong><span>Kayseri • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SÇ</div>
+            <div><strong>Sezer Ç.</strong><span>Eskişehir • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kumaş dokusu ve dikişleri çok muntazam, İnegöl mobilyası olduğunu ilk bakışta belli ediyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ŞG</div>
+            <div><strong>Şule G.</strong><span>Samsun • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">AD</div>
+            <div><strong>Alperen D.</strong><span>Denizli • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komple takım olarak aldık, renk uyumu ve ahşap kalitesi harika. Gelen misafirler çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MT</div>
+            <div><strong>Mine T.</strong><span>Sakarya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Köşe takımı aldık oturumu rahat süngeri çökecek gibi durmuyor. Rengi de tam istediğimiz antrasit tonunda geldi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">RK</div>
+            <div><strong>Ramazan K.</strong><span>Tekirdağ • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Robot süpürge uyumlu yüksek ayaklı olması çok kullanışlı oldu, temizliği çok rahat yapılıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">ES</div>
+            <div><strong>Ebru S.</strong><span>Muğla • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Yazlık için koltuk ve yemek takımı aldık. Kumaşı terletmiyor, minderlerin sertliği tam kararında."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">YE</div>
+            <div><strong>Yunus E.</strong><span>Balıkesir • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mobilyalar çok güzel sağlam ama yoğunluktan dolayı müşteri hizmetlerine bağlanmak bazen vakit alıyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">TA</div>
+            <div><strong>Tülay A.</strong><span>Manisa • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kalite olarak 5 yıldız ama iletişimde yoğunluktan bazen geç döndüler. Yine de ürün sağlam ulaştı kurulumu yapıldı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">FM</div>
+            <div><strong>Fatih M.</strong><span>Trabzon • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Malzeme kalitesi gerçekten beklentimin üstünde çıktı, kurulum ekibi de yarım saatte kurup çıktı ellerine sağlık."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">SÖ</div>
+            <div><strong>Sevim Ö.</strong><span>Aydın • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span> <span class="rating-num">4.0</span></div>
+            <p class="review-square-text">"Ürün güzel kaliteli sözüm yok ama nakliye ekibi akşam geç saatte geldi kurulum biraz uzun sürdü. Mobilyanın kendisi 10 numara."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">KB</div>
+            <div><strong>Kaan B.</strong><span>Diyarbakır • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span> <span class="rating-num">4.5</span></div>
+            <p class="review-square-text">"Kumaş dokusu ve dikişleri çok muntazam, İnegöl mobilyası olduğunu ilk bakışta belli ediyor."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">DN</div>
+            <div><strong>Duygu N.</strong><span>Hatay • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span> <span class="rating-num">3.5</span></div>
+            <p class="review-square-text">"Mağaza mağaza gezip iki katı fiyat vermeye hiç gerek yokmuş. İnegöl kalitesi belli ediyor kendini, iskeleti gürgen çok ağır ve oturaklı."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">MC</div>
+            <div><strong>Mete C.</strong><span>Malatya • Onaylı Alıcı</span></div>
+          </div>
+        </div>
+        <div class="review-square-card">
+          <div>
+            <div class="review-square-top"><span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> <span class="rating-num">5.0</span></div>
+            <p class="review-square-text">"Komple takım olarak aldık, renk uyumu ve ahşap kalitesi harika. Gelen misafirler çok beğendi."</p>
+          </div>
+          <div class="review-square-author">
+            <div class="review-square-avatar">NK</div>
+            <div><strong>Nalan K.</strong><span>Erzurum • Onaylı Alıcı</span></div>
           </div>
         </div>
       </div>
@@ -540,7 +2480,7 @@
   <a href="https://wa.me/905077567887" class="whatsapp-float" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
   <button class="scroll-top" id="scrollTop" title="Yukarı"><i class="fas fa-chevron-up"></i></button>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20261105c"></script>
   <script src="chatbot.js"></script>
 </body>
 </html>

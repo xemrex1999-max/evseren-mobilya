@@ -6,14 +6,205 @@ const API_URL = 'http://localhost:5000/api';
 
 // 1. URUN VERILERI
 window.fallbackProductsData = [
-  { "id": 1010, "name": "Aynalı Yatak Odası Takımı", "price": 86476, "oldPrice": 100270, "cat": "yatak", "img": "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.43.59 (1).jpeg", "badge": "2026 MODEL" },
-  { "id": 1011, "name": "Aynalı Yemek Odası Takımı", "price": 81394, "oldPrice": 94462, "cat": "yemek", "img": "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.04 (2).jpeg", "badge": "YENİ" },
-  { "id": 1020, "name": "Bohem Yatak Odası Takımı", "price": 88170, "oldPrice": 102206, "cat": "yatak", "img": "evrensen/Boğem Yatak odası/page1_img24.jpeg", "badge": "POPÜLER" },
-  { "id": 1021, "name": "Bohem Yemek Odası Takımı", "price": 68689, "oldPrice": 79821, "cat": "yemek", "img": "evrensen/Boğem Yemek Odası/page1_img22.jpeg", "badge": "YENİ" },
-  { "id": 1030, "name": "Buğlem Yatak Odası Takımı", "price": 89864, "oldPrice": 104142, "cat": "yatak", "img": "evrensen/Buğlem Yatak Odası/page1_img17.jpeg", "badge": "POPÜLER" },
-  { "id": 1031, "name": "Buğlem Yemek Odası Takımı", "price": 83088, "oldPrice": 96398, "cat": "yemek", "img": "evrensen/Buğlem Yemek Odası/page1_img18.jpeg", "badge": "" },
-  { "id": 1060, "name": "İnci Yatak Odası Takımı", "price": 79700, "oldPrice": 92405, "cat": "yatak", "img": "evrensen/İnci Yatak Odası/page1_img11.jpeg", "badge": "FIRSAT" },
-  { "id": 1061, "name": "İnci Yemek Odası Takımı", "price": 66148, "oldPrice": 76917, "cat": "yemek", "img": "evrensen/İnci Yemek Odası/page1_img10.jpeg", "badge": "" }
+  {
+    "id": 1010,
+    "name": "Aynalı Yatak Odası Takımı",
+    "price": 86476,
+    "oldPrice": 100270,
+    "cat": "yatak",
+    "img": "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.43.59 (1).jpeg",
+    "images": [
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.43.59 (1).jpeg",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.43.59.jpeg",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.00 (1).jpeg",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.00.jpeg",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.01.jpeg",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.02 (1).jpeg",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.02 (2).jpeg",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.02.jpeg",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.03 (1).jpeg",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.03 (2).jpeg",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.03 (3).jpeg",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.03.jpeg",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.04 (1).jpeg",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.04.jpeg"
+    ],
+    "badge": "2026 MODEL"
+  },
+  {
+    "id": 1011,
+    "name": "Aynalı Yemek Odası Takımı",
+    "price": 81394,
+    "oldPrice": 94462,
+    "cat": "yemek",
+    "img": "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.04 (2).jpeg",
+    "images": [
+      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.04 (2).jpeg",
+      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.05 (1).jpeg",
+      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.05 (2).jpeg",
+      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.05 (3).jpeg",
+      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.05.jpeg",
+      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.06 (1).jpeg",
+      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.06 (2).jpeg",
+      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.06 (3).jpeg",
+      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.06 (4).jpeg",
+      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.06 (5).jpeg",
+      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.06.jpeg",
+      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.07.jpeg"
+    ],
+    "badge": "YENİ"
+  },
+  {
+    "id": 1020,
+    "name": "Bohem Yatak Odası Takımı",
+    "price": 88170,
+    "oldPrice": 102206,
+    "cat": "yatak",
+    "img": "evrensen/Boğem Yatak odası/page1_img24.jpeg",
+    "images": [
+      "evrensen/Boğem Yatak odası/page1_img24.jpeg",
+      "evrensen/Boğem Yatak odası/page1_img25.jpeg",
+      "evrensen/Boğem Yatak odası/page1_img27.jpeg",
+      "evrensen/Boğem Yatak odası/page1_img28.jpeg",
+      "evrensen/Boğem Yatak odası/page1_img29.jpeg",
+      "evrensen/Boğem Yatak odası/page1_img30.jpeg"
+    ],
+    "badge": "POPÜLER"
+  },
+  {
+    "id": 1021,
+    "name": "Bohem Yemek Odası Takımı",
+    "price": 68689,
+    "oldPrice": 79821,
+    "cat": "yemek",
+    "img": "evrensen/Boğem Yemek Odası/page1_img22.jpeg",
+    "images": [
+      "evrensen/Boğem Yemek Odası/page1_img22.jpeg",
+      "evrensen/Boğem Yemek Odası/page1_img23.jpeg",
+      "evrensen/Boğem Yemek Odası/page1_img26.jpeg"
+    ],
+    "badge": "YENİ"
+  },
+  {
+    "id": 1030,
+    "name": "Buğlem Yatak Odası Takımı",
+    "price": 89864,
+    "oldPrice": 104142,
+    "cat": "yatak",
+    "img": "evrensen/Buğlem Yatak Odası/page1_img17.jpeg",
+    "images": [
+      "evrensen/Buğlem Yatak Odası/page1_img17.jpeg",
+      "evrensen/Buğlem Yatak Odası/page1_img21.jpeg"
+    ],
+    "badge": "POPÜLER"
+  },
+  {
+    "id": 1031,
+    "name": "Buğlem Yemek Odası Takımı",
+    "price": 83088,
+    "oldPrice": 96398,
+    "cat": "yemek",
+    "img": "evrensen/Buğlem Yemek Odası/page1_img18.jpeg",
+    "images": [
+      "evrensen/Buğlem Yemek Odası/page1_img18.jpeg",
+      "evrensen/Buğlem Yemek Odası/page1_img19.jpeg",
+      "evrensen/Buğlem Yemek Odası/page1_img20.jpeg"
+    ],
+    "badge": ""
+  },
+  {
+    "id": 1060,
+    "name": "İnci Yatak Odası Takımı",
+    "price": 79700,
+    "oldPrice": 92405,
+    "cat": "yatak",
+    "img": "evrensen/İnci Yatak Odası/page1_img11.jpeg",
+    "images": [
+      "evrensen/İnci Yatak Odası/page1_img11.jpeg",
+      "evrensen/İnci Yatak Odası/page1_img12.jpeg",
+      "evrensen/İnci Yatak Odası/page1_img13.jpeg",
+      "evrensen/İnci Yatak Odası/page1_img2.jpeg",
+      "evrensen/İnci Yatak Odası/page1_img3.jpeg",
+      "evrensen/İnci Yatak Odası/page1_img4.jpeg",
+      "evrensen/İnci Yatak Odası/page1_img5.jpeg",
+      "evrensen/İnci Yatak Odası/page1_img6.jpeg",
+      "evrensen/İnci Yatak Odası/page1_img7.jpeg"
+    ],
+    "badge": "FIRSAT"
+  },
+  {
+    "id": 1061,
+    "name": "İnci Yemek Odası Takımı",
+    "price": 66148,
+    "oldPrice": 76917,
+    "cat": "yemek",
+    "img": "evrensen/İnci Yemek Odası/page1_img10.jpeg",
+    "images": [
+      "evrensen/İnci Yemek Odası/page1_img10.jpeg",
+      "evrensen/İnci Yemek Odası/page1_img14.jpeg",
+      "evrensen/İnci Yemek Odası/page1_img15.jpeg",
+      "evrensen/İnci Yemek Odası/page1_img16.jpeg",
+      "evrensen/İnci Yemek Odası/page1_img8.jpeg",
+      "evrensen/İnci Yemek Odası/page1_img9.jpeg"
+    ],
+    "badge": ""
+  },
+  {
+    "id": 1070,
+    "name": "Lüks İnegöl Düğün Paketi (Yatak + Yemek + Koltuk)",
+    "price": 164900,
+    "oldPrice": 194000,
+    "cat": "dugun",
+    "img": "images/dugun_paketi.png",
+    "images": [
+      "images/dugun_paketi.png",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.43.59 (1).jpeg",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.43.59.jpeg",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.00 (1).jpeg",
+      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.04 (2).jpeg",
+      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.05 (1).jpeg",
+      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.05 (2).jpeg"
+    ],
+    "badge": "%15 İNDİRİM"
+  },
+  {
+    "id": 1080,
+    "name": "Milano Modern Koltuk Takımı",
+    "price": 74500,
+    "oldPrice": 86000,
+    "cat": "koltuk",
+    "img": "images/koltuk_takimi.png",
+    "images": [
+      "images/koltuk_takimi.png",
+      "images/kose_takimi.png"
+    ],
+    "badge": "YENİ"
+  },
+  {
+    "id": 1090,
+    "name": "Nordic L Köşe Koltuk Takımı",
+    "price": 62900,
+    "oldPrice": 73500,
+    "cat": "kose",
+    "img": "images/kose_takimi.png",
+    "images": [
+      "images/kose_takimi.png",
+      "images/koltuk_takimi.png"
+    ],
+    "badge": "POPÜLER"
+  },
+  {
+    "id": 1100,
+    "name": "mermer Desenli İnegöl TV Ünitesi",
+    "price": 28900,
+    "oldPrice": 34500,
+    "cat": "tv",
+    "img": "images/tv_unitesi.png",
+    "images": [
+      "images/tv_unitesi.png"
+    ],
+    "badge": ""
+  }
 ];
 
 // YARDIMCILAR
@@ -526,6 +717,38 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (emailInput) emailInput.value = '';
             if (btn) { btn.innerText = '✓ Abone Olundu!'; setTimeout(() => { btn.innerText = origText; btn.disabled = false; }, 3500); }
+        });
+    }
+});
+
+
+// 12. ILETISIM FORMU - Doğrudan evserenmobilya@gmail.com adresine iletir
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const inputs = contactForm.querySelectorAll('input, select, textarea');
+            const payload = { _subject: 'Yeni İletişim Mesajı - Evseren Mobilya' };
+            inputs.forEach((inp, idx) => {
+                const label = inp.previousElementSibling ? inp.previousElementSibling.innerText : ('Alan_' + idx);
+                payload[label] = inp.value;
+            });
+            const btn = contactForm.querySelector('button[type="submit"]');
+            const origHtml = btn ? btn.innerHTML : 'Mesajı Gönder';
+            if (btn) { btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...'; btn.disabled = true; }
+            try {
+                await fetch('https://formsubmit.co/ajax/evserenmobilya@gmail.com', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (err) {}
+            contactForm.reset();
+            if (btn) {
+                btn.innerHTML = '<i class="fas fa-check"></i> Mesajınız İletildi!';
+                setTimeout(() => { btn.innerHTML = origHtml; btn.disabled = false; }, 3500);
+            }
         });
     }
 });
