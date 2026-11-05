@@ -4,7 +4,7 @@
 let currentFormImages = [];
 
 function safeImg(u) {
-  if (!u) return 'images/hero_living_room.png';
+  if (!u) return 'evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.43.59 (1).jpeg';
   return u.startsWith('data:') ? u : encodeURI(u);
 }
 
@@ -42,13 +42,14 @@ window.switchTab = (tabName) => {
   const titles = {
     orders: 'Sipariş Yönetimi',
     products: 'Ürün Kataloğu & Fotoğraf Yönetimi',
+    banners: 'Banner, Kategori & Kampanya Görselleri Yönetimi',
     users: 'Kayıtlı Üyeler (MongoDB)',
     subscribers: 'E-Posta & Bülten Aboneleri'
   };
   document.getElementById('tabTitle').innerText = titles[tabName] || 'Yönetim Paneli';
   
   const navItems = document.querySelectorAll('.admin-nav-item');
-  const mapIdx = { orders: 0, products: 1, users: 2, subscribers: 3 };
+  const mapIdx = { orders: 0, products: 1, banners: 2, users: 3, subscribers: 4 };
   if (navItems[mapIdx[tabName]]) navItems[mapIdx[tabName]].classList.add('active');
 
   refreshAllAdminData();
@@ -117,6 +118,7 @@ function refreshAllAdminData() {
 
   renderOrders(orders);
   renderAdminProducts(products);
+  if (typeof renderAdminBanners === 'function') renderAdminBanners();
   renderAdminUsers(users);
   renderAdminSubs(subs);
 }
@@ -481,3 +483,155 @@ document.addEventListener('DOMContentLoaded', () => {
     initAdmin();
   }
 });
+
+
+/* ==========================================
+   BANNER & VİTRİN GÖRSELLERİ YÖNETİMİ
+   ========================================== */
+const EVSEREN_COLLECTION_PHOTOS = [
+  { label: 'Aynalı Yatak Odası - Vitrin 1', path: 'evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.43.59 (1).jpeg' },
+  { label: 'Aynalı Yatak Odası - Görsel 2', path: 'evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.43.59.jpeg' },
+  { label: 'Aynalı Yatak Odası - Görsel 3', path: 'evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.00 (1).jpeg' },
+  { label: 'Aynalı Yatak Odası - Görsel 4', path: 'evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.01.jpeg' },
+  { label: 'Aynalı Yatak Odası - Görsel 5', path: 'evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.02.jpeg' },
+  { label: 'Aynalı Yatak Odası - Görsel 6', path: 'evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.03.jpeg' },
+  { label: 'Aynalı Yatak Odası - Görsel 7', path: 'evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.04.jpeg' },
+  { label: 'Bohem Yatak Odası - Vitrin 1', path: 'evrensen/Boğem Yatak odası/page1_img24.jpeg' },
+  { label: 'Bohem Yatak Odası - Görsel 2', path: 'evrensen/Boğem Yatak odası/page1_img25.jpeg' },
+  { label: 'Bohem Yatak Odası - Görsel 3', path: 'evrensen/Boğem Yatak odası/page1_img27.jpeg' },
+  { label: 'Bohem Yatak Odası - Görsel 4', path: 'evrensen/Boğem Yatak odası/page1_img28.jpeg' },
+  { label: 'Bohem Yatak Odası - Görsel 5', path: 'evrensen/Boğem Yatak odası/page1_img29.jpeg' },
+  { label: 'Bohem Yatak Odası - Görsel 6', path: 'evrensen/Boğem Yatak odası/page1_img30.jpeg' },
+  { label: 'Buğlem Yatak Odası - Vitrin 1', path: 'evrensen/Buğlem Yatak Odası/page1_img17.jpeg' },
+  { label: 'Buğlem Yatak Odası - Görsel 2', path: 'evrensen/Buğlem Yatak Odası/page1_img21.jpeg' },
+  { label: 'İnci Yatak Odası - Vitrin 1', path: 'evrensen/İnci Yatak Odası/page1_img11.jpeg' },
+  { label: 'İnci Yatak Odası - Görsel 2', path: 'evrensen/İnci Yatak Odası/page1_img12.jpeg' },
+  { label: 'İnci Yatak Odası - Görsel 3', path: 'evrensen/İnci Yatak Odası/page1_img13.jpeg' },
+  { label: 'İnci Yatak Odası - Görsel 4', path: 'evrensen/İnci Yatak Odası/page1_img2.jpeg' },
+  { label: 'İnci Yatak Odası - Görsel 5', path: 'evrensen/İnci Yatak Odası/page1_img3.jpeg' },
+  { label: 'İnci Yatak Odası - Görsel 6', path: 'evrensen/İnci Yatak Odası/page1_img4.jpeg' },
+  { label: 'Aynalı Yemek Odası - Vitrin 1', path: 'evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.04 (2).jpeg' },
+  { label: 'Aynalı Yemek Odası - Görsel 2', path: 'evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.05 (1).jpeg' },
+  { label: 'Aynalı Yemek Odası - Görsel 3', path: 'evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.05 (2).jpeg' },
+  { label: 'Aynalı Yemek Odası - Görsel 4', path: 'evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.06 (1).jpeg' },
+  { label: 'Aynalı Yemek Odası - Görsel 5', path: 'evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.07.jpeg' },
+  { label: 'Bohem Yemek Odası - Vitrin 1', path: 'evrensen/Boğem Yemek Odası/page1_img22.jpeg' },
+  { label: 'Bohem Yemek Odası - Görsel 2', path: 'evrensen/Boğem Yemek Odası/page1_img23.jpeg' },
+  { label: 'Bohem Yemek Odası - Görsel 3', path: 'evrensen/Boğem Yemek Odası/page1_img26.jpeg' },
+  { label: 'Buğlem Yemek Odası - Vitrin 1', path: 'evrensen/Buğlem Yemek Odası/page1_img18.jpeg' },
+  { label: 'Buğlem Yemek Odası - Görsel 2', path: 'evrensen/Buğlem Yemek Odası/page1_img19.jpeg' },
+  { label: 'Buğlem Yemek Odası - Görsel 3', path: 'evrensen/Buğlem Yemek Odası/page1_img20.jpeg' },
+  { label: 'İnci Yemek Odası - Vitrin 1', path: 'evrensen/İnci Yemek Odası/page1_img10.jpeg' },
+  { label: 'İnci Yemek Odası - Görsel 2', path: 'evrensen/İnci Yemek Odası/page1_img14.jpeg' },
+  { label: 'İnci Yemek Odası - Görsel 3', path: 'evrensen/İnci Yemek Odası/page1_img15.jpeg' },
+  { label: 'İnci Yemek Odası - Görsel 4', path: 'evrensen/İnci Yemek Odası/page1_img16.jpeg' }
+];
+
+function renderAdminBanners() {
+  const container = document.getElementById('bannersGridContainer');
+  if (!container || typeof window.getSiteBanners !== 'function') return;
+
+  const banners = window.getSiteBanners();
+  container.innerHTML = banners.map(b => {
+    const optionsHtml = EVSEREN_COLLECTION_PHOTOS.map(item =>
+      `<option value="${item.path}" ${b.img === item.path ? 'selected' : ''}>${item.label}</option>`
+    ).join('');
+
+    return `
+      <div style="border:1px solid #e5dec9; border-radius:14px; padding:16px; background:#fdfbf7; display:flex; flex-direction:column; gap:11px; box-shadow:0 4px 14px rgba(0,0,0,0.03);">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+          <span style="font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; background:#1c1613; color:#d4a373; padding:4px 10px; border-radius:20px;">${b.group}</span>
+          <small style="color:#888; font-weight:600;">#${b.id}</small>
+        </div>
+        <strong style="font-size:0.98rem; color:#1c1613;">${b.locationName}</strong>
+        <div style="position:relative; width:100%; height:165px; border-radius:10px; overflow:hidden; border:1px solid #ddd; background:#eee;">
+          <img id="preview_img_${b.id}" src="${safeImg(b.img)}" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+
+        <div>
+          <label style="font-size:0.78rem; font-weight:700; color:#4a3525; display:block; margin-bottom:4px;">1) Kendi Ürün Fotoğraflarımızdan Seçin:</label>
+          <select class="admin-input" style="margin-top:0; padding:8px 10px; font-size:0.84rem;" onchange="selectCollectionBannerPhoto('${b.id}', this.value)">
+            <option value="">-- Koleksiyon Fotoğrafı Seçin --</option>
+            ${optionsHtml}
+          </select>
+        </div>
+
+        <div>
+          <label style="font-size:0.78rem; font-weight:700; color:#4a3525; display:block; margin-bottom:4px;">2) Veya Bilgisayardan Yeni Fotoğraf Yükleyin:</label>
+          <button type="button" class="admin-btn-sm" style="width:100%; padding:9px; background:#fff; border:1px dashed #8b5e3c; color:#8b5e3c;" onclick="document.getElementById('banner_file_${b.id}').click()">
+            <i class="fas fa-upload"></i> Bilgisayardan Fotoğraf Seç & Yükle
+          </button>
+          <input type="file" id="banner_file_${b.id}" accept="image/*" style="display:none" onchange="uploadBannerPhotoFile('${b.id}', this.files)">
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr; gap:8px; margin-top:2px;">
+          <div>
+            <label style="font-size:0.75rem; font-weight:600; color:#666;">Banner Başlığı:</label>
+            <input type="text" id="banner_title_${b.id}" class="admin-input" style="margin-top:2px; padding:7px 10px; font-size:0.84rem;" value="${(b.title || '').replace(/"/g, '&quot;')}">
+          </div>
+          <div>
+            <label style="font-size:0.75rem; font-weight:600; color:#666;">Alt Açıklama:</label>
+            <input type="text" id="banner_sub_${b.id}" class="admin-input" style="margin-top:2px; padding:7px 10px; font-size:0.84rem;" value="${(b.sub || '').replace(/"/g, '&quot;')}">
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" style="width:100%; padding:10px; font-size:0.86rem; justify-content:center; margin-top:auto;" onclick="saveBannerCard('${b.id}')">
+          <i class="fas fa-save"></i> Bu Bannerı Kaydet & Güncelle
+        </button>
+      </div>
+    `;
+  }).join('');
+}
+
+window.selectCollectionBannerPhoto = (bannerId, selectedPath) => {
+  if (!selectedPath) return;
+  const banners = window.getSiteBanners();
+  const idx = banners.findIndex(b => b.id === bannerId);
+  if (idx > -1) {
+    banners[idx].img = selectedPath;
+    localStorage.setItem('evseren_site_banners', JSON.stringify(banners));
+    const prev = document.getElementById('preview_img_' + bannerId);
+    if (prev) prev.src = safeImg(selectedPath);
+  }
+};
+
+window.uploadBannerPhotoFile = async (bannerId, fileList) => {
+  if (!fileList || fileList.length === 0) return;
+  const file = fileList[0];
+  if (!file.type.startsWith('image/')) return;
+  try {
+    const dataUrl = await compressImageFile(file, 1280, 0.8);
+    const banners = window.getSiteBanners();
+    const idx = banners.findIndex(b => b.id === bannerId);
+    if (idx > -1) {
+      banners[idx].img = dataUrl;
+      localStorage.setItem('evseren_site_banners', JSON.stringify(banners));
+      const prev = document.getElementById('preview_img_' + bannerId);
+      if (prev) prev.src = dataUrl;
+      alert('Banner fotoğrafı başarıyla yüklendi ve ana sayfada güncellendi!');
+    }
+  } catch (err) {
+    alert('Fotoğraf yüklenirken bir hata oluştu.');
+  }
+};
+
+window.saveBannerCard = (bannerId) => {
+  const banners = window.getSiteBanners();
+  const idx = banners.findIndex(b => b.id === bannerId);
+  if (idx > -1) {
+    const tEl = document.getElementById('banner_title_' + bannerId);
+    const sEl = document.getElementById('banner_sub_' + bannerId);
+    if (tEl) banners[idx].title = tEl.value.trim();
+    if (sEl) banners[idx].sub = sEl.value.trim();
+    localStorage.setItem('evseren_site_banners', JSON.stringify(banners));
+    alert('Banner bilgileri kaydedildi ve canlı sitede güncellendi!');
+    renderAdminBanners();
+  }
+};
+
+window.resetAllBannersToDefault = () => {
+  if (!confirm('Tüm banner görsellerini ve yazılarını kendi ürün fotoğraflarımızdan oluşan varsayılan haline döndürmek istiyor musunuz?')) return;
+  localStorage.removeItem('evseren_site_banners');
+  renderAdminBanners();
+  alert('Tüm bannerlar varsayılan ürün fotoğraflarımıza sıfırlandı!');
+};

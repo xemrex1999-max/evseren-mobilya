@@ -155,53 +155,56 @@ window.fallbackProductsData = [
     "price": 164900,
     "oldPrice": 194000,
     "cat": "dugun",
-    "img": "images/dugun_paketi.png",
+    "img": "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.00 (1).jpeg",
     "images": [
-      "images/dugun_paketi.png",
+      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.00 (1).jpeg",
       "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.43.59 (1).jpeg",
       "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.43.59.jpeg",
-      "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.00 (1).jpeg",
       "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.04 (2).jpeg",
       "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.05 (1).jpeg",
-      "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.05 (2).jpeg"
+      "evrensen/Boğem Yatak odası/page1_img24.jpeg"
     ],
     "badge": "%15 İNDİRİM"
   },
   {
     "id": 1080,
-    "name": "Milano Modern Koltuk Takımı",
+    "name": "Milano İnegöl Salon & Yemek Takımı",
     "price": 74500,
     "oldPrice": 86000,
     "cat": "koltuk",
-    "img": "images/koltuk_takimi.png",
+    "img": "evrensen/Boğem Yemek Odası/page1_img22.jpeg",
     "images": [
-      "images/koltuk_takimi.png",
-      "images/kose_takimi.png"
+      "evrensen/Boğem Yemek Odası/page1_img22.jpeg",
+      "evrensen/Boğem Yemek Odası/page1_img23.jpeg",
+      "evrensen/Boğem Yemek Odası/page1_img26.jpeg"
     ],
     "badge": "YENİ"
   },
   {
     "id": 1090,
-    "name": "Nordic L Köşe Koltuk Takımı",
+    "name": "Nordic İnegöl Özel Tasarım Takım",
     "price": 62900,
     "oldPrice": 73500,
     "cat": "kose",
-    "img": "images/kose_takimi.png",
+    "img": "evrensen/İnci Yatak Odası/page1_img11.jpeg",
     "images": [
-      "images/kose_takimi.png",
-      "images/koltuk_takimi.png"
+      "evrensen/İnci Yatak Odası/page1_img11.jpeg",
+      "evrensen/İnci Yatak Odası/page1_img12.jpeg",
+      "evrensen/İnci Yatak Odası/page1_img13.jpeg"
     ],
     "badge": "POPÜLER"
   },
   {
     "id": 1100,
-    "name": "mermer Desenli İnegöl TV Ünitesi",
+    "name": "Mermer Desenli İnegöl TV & Konsol Ünitesi",
     "price": 28900,
     "oldPrice": 34500,
     "cat": "tv",
-    "img": "images/tv_unitesi.png",
+    "img": "evrensen/Buğlem Yemek Odası/page1_img18.jpeg",
     "images": [
-      "images/tv_unitesi.png"
+      "evrensen/Buğlem Yemek Odası/page1_img18.jpeg",
+      "evrensen/Buğlem Yemek Odası/page1_img19.jpeg",
+      "evrensen/Buğlem Yemek Odası/page1_img20.jpeg"
     ],
     "badge": ""
   }
@@ -797,4 +800,161 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+});
+
+
+// 13. SITE BANNER & VITRIN YONETIMI (ADMIN PANEL ILE CANLI SENKRONIZE)
+window.defaultSiteBanners = [
+  {
+    id: 'hero_1',
+    group: 'Üst Vitrin (Hero Slider)',
+    locationName: '1. Vitrin Slaytı (Ana Karşılama)',
+    badge: 'YENİ KOLEKSİYON 2026',
+    title: 'Evinizi <span class="hero-accent">Hayalinizdeki</span><br>Konuta Dönüştürün',
+    sub: "İnegöl'ün seçkin yatak odası, yemek odası ve düğün paketleri Türkiye geneli ücretsiz kurulumla",
+    img: 'evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.43.59 (1).jpeg',
+    type: 'bg'
+  },
+  {
+    id: 'hero_2',
+    group: 'Üst Vitrin (Hero Slider)',
+    locationName: '2. Vitrin Slaytı (Yatak Odası Kampanyası)',
+    badge: 'ÖZEL KAMPANYA',
+    title: 'Yatak Odanızı<br><span class="hero-accent">%20 İndirimle</span> Yenileyin',
+    sub: '1. sınıf fırınlanmış gürgen ve MDF kalitesiyle üretilen özel tasarım yatak odaları',
+    img: 'evrensen/Boğem Yatak odası/page1_img24.jpeg',
+    type: 'bg'
+  },
+  {
+    id: 'hero_3',
+    group: 'Üst Vitrin (Hero Slider)',
+    locationName: '3. Vitrin Slaytı (Yemek Odası Koleksiyonu)',
+    badge: 'İNEGÖL MOBİLYA SANATI',
+    title: 'Misafirlerinizi <span class="hero-accent">Zarafetle</span><br>Ağırlayın',
+    sub: 'Aynalı, Bohem, Buğlem ve İnci yemek odası koleksiyonlarımızı hemen keşfedin',
+    img: 'evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.04 (2).jpeg',
+    type: 'bg'
+  },
+  {
+    id: 'cat_dugun',
+    group: 'Kategori Bannerları (Ana Sayfa 6 Kategori Vitrini)',
+    locationName: 'Kategori 1: ♥ Düğün Paketleri Bannerı',
+    badge: 'ÖZEL PAKET',
+    title: '♥ Düğün Paketleri',
+    sub: 'Komple ev mobilyası',
+    img: 'evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.44.00 (1).jpeg',
+    type: 'img'
+  },
+  {
+    id: 'cat_yatak',
+    group: 'Kategori Bannerları (Ana Sayfa 6 Kategori Vitrini)',
+    locationName: 'Kategori 2: Yatak Odası Bannerı',
+    badge: '',
+    title: 'Yatak Odası',
+    sub: 'Lüks dinlenme',
+    img: 'evrensen/Buğlem Yatak Odası/page1_img17.jpeg',
+    type: 'img'
+  },
+  {
+    id: 'cat_yemek',
+    group: 'Kategori Bannerları (Ana Sayfa 6 Kategori Vitrini)',
+    locationName: 'Kategori 3: Yemek Odası Bannerı',
+    badge: '',
+    title: 'Yemek Odası',
+    sub: 'Şık sofra',
+    img: 'evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.05 (1).jpeg',
+    type: 'img'
+  },
+  {
+    id: 'cat_koltuk',
+    group: 'Kategori Bannerları (Ana Sayfa 6 Kategori Vitrini)',
+    locationName: 'Kategori 4: Koltuk Takımı Bannerı',
+    badge: '',
+    title: 'Koltuk Takımı',
+    sub: 'Konforlu oturma',
+    img: 'evrensen/Boğem Yemek Odası/page1_img22.jpeg',
+    type: 'img'
+  },
+  {
+    id: 'cat_kose',
+    group: 'Kategori Bannerları (Ana Sayfa 6 Kategori Vitrini)',
+    locationName: 'Kategori 5: Köşe Takımı Bannerı',
+    badge: '',
+    title: 'Köşe Takımı',
+    sub: 'Geniş alan',
+    img: 'evrensen/İnci Yatak Odası/page1_img11.jpeg',
+    type: 'img'
+  },
+  {
+    id: 'cat_tv',
+    group: 'Kategori Bannerları (Ana Sayfa 6 Kategori Vitrini)',
+    locationName: 'Kategori 6: TV Ünitesi Bannerı',
+    badge: '',
+    title: 'TV Ünitesi',
+    sub: 'Modern tasarım',
+    img: 'evrensen/Buğlem Yemek Odası/page1_img18.jpeg',
+    type: 'img'
+  },
+  {
+    id: 'promo_dugun',
+    group: 'Orta Kampanya Bannerı (%15 İndirim Alanı)',
+    locationName: 'Düğün Paketlerinde %15 İndirim (Sağ Fotoğraf)',
+    badge: 'ÖZEL TEKLİF',
+    title: 'Düğün Paketlerinde<br><span style="color:var(--accent)">%15 İndirim!</span>',
+    sub: 'Komple ev mobilyanızı tek pakette alın, büyük tasarruf edin. Sınırlı süre geçerli!',
+    img: 'evrensen/İnci Yatak Odası/page1_img12.jpeg',
+    type: 'img'
+  }
+];
+
+window.getSiteBanners = function() {
+  let saved = [];
+  try { saved = JSON.parse(localStorage.getItem('evseren_site_banners') || '[]'); } catch (e) {}
+  const savedMap = new Map((Array.isArray(saved) ? saved : []).map(b => [b.id, b]));
+  return window.defaultSiteBanners.map(def => {
+    const custom = savedMap.get(def.id);
+    return custom ? { ...def, ...custom } : { ...def };
+  });
+};
+
+window.applySiteBanners = function() {
+  const banners = window.getSiteBanners();
+  banners.forEach(b => {
+    const safeUrl = b.img && b.img.startsWith('data:') ? b.img : encodeURI(b.img || '');
+    const bgEl = document.querySelector(`[data-banner-id="${b.id}"]`);
+    if (bgEl && safeUrl) {
+      bgEl.style.backgroundImage = `url('${safeUrl}')`;
+    }
+    const imgEl = document.querySelector(`[data-banner-img="${b.id}"]`);
+    if (imgEl && safeUrl) {
+      imgEl.src = safeUrl;
+    }
+    const titleEl = document.querySelector(`[data-banner-title="${b.id}"]`);
+    if (titleEl && b.title) {
+      titleEl.innerHTML = b.title;
+    }
+    const subEl = document.querySelector(`[data-banner-sub="${b.id}"]`);
+    if (subEl && b.sub !== undefined) {
+      subEl.innerText = b.sub;
+    }
+    const badgeEl = document.querySelector(`[data-banner-badge="${b.id}"]`);
+    if (badgeEl && b.badge !== undefined) {
+      badgeEl.innerText = b.badge;
+      badgeEl.style.display = b.badge ? '' : 'none';
+    }
+  });
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.applySiteBanners();
+});
+
+window.addEventListener('storage', (e) => {
+  if (e.key === 'evseren_site_banners') {
+    window.applySiteBanners();
+  }
+  if (e.key === 'evseren_custom_products' || e.key === 'evseren_deleted_products') {
+    window.allProductsData = window.getEffectiveProducts();
+    refreshUIs();
+  }
 });

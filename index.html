@@ -430,30 +430,42 @@
     </div>
   </header>
 
-  <!-- HERO SLIDER -->
+    <!-- HERO SLIDER -->
   <section class="hero">
-    <div class="hero-slider">
-      <div class="hero-slide active" style="background-image: url('images/hero_banner.png');">
+    <div class="hero-slider" id="heroSliderContainer">
+      <div class="hero-slide active" data-banner-id="hero_1" style="background-image: url('evrensen/Aynal%C4%B1%20Yatak%20Odas%C4%B1/WhatsApp%20Image%202025-09-01%20at%2011.43.59%20(1).jpeg');">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-          <span class="hero-badge">YENİ KOLEKSİYON 2025</span>
-          <h1 class="hero-title">Evinizi <span class="hero-accent">Hayalinizdeki</span><br>Konuta Dönüştürün</h1>
-          <p class="hero-sub">Kaliteli mobilya, uygun fiyat ve Türkiye geneli ücretsiz kurulum</p>
+          <span class="hero-badge" data-banner-badge="hero_1">YENİ KOLEKSİYON 2026</span>
+          <h1 class="hero-title" data-banner-title="hero_1">Evinizi <span class="hero-accent">Hayalinizdeki</span><br>Konuta Dönüştürün</h1>
+          <p class="hero-sub" data-banner-sub="hero_1">İnegöl'ün seçkin yatak odası, yemek odası ve düğün paketleri Türkiye geneli ücretsiz kurulumla</p>
           <div class="hero-btns">
             <a href="products.html" class="btn btn-primary">Koleksiyonu Keşfet</a>
             <a href="products.html?cat=dugun" class="btn btn-outline">♥ Düğün Paketleri</a>
           </div>
         </div>
       </div>
-      <div class="hero-slide" style="background-image: url('images/yatak_odasi.png');">
+      <div class="hero-slide" data-banner-id="hero_2" style="background-image: url('evrensen/Bo%C4%9Fem%20Yatak%20odas%C4%B1/page1_img24.jpeg');">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-          <span class="hero-badge">ÖZEL KAMPANYA</span>
-          <h1 class="hero-title">Yatak Odanızı<br><span class="hero-accent">%20 İndirimle</span> Yenileyin</h1>
-          <p class="hero-sub">Sınırlı süre geçerli fırsatları kaçırmayın</p>
+          <span class="hero-badge" data-banner-badge="hero_2">ÖZEL KAMPANYA</span>
+          <h1 class="hero-title" data-banner-title="hero_2">Yatak Odanızı<br><span class="hero-accent">%20 İndirimle</span> Yenileyin</h1>
+          <p class="hero-sub" data-banner-sub="hero_2">1. sınıf fırınlanmış gürgen ve MDF kalitesiyle üretilen özel tasarım yatak odaları</p>
           <div class="hero-btns">
             <a href="products.html?cat=yatak" class="btn btn-primary">İncele</a>
             <a href="contact.html" class="btn btn-outline">Teklif Al</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-slide" data-banner-id="hero_3" style="background-image: url('evrensen/Aynal%C4%B1%20Yemek%20Odas%C4%B1/WhatsApp%20Image%202025-09-01%20at%2011.44.04%20(2).jpeg');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <span class="hero-badge" data-banner-badge="hero_3">İNEGÖL MOBİLYA SANATI</span>
+          <h1 class="hero-title" data-banner-title="hero_3">Misafirlerinizi <span class="hero-accent">Zarafetle</span><br>Ağırlayın</h1>
+          <p class="hero-sub" data-banner-sub="hero_3">Aynalı, Bohem, Buğlem ve İnci yemek odası koleksiyonlarımızı hemen keşfedin</p>
+          <div class="hero-btns">
+            <a href="products.html?cat=yemek" class="btn btn-primary">Yemek Odaları</a>
+            <a href="contact.html" class="btn btn-outline">Bize Ulaşın</a>
           </div>
         </div>
       </div>
@@ -463,6 +475,7 @@
     <div class="hero-indicators">
       <button class="indicator active" data-slide="0"></button>
       <button class="indicator" data-slide="1"></button>
+      <button class="indicator" data-slide="2"></button>
     </div>
   </section>
 
@@ -492,7 +505,7 @@
     </div>
   </div>
 
-  <!-- KATEGORİLER -->
+    <!-- KATEGORİLER -->
   <section class="categories section">
     <div class="container">
       <div class="section-header">
@@ -501,32 +514,32 @@
         <p class="section-sub">İhtiyacınıza göre en uygun mobilya kategorisini seçin</p>
       </div>
       <div class="cat-grid">
-        <a href="products.html?cat=dugun" class="cat-card"><span class="cat-badge">ÖZEL PAKET</span>
-          <img src="images/dugun_paketi.png" alt="Düğün Paketi" loading="lazy" />
+        <a href="products.html?cat=dugun" class="cat-card" data-banner-card="cat_dugun"><span class="cat-badge" data-banner-badge="cat_dugun">ÖZEL PAKET</span>
+          <img src="evrensen/Aynal%C4%B1%20Yatak%20Odas%C4%B1/WhatsApp%20Image%202025-09-01%20at%2011.44.00%20(1).jpeg" data-banner-img="cat_dugun" alt="Düğün Paketi" loading="lazy" />
           <div class="cat-info">
-            <h3>♥ Düğün Paketleri</h3>
-            <span>Komple ev mobilyası</span>
+            <h3 data-banner-title="cat_dugun">♥ Düğün Paketleri</h3>
+            <span data-banner-sub="cat_dugun">Komple ev mobilyası</span>
           </div>
         </a>
-        <a href="products.html?cat=yatak" class="cat-card">
-          <img src="images/yatak_odasi.png" alt="Yatak Odası" loading="lazy" />
-          <div class="cat-info"><h3>Yatak Odası</h3><span>Lüks dinlenme</span></div>
+        <a href="products.html?cat=yatak" class="cat-card" data-banner-card="cat_yatak">
+          <img src="evrensen/Bu%C4%9Flem%20Yatak%20Odas%C4%B1/page1_img17.jpeg" data-banner-img="cat_yatak" alt="Yatak Odası" loading="lazy" />
+          <div class="cat-info"><h3 data-banner-title="cat_yatak">Yatak Odası</h3><span data-banner-sub="cat_yatak">Lüks dinlenme</span></div>
         </a>
-        <a href="products.html?cat=yemek" class="cat-card">
-          <img src="images/yemek_odasi.png" alt="Yemek Odası" loading="lazy" />
-          <div class="cat-info"><h3>Yemek Odası</h3><span>Şık sofra</span></div>
+        <a href="products.html?cat=yemek" class="cat-card" data-banner-card="cat_yemek">
+          <img src="evrensen/Aynal%C4%B1%20Yemek%20Odas%C4%B1/WhatsApp%20Image%202025-09-01%20at%2011.44.05%20(1).jpeg" data-banner-img="cat_yemek" alt="Yemek Odası" loading="lazy" />
+          <div class="cat-info"><h3 data-banner-title="cat_yemek">Yemek Odası</h3><span data-banner-sub="cat_yemek">Şık sofra</span></div>
         </a>
-        <a href="products.html?cat=koltuk" class="cat-card">
-          <img src="images/koltuk_takimi.png" alt="Koltuk Takımı" loading="lazy" />
-          <div class="cat-info"><h3>Koltuk Takımı</h3><span>Konforlu oturma</span></div>
+        <a href="products.html?cat=koltuk" class="cat-card" data-banner-card="cat_koltuk">
+          <img src="evrensen/Bo%C4%9Fem%20Yemek%20Odas%C4%B1/page1_img22.jpeg" data-banner-img="cat_koltuk" alt="Koltuk Takımı" loading="lazy" />
+          <div class="cat-info"><h3 data-banner-title="cat_koltuk">Koltuk Takımı</h3><span data-banner-sub="cat_koltuk">Konforlu oturma</span></div>
         </a>
-        <a href="products.html?cat=kose" class="cat-card">
-          <img src="images/kose_takimi.png" alt="Köşe Takımı" loading="lazy" />
-          <div class="cat-info"><h3>Köşe Takımı</h3><span>Geniş alan</span></div>
+        <a href="products.html?cat=kose" class="cat-card" data-banner-card="cat_kose">
+          <img src="evrensen/%C4%B0nci%20Yatak%20Odas%C4%B1/page1_img11.jpeg" data-banner-img="cat_kose" alt="Köşe Takımı" loading="lazy" />
+          <div class="cat-info"><h3 data-banner-title="cat_kose">Köşe Takımı</h3><span data-banner-sub="cat_kose">Geniş alan</span></div>
         </a>
-        <a href="products.html?cat=tv" class="cat-card">
-          <img src="images/tv_unitesi.png" alt="TV Ünitesi" loading="lazy" />
-          <div class="cat-info"><h3>TV Ünitesi</h3><span>Modern tasarım</span></div>
+        <a href="products.html?cat=tv" class="cat-card" data-banner-card="cat_tv">
+          <img src="evrensen/Bu%C4%9Flem%20Yemek%20Odas%C4%B1/page1_img18.jpeg" data-banner-img="cat_tv" alt="TV Ünitesi" loading="lazy" />
+          <div class="cat-info"><h3 data-banner-title="cat_tv">TV Ünitesi</h3><span data-banner-sub="cat_tv">Modern tasarım</span></div>
         </a>
       </div>
     </div>
@@ -547,17 +560,17 @@
     </div>
   </section>
 
-  <!-- PROMO BANNER -->
-  <section class="promo-section">
+    <!-- PROMO BANNER -->
+  <section class="promo-section" data-banner-card="promo_dugun">
     <div class="container promo-inner">
       <div class="promo-text">
-        <span class="promo-tag">ÖZEL TEKLİF</span>
-        <h2>Düğün Paketlerinde<br><span style="color:var(--accent)">%15 İndirim!</span></h2>
-        <p>Komple ev mobilyanızı tek pakette alın, büyük tasarruf edin. Sınırlı süre geçerli!</p>
+        <span class="promo-tag" data-banner-badge="promo_dugun">ÖZEL TEKLİF</span>
+        <h2 data-banner-title="promo_dugun">Düğün Paketlerinde<br><span style="color:var(--accent)">%15 İndirim!</span></h2>
+        <p data-banner-sub="promo_dugun">Komple ev mobilyanızı tek pakette alın, büyük tasarruf edin. Sınırlı süre geçerli!</p>
         <a href="products.html?cat=dugun" class="btn btn-primary">Paketleri Keşfet</a>
       </div>
       <div class="promo-img">
-        <img src="images/dugun_paketi.png" alt="Düğün Paketi Fırsatı" />
+        <img src="evrensen/%C4%B0nci%20Yatak%20Odas%C4%B1/page1_img12.jpeg" data-banner-img="promo_dugun" alt="Düğün Paketi Fırsatı" />
       </div>
     </div>
   </section>
@@ -2628,7 +2641,7 @@
   <a href="https://wa.me/905077567887" class="whatsapp-float" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
   <button class="scroll-top" id="scrollTop" title="Yukarı"><i class="fas fa-chevron-up"></i></button>
 
-  <script src="script.js?v=20261105h"></script>
+  <script src="script.js?v=20261105g"></script>
   <script src="chatbot.js"></script>
 </body>
 </html>
