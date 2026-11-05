@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evseren Mobilya | İnegöl Mobilya Modelleri ve Düğün Paketleri</title>
+  <script>
+    (function() {
+      var p = window.location.pathname.toLowerCase();
+      if (p.indexOf('iletisim') !== -1 || p.indexOf('contact') !== -1) {
+        window.location.replace('/contact.html');
+      } else if (p.indexOf('hakkimizda') !== -1 || p.indexOf('about') !== -1) {
+        window.location.replace('/about.html');
+      } else if (p.indexOf('urun') !== -1 || p.indexOf('product') !== -1 || p.indexOf('kategori') !== -1 || p.indexOf('yatak') !== -1 || p.indexOf('yemek') !== -1 || p.indexOf('koltuk') !== -1 || p.indexOf('dugun') !== -1) {
+        window.location.replace('/products.html');
+      } else if (p.indexOf('takip') !== -1 || p.indexOf('track') !== -1) {
+        window.location.replace('/track-order.html');
+      } else if (p.indexOf('sepet') !== -1 || p.indexOf('odeme') !== -1 || p.indexOf('checkout') !== -1) {
+        window.location.replace('/checkout.html');
+      } else if (p.indexOf('giris') !== -1 || p.indexOf('login') !== -1) {
+        window.location.replace('/login.html');
+      } else if (p.indexOf('uye') !== -1 || p.indexOf('kayit') !== -1 || p.indexOf('register') !== -1) {
+        window.location.replace('/register.html');
+      } else if (p.indexOf('hesab') !== -1 || p.indexOf('profil') !== -1) {
+        window.location.replace('/profile.html');
+      } else if (p.indexOf('admin') !== -1 || p.indexOf('panel') !== -1) {
+        window.location.replace('/admin.html');
+      } else {
+        window.location.replace('/');
+      }
+    })();
+  </script>
+  <meta http-equiv="refresh" content="0; url=/" />
+</head>
+<body style="background:#faf7f2; font-family:sans-serif; text-align:center; padding-top:80px; color:#1a1209;">
+  <p>Evseren Mobilya sayfasına yönlendiriliyorsunuz...</p>
+</body>
+</html>
