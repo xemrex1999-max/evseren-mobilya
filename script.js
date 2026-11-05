@@ -806,6 +806,16 @@ document.addEventListener('DOMContentLoaded', () => {
 // 13. SITE BANNER & VITRIN YONETIMI (ADMIN PANEL ILE CANLI SENKRONIZE)
 window.defaultSiteBanners = [
   {
+    id: 'vip_curtain',
+    group: 'Giriş Karşılama Perdesi (İkiye Bölünen Fotoğraf)',
+    locationName: 'Açılışta İkiye Bölünen Karşılama Fotoğrafı',
+    badge: 'EVSEREN MOBİLYA • İNEGÖL',
+    title: 'AÇ',
+    sub: 'Tıklayınca ortadan ikiye bölünerek açılan tam ekran vitrin fotoğrafı',
+    img: 'evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.43.59 (1).jpeg',
+    type: 'curtain'
+  },
+  {
     id: 'hero_1',
     group: 'Üst Vitrin (Hero Slider)',
     locationName: '1. Vitrin Slaytı (Ana Karşılama)',
@@ -924,6 +934,12 @@ window.applySiteBanners = function() {
     const bgEl = document.querySelector(`[data-banner-id="${b.id}"]`);
     if (bgEl && safeUrl) {
       bgEl.style.backgroundImage = `url('${safeUrl}')`;
+    }
+    if (b.id === 'vip_curtain' && safeUrl && !window.location.pathname.includes('product-detail')) {
+      const leftC = document.getElementById('evserenCurtainLeftImg');
+      const rightC = document.getElementById('evserenCurtainRightImg');
+      if (leftC) leftC.src = safeUrl;
+      if (rightC) rightC.src = safeUrl;
     }
     const imgEl = document.querySelector(`[data-banner-img="${b.id}"]`);
     if (imgEl && safeUrl) {
