@@ -255,6 +255,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 1. Instant UI Updates (Auth & Cart)
     const userBtn = document.getElementById('userBtn');
     if (userBtn) {
+        userBtn.style.cssText = 'width: auto !important; min-width: 42px; height: 40px; padding: 0 14px !important; border-radius: 50px !important; display: inline-flex !important; align-items: center !important; gap: 7px !important; border: 1px solid #e5dec9 !important; background: #fdfbf7 !important; white-space: nowrap !important;';
         const token = localStorage.getItem('token');
         let user = null;
         try { user = JSON.parse(localStorage.getItem('user') || 'null'); } catch(e) {}
