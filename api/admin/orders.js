@@ -1,6 +1,6 @@
-const dbConnect = require('../../utils/db');
-const Order = require('../../models/Order');
-const adminAuth = require('../../utils/adminAuth');
+const dbConnect = require('../utils/db');
+const Order = require('../models/Order');
+const adminAuth = require('../utils/adminAuth');
 
 const handler = async (req, res) => {
   await dbConnect();

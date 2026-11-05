@@ -1,5 +1,5 @@
-const dbConnect = require('../../utils/db');
-const Order = require('../../models/Order');
+const dbConnect = require('../utils/db');
+const Order = require('../models/Order');
 const jwt = require('jsonwebtoken');
 
 module.exports = async (req, res) => {

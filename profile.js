@@ -182,39 +182,32 @@ if (updateForm) {
         btn.innerText = 'Kaydediliyor...';
         btn.disabled = true;
 
-        const updatedData = {
-            name: document.getElementById('infoName').value,
-            phone: document.getElementById('infoPhone').value,
-            address: document.getElementById('infoAddr').value
+        const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
+        const updatedUser = {
+            ...currentUser,
+            name: document.getElementById('infoName').value.trim(),
+            phone: document.getElementById('infoPhone').value.trim(),
+            address: document.getElementById('infoAddr').value.trim()
         };
 
-        try {
-            const res = await fetch(`${API_URL}/auth/profile`, {
-                method: 'PUT',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-                body: JSON.stringify(updatedData)
-            });
-            const data = await res.json();
-            if (res.ok) {
-                localStorage.setItem('user', JSON.stringify(data));
-                alert('Bilgileriniz başarıyla güncellendi!');
-                initProfile(); // Refresh UI
-            } else {
-                alert('Hata: ' + (data.message || 'Güncellenemedi'));
-            }
-        } catch (err) {
-            alert('Bağlantı hatası!');
-        } finally {
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+
+        const users = JSON.parse(localStorage.getItem('evseren_users') || '[]');
+        const idx = users.findIndex(u => u.email === updatedUser.email);
+        if (idx > -1) {
+            users[idx] = { ...users[idx], ...updatedUser };
+            localStorage.setItem('evseren_users', JSON.stringify(users));
+        }
+
+        setTimeout(() => {
             btn.innerText = originalText;
             btn.disabled = false;
-        }
+            alert('Bilgileriniz başarıyla güncellendi!');
+            initProfile();
+        }, 300);
     });
 }
 
-// Init check
 function start() {
     try {
         initProfile();
@@ -223,7 +216,6 @@ function start() {
     }
 }
 
-// Global scope attachment for HTML onclicks
 window.switchProfileTab = switchProfileTab;
 window.handleLogout = handleLogout;
 window.initProfile = initProfile;

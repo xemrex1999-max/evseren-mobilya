@@ -1,5 +1,5 @@
-const dbConnect = require('../../utils/db');
-const Order = require('../../models/Order');
+const dbConnect = require('../utils/db');
+const Order = require('../models/Order');
 
 module.exports = async (req, res) => {
   // Ödeal'dan gelen Callback/Webhook URL'si.

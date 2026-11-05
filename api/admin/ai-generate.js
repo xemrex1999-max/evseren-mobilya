@@ -1,4 +1,4 @@
-const adminAuth = require('../../utils/adminAuth');
+const adminAuth = require('../utils/adminAuth');
 const { GoogleGenAI } = require('@google/genai');
 
 const handler = async (req, res) => {

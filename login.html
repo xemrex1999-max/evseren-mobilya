@@ -162,41 +162,42 @@
   <script>
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = document.getElementById('email').value.trim();
+      const email = document.getElementById('email').value.trim().toLowerCase();
       const password = document.getElementById('password').value;
-      const errEl = document.getElementById('authError');
-      errEl.style.display = 'none';
+      const errorDiv = document.getElementById('errorMsg');
+      
+      errorDiv.style.display = 'none';
 
       try {
-        const users = JSON.parse(localStorage.getItem('evseren_users') || '[]');
-        const matched = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
-        if (matched) {
-          const sessionUser = { id: matched.id, name: matched.name, email: matched.email };
-          localStorage.setItem('token', 'evseren_session_' + matched.id);
-          localStorage.setItem('user', JSON.stringify(sessionUser));
-          window.location.href = 'profile.html';
-        } else {
-          // Eğer bu tarayıcıda daha önce kayıt yoksa hızlı giriş/oturum oluştur
-          const namePart = email.split('@')[0];
-          const displayName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
-          const sessionUser = { id: Date.now(), name: displayName, email };
-          localStorage.setItem('token', 'evseren_session_' + sessionUser.id);
-          localStorage.setItem('user', JSON.stringify(sessionUser));
-          window.location.href = 'profile.html';
+        // Check Admin credentials
+        if ((email === 'xemrex1999@hotmail.com' && password === 'evseren123') || (email === 'admin@evserenmobilya.com' && password === '123456') || (email === 'admin' && password === '123456')) {
+          const adminUser = { id: 'admin_1', name: 'Evseren Yönetici', email: email, role: 'admin' };
+          localStorage.setItem('token', 'evseren_admin_token_' + Date.now());
+          localStorage.setItem('adminToken', 'evseren_admin_token_' + Date.now());
+          localStorage.setItem('user', JSON.stringify(adminUser));
+          window.location.href = 'admin.html';
+          return;
         }
+
+        const users = JSON.parse(localStorage.getItem('evseren_users') || '[]');
+        const found = users.find(u => u.email.toLowerCase() === email && u.password === password);
+        
+        const activeUser = found || {
+          id: 'usr_' + Date.now(),
+          name: email.split('@')[0],
+          email: email,
+          phone: '',
+          role: 'user'
+        };
+
+        localStorage.setItem('token', 'evseren_jwt_' + Date.now());
+        localStorage.setItem('user', JSON.stringify(activeUser));
+        window.location.href = 'profile.html';
       } catch (err) {
-        errEl.innerText = 'Giriş yapılamadı, lütfen tekrar deneyin.';
-        errEl.style.display = 'block';
+        errorDiv.innerText = 'Giriş yapılırken bir hata oluştu.';
+        errorDiv.style.display = 'block';
       }
     });
-
-    try {
-        const token = localStorage.getItem('token');
-        const user = JSON.parse(localStorage.getItem('user') || 'null');
-        if (token && user) {
-            window.location.href = 'index.html';
-        }
-    } catch(e) { /* silent fail */ }
   </script>
 </body>
 </html>
