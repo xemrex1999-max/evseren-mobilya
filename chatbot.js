@@ -8,16 +8,23 @@ const WHATSAPP_NUMBER = '+90 507 756 78 87';
 const WHATSAPP_LINK = 'https://wa.me/905077567887';
 const STORE_ADDRESS = 'Mahmudiye Mh. 14 Mob. Nil Sk. No:33, İnegöl / BURSA';
 
+const ALL_QUICK_REPLIES = [
+  '💰 Fiyatlar nedir?',
+  '🛏️ Yatak odası modelleri',
+  '🍽️ Yemek odası modelleri',
+  '💍 Düğün paketleri',
+  '🚚 Teslimat & Kurulum',
+  '💳 Taksit & Kupon Kodu',
+  '📦 Sipariş Takibi',
+  '📍 Mağaza adresiniz'
+];
+
 let conversationHistory = [];
 let isTyping = false;
 
 function getSmartEvserenResponse(message) {
   const msg = message.toLocaleLowerCase('tr-TR');
-  const products = (typeof window.getEffectiveProducts === 'function')
-    ? window.getEffectiveProducts()
-    : (window.allProductsData || window.fallbackProductsData || []);
 
-  // Specific model queries
   if (msg.includes('aynalı') || msg.includes('aynali')) {
     return '✨ <strong>Aynalı Koleksiyonumuz:</strong><br>• <strong>Aynalı Yatak Odası Takımı:</strong> ₺86.476 (14 parça detaylı görsel)<br>• <strong>Aynalı Yemek Odası Takımı:</strong> ₺81.394<br>Türkiye geneli ücretsiz nakliye ve kurulum dahildir! Detaylar için <a href="products.html?search=Aynal%C4%B1" style="color:#8b5e3c;font-weight:700;">buraya tıklayabilirsiniz</a>.';
   }
@@ -45,11 +52,11 @@ function getSmartEvserenResponse(message) {
   if (msg.includes('teslimat') || msg.includes('kargo') || msg.includes('nakliye') || msg.includes('kurulum')) {
     return '🚚 <strong>Ücretsiz Nakliye & Kurulum:</strong><br>Bursa İnegöl üretim tesislerimizden Türkiye\'nin 81 iline kendi uzman ekibimizle <strong>ücretsiz teslimat ve evinizde kurulum</strong> yapıyoruz. Ortalama teslimat süremiz 7-14 iş günüdür.';
   }
-  if (msg.includes('takip') || msg.includes('sipariş') || msg.includes('nerede') || msg.includes('evs-')) {
+  if (msg.includes('takip') || msg.includes('sipariş') || msg.includes('evs-')) {
     return '📦 Siparişinizin durumunu <a href="track-order.html" style="color:#8b5e3c;font-weight:700;">Sipariş Takibi</a> sayfamızdan <strong>EVS-...</strong> sipariş kodunuzla anlık olarak sorgulayabilirsiniz.';
   }
-  if (msg.includes('taksit') || msg.includes('ödeme') || msg.includes('kredi') || msg.includes('havale')) {
-    return '💳 <strong>Ödeme Seçeneklerimiz:</strong><br>Kredi kartına 6 aya varan taksit veya Havale/EFT ile güvenli ödeme yapabilirsiniz. Sepetinizde <code>EVSEREN10</code> kupon koduyla ekstra %10 indirim kazanabilirsiniz!';
+  if (msg.includes('taksit') || msg.includes('ödeme') || msg.includes('kredi') || msg.includes('havale') || msg.includes('kupon')) {
+    return '💳 <strong>Ödeme & Kupon Fırsatı:</strong><br>Kredi kartına 6 aya varan taksit veya Havale/EFT ile güvenli ödeme yapabilirsiniz. Sepetinizde <code>EVSEREN10</code> kupon koduyla ekstra <strong>%10 indirim</strong> kazanabilirsiniz!';
   }
   if (msg.includes('adres') || msg.includes('nerede') || msg.includes('mağaza') || msg.includes('inegöl') || msg.includes('iletisim') || msg.includes('iletişim') || msg.includes('telefon')) {
     return `📍 <strong>Mağaza Adresimiz:</strong> ${STORE_ADDRESS}<br>📞 <strong>Telefon & WhatsApp:</strong> <a href="${WHATSAPP_LINK}" target="_blank" style="color:#8b5e3c;font-weight:700;">${WHATSAPP_NUMBER}</a><br>🕘 Çalışma Saatleri: Pzt–Cts 09:00–18:00`;
@@ -58,10 +65,10 @@ function getSmartEvserenResponse(message) {
     return '🛡️ Tüm ürünlerimiz 1. sınıf fırınlanmış gürgen iskelet ve E1 kalitesinde MDF malzemeden üretilir, <strong>2 yıl tam garanti</strong> ve 30 gün kolay iade güvencesi altındadır.';
   }
   if (msg.includes('merhaba') || msg.includes('selam') || msg.includes('iyi günler')) {
-    return 'Merhaba! 👋 <strong>Evseren Mobilya</strong> İnegöl mağazamıza hoş geldiniz. Yatak odası, yemek odası, düğün paketleri, fiyatlar veya ücretsiz kurulum hakkında her şeyi bana sorabilirsiniz!';
+    return 'Merhaba! 👋 <strong>Evseren Mobilya</strong> İnegöl mağazamıza hoş geldiniz. Aşağıdaki hızlı seçeneklerden birine tıklayabilir veya sorunuzu yazabilirsiniz!';
   }
 
-  return `Size hemen yardımcı olalım! 🛋️ Güncel modellerimizi <a href="products.html" style="color:#8b5e3c;font-weight:700;">Ürünler</a> sayfamızdan inceleyebilir veya özel ölçü/renk talepleriniz için doğrudan WhatsApp hattımızdan bize ulaşabilirsiniz: <a href="${WHATSAPP_LINK}" target="_blank" style="color:#25D366;font-weight:700;">${WHATSAPP_NUMBER}</a>`;
+  return `Size hemen yardımcı olalım! 🛋️ Güncel modellerimizi <a href="products.html" style="color:#8b5e3c;font-weight:700;">Ürünler</a> sayfamızdan inceleyebilir, aşağıdaki başlıklardan birini seçebilir veya doğrudan WhatsApp hattımızdan bize ulaşabilirsiniz: <a href="${WHATSAPP_LINK}" target="_blank" style="color:#25D366;font-weight:700;">${WHATSAPP_NUMBER}</a>`;
 }
 
 function createChatbotWidget() {
@@ -114,13 +121,7 @@ function createChatbotWidget() {
 
   setTimeout(() => {
     addMessage('bot', 'Merhaba! 👋 <strong>Evseren Mobilya</strong> dijital asistanıyım.<br><br>İnegöl yatak odası, yemek odası, düğün paketleri, fiyatlar veya ücretsiz kurulum hakkında size nasıl yardımcı olabilirim?');
-    addQuickReplies([
-      '💰 Fiyatlar nedir?',
-      '🛏️ Yatak odası modelleri',
-      '💍 Düğün paketleri',
-      '🚚 Teslimat & Kurulum',
-      '📍 Mağaza adresiniz'
-    ]);
+    addQuickReplies(ALL_QUICK_REPLIES);
   }, 400);
 
   bindEvents();
@@ -159,6 +160,9 @@ async function handleSend() {
   if (!text || isTyping) return;
 
   input.value = '';
+  // Remove previous quick-replies block so it moves cleanly below the new answer
+  document.getElementById('quickRepliesBlock')?.remove();
+
   addMessage('user', text);
   conversationHistory.push({ role: 'user', content: text });
 
@@ -166,7 +170,7 @@ async function handleSend() {
   sendBtn.disabled = true;
   const typingId = showTyping();
 
-  await new Promise(r => setTimeout(r, 350));
+  await new Promise(r => setTimeout(r, 300));
   const reply = getSmartEvserenResponse(text);
 
   removeTyping(typingId);
@@ -175,6 +179,11 @@ async function handleSend() {
 
   addMessage('bot', reply);
   conversationHistory.push({ role: 'bot', content: reply });
+
+  // Always show the remaining/all quick reply options below the answer so the user can keep clicking other questions!
+  const norm = text.toLocaleLowerCase('tr-TR');
+  const nextOptions = ALL_QUICK_REPLIES.filter(opt => !opt.toLocaleLowerCase('tr-TR').includes(norm));
+  addQuickReplies(nextOptions.length >= 4 ? nextOptions : ALL_QUICK_REPLIES);
 }
 
 function addMessage(role, text) {
@@ -223,12 +232,15 @@ function addQuickReplies(options) {
   const container = document.getElementById('chatbotMessages');
   if (!container) return;
 
+  document.getElementById('quickRepliesBlock')?.remove();
+
   const qr = document.createElement('div');
   qr.className = 'chat-msg bot';
   qr.id = 'quickRepliesBlock';
   qr.innerHTML = `
     <div class="chat-msg-avatar" style="visibility:hidden"></div>
     <div class="chat-quick-replies">
+      <div style="width:100%; font-size:0.72rem; color:#8b5e3c; font-weight:700; margin-bottom:2px;">Başka ne sormak istersiniz?</div>
       ${options.map(o => `<button class="quick-reply-btn">${o}</button>`).join('')}
     </div>`;
   container.appendChild(qr);
@@ -236,7 +248,6 @@ function addQuickReplies(options) {
   qr.querySelectorAll('.quick-reply-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.getElementById('chatbotInput').value = btn.textContent.replace(/^[^\w\sÇĞİÖŞÜçğıöşü]+\s*/, '');
-      document.getElementById('quickRepliesBlock')?.remove();
       handleSend();
     });
   });
