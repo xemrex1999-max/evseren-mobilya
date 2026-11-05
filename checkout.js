@@ -528,6 +528,7 @@
       coCart = [];
       saveCart();
       if (document.getElementById('orderNumber')) document.getElementById('orderNumber').textContent = newOrder.orderCode;
+      if (document.getElementById('trackOrderLinkBtn')) document.getElementById('trackOrderLinkBtn').href = 'track-order.html?code=' + encodeURIComponent(newOrder.orderCode);
       if (document.getElementById('orderDate')) document.getElementById('orderDate').textContent = new Date().toLocaleDateString('tr-TR');
       if (document.getElementById('orderTotal')) document.getElementById('orderTotal').textContent = fmtPrice(totalPrice);
       

@@ -1212,17 +1212,19 @@ button.btn-primary:disabled {
 }
 
 /* ==========================================
-   PRINTABLE RECEIPT (Hidden by default)
+   PRINTABLE RECEIPT (Clean A4 Single Page Order Summary)
    ========================================== */
 #printableReceipt {
     display: none;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Inter', Arial, sans-serif;
     width: 100%;
-    max-width: 80mm; /* Standard thermal printer width */
+    max-width: 650px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 32px;
     background: white;
-    color: black;
+    color: #1a1209;
+    border: 1px solid #ddd;
+    border-radius: 12px;
 }
 
 .receipt-header {
@@ -1231,60 +1233,57 @@ button.btn-primary:disabled {
 }
 
 .receipt-logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 5px;
+    font-size: 1.65rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
 }
 
 .receipt-info {
-    font-size: 0.8rem;
-    margin-bottom: 15px;
-    line-height: 1.2;
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+    line-height: 1.5;
 }
 
 .receipt-divider {
-    border-top: 1px dashed black;
-    margin: 10px 0;
+    border-top: 1px dashed #999;
+    margin: 14px 0;
 }
 
 .receipt-item {
     display: flex;
     justify-content: space-between;
-    font-size: 0.85rem;
-    margin-bottom: 5px;
+    gap: 16px;
+    font-size: 0.92rem;
+    padding: 6px 0;
 }
 
 .receipt-total {
     display: flex;
     justify-content: space-between;
-    font-size: 1rem;
-    font-weight: 700;
-    margin-top: 10px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-top: 12px;
 }
 
-/* ==========================================
-   PRINT MEDIA RULES
-   ========================================== */
 @media print {
-    body * {
-        visibility: hidden;
+    .topbar, .co-header, .co-steps-bar, .co-main, .co-footer, .whatsapp-float {
+        display: none !important;
     }
-    
-    #printableReceipt, #printableReceipt * {
-        visibility: visible;
+    body {
+        background: #fff !important;
+        margin: 0 !important;
+        padding: 20px !important;
     }
-    
     #printableReceipt {
         display: block !important;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
+        margin: 0 auto !important;
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
     }
-
     @page {
-        margin: 0;
-        size: auto;
+        margin: 12mm;
+        size: A4 portrait;
     }
 }
 

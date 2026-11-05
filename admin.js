@@ -139,6 +139,7 @@ function renderOrders(orders) {
           <option value="Onaylandı" ${order.status === 'Onaylandı' ? 'selected' : ''}>Onaylandı</option>
           <option value="Hazırlanıyor" ${order.status === 'Hazırlanıyor' ? 'selected' : ''}>Hazırlanıyor</option>
           <option value="Kargoya verildi" ${order.status === 'Kargoya verildi' ? 'selected' : ''}>Kargoya verildi</option>
+          <option value="Dağıtımda" ${order.status === 'Dağıtımda' ? 'selected' : ''}>Dağıtımda</option>
           <option value="Teslim edildi" ${order.status === 'Teslim edildi' ? 'selected' : ''}>Teslim edildi</option>
         </select>
       </td>

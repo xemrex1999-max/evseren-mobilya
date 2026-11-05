@@ -674,33 +674,61 @@ function renderTrackingTimeline(order) {
     if (!resultArea) return;
 
     const statusList = ["Onaylandı", "Hazırlanıyor", "Kargoya verildi", "Dağıtımda", "Teslim edildi"];
-    const currentIndex = statusList.indexOf(order.status);
-    const progressPercent = (currentIndex / (statusList.length - 1)) * 100;
+    const stepIcons = ["fa-check-circle", "fa-hammer", "fa-Boxes-packing", "fa-truck-fast", "fa-house-circle-check"];
+    let currentIndex = statusList.findIndex(s => s.toLowerCase() === (order.status || 'Onaylandı').toLowerCase());
+    if (currentIndex === -1) currentIndex = 0;
+
+    const progressWidth = currentIndex === 0 ? 10 : Math.min(100, Math.round((currentIndex / (statusList.length - 1)) * 88));
+    const itemsHtml = Array.isArray(order.products) && order.products.length > 0
+      ? order.products.map(p => `<div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px dashed #e5dec9; font-size:0.9rem;"><span><strong>${p.name}</strong> (x${p.quantity || p.qty || 1})</span><span style="font-weight:700; color:#8b5e3c;">₺${Number((p.price || 0) * (p.quantity || p.qty || 1)).toLocaleString('tr-TR')}</span></div>`).join('')
+      : '<div style="font-size:0.9rem; color:#555;">İnegöl Mobilya Özel Üretim Siparişi</div>';
 
     resultArea.innerHTML = `
-        <div class="order-tracking-card glass">
+        <div class="order-tracking-card">
             <div class="tracking-header">
-                <h3 style="font-family:var(--font-heading)">Sipariş Bilgileri</h3>
-                <p style="color:var(--text-light)">Kod: <strong>${order.orderCode}</strong> | Toplam: <strong>₺${order.totalPrice.toLocaleString()}</strong></p>
+                <div>
+                    <span style="font-size:0.78rem; text-transform:uppercase; letter-spacing:1.5px; color:#8b5e3c; font-weight:700;">SİPARİŞ TAKİP DETAYI</span>
+                    <h3 style="font-family:var(--font-heading); font-size:1.65rem; color:#1a1209; margin:4px 0;">Sipariş Kodu: ${order.orderCode}</h3>
+                    <p style="color:#666; font-size:0.92rem; margin:0;">Toplam Tutar: <strong style="color:#1a1209;">₺${Number(order.totalPrice || 0).toLocaleString('tr-TR')}</strong> • Tarih: <strong>${new Date(order.createdAt || Date.now()).toLocaleDateString('tr-TR')}</strong></p>
+                </div>
+                <div class="tracking-status-pill">
+                    <i class="fas fa-sync-alt"></i> Güncel Durum: ${statusList[currentIndex]}
+                </div>
             </div>
             
             <div class="tracking-timeline">
                 <div class="timeline-line"></div>
-                <div class="timeline-progress" style="width: ${progressPercent}%"></div>
+                <div class="timeline-progress" style="width: ${progressWidth}%"></div>
                 <div class="timeline-steps">
                     ${statusList.map((st, i) => `
                         <div class="step ${i <= currentIndex ? 'completed' : ''} ${i === currentIndex ? 'active' : ''}">
-                            <div class="step-circle">${i < currentIndex ? '<i class="fas fa-check"></i>' : (i + 1)}</div>
-                            <div class="step-label">${st}</div>
+                            <div class="step-circle">${i <= currentIndex ? '<i class="fas fa-check"></i>' : (i + 1)}</div>
+                            <div>
+                                <div class="step-label">${st}</div>
+                                ${i === currentIndex ? '<span class="step-active-tag">Şu Anki Aşama</span>' : (i < currentIndex ? '<span style="font-size:0.72rem; color:#2e7d32; font-weight:600;">Tamamlandı</span>' : '<span style="font-size:0.72rem; color:#aaa;">Bekleniyor</span>')}
+                            </div>
                         </div>
                     `).join('')}
+                </div>
+            </div>
+
+            <div class="tracking-details-grid">
+                <div>
+                    <h4 style="margin-bottom:8px; color:#1a1209; font-size:0.95rem;"><i class="fas fa-couch" style="color:#8b5e3c;"></i> Sipariş Edilen Ürünler</h4>
+                    ${itemsHtml}
+                </div>
+                <div>
+                    <h4 style="margin-bottom:8px; color:#1a1209; font-size:0.95rem;"><i class="fas fa-map-marker-alt" style="color:#8b5e3c;"></i> Teslimat & Alıcı Bilgileri</h4>
+                    <div style="font-size:0.88rem; color:#444; line-height:1.6;">
+                        <div><strong>Alıcı:</strong> ${order.customerInfo?.name || 'Değerli Müşterimiz'}</div>
+                        <div><strong>Telefon:</strong> ${order.customerInfo?.phone || '-'}</div>
+                        <div><strong>Teslimat Adresi:</strong> ${order.customerInfo?.address || 'Türkiye Geneli Ücretsiz Teslimat & Kurulum'}</div>
+                    </div>
                 </div>
             </div>
         </div>
     `;
 }
-
-
 
 // 11. E-BULTEN (ABONE OL) FORMU - Doğrudan evserenmobilya@gmail.com adresine iletir ve kaydeder
 document.addEventListener('DOMContentLoaded', () => {
