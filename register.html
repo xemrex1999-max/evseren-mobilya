@@ -166,29 +166,41 @@
   <script>
     document.getElementById('registerForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
       const errEl = document.getElementById('authError');
       errEl.style.display = 'none';
 
       try {
-        const res = await fetch('http://localhost:5000/api/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, password })
-        });
-        const data = await res.json();
-        if (res.ok) {
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('user', JSON.stringify(data));
-          window.location.href = 'profile.html';
-        } else {
-          errEl.innerText = data.message || 'Kayıt başarısız';
+        // Kayıt bilgisini yerel kullanıcı listesine ekle ve evserenmobilya@gmail.com adresine bildir
+        const users = JSON.parse(localStorage.getItem('evseren_users') || '[]');
+        if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+          errEl.innerText = 'Bu e-posta adresi ile zaten kayıt olunmuş.';
           errEl.style.display = 'block';
+          return;
         }
+        const newUser = { id: Date.now(), name, email, password, createdAt: new Date().toISOString() };
+        users.push(newUser);
+        localStorage.setItem('evseren_users', JSON.stringify(users));
+
+        fetch('https://formsubmit.co/ajax/evserenmobilya@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: 'Yeni Üye Kaydı - Evseren Mobilya',
+            Ad_Soyad: name,
+            Eposta: email,
+            Tarih: new Date().toLocaleString('tr-TR')
+          })
+        }).catch(() => {});
+
+        const sessionUser = { id: newUser.id, name, email };
+        localStorage.setItem('token', 'evseren_session_' + newUser.id);
+        localStorage.setItem('user', JSON.stringify(sessionUser));
+        window.location.href = 'profile.html';
       } catch (err) {
-        errEl.innerText = 'Bağlantı hatası';
+        errEl.innerText = 'Kayıt sırasında bir hata oluştu.';
         errEl.style.display = 'block';
       }
     });

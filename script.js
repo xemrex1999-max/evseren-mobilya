@@ -6,14 +6,14 @@ const API_URL = 'http://localhost:5000/api';
 
 // 1. URUN VERILERI
 window.fallbackProductsData = [
-  { "id": 1010, "name": "Ayça Yatak Odası", "price": 86476, "oldPrice": 100270, "cat": "yatak", "img": "images/yatak_odasi.png", "badge": "2026 MODEL" },
-  { "id": 1011, "name": "Ayça Yemek Odası", "price": 81394, "oldPrice": 94462, "cat": "yemek", "img": "images/yemek_odasi.png", "badge": "" },
-  { "id": 1030, "name": "Buğlem Yatak Odası", "price": 89864, "oldPrice": 104142, "cat": "yatak", "img": "images/yatak_odasi.png", "badge": "POPÜLER" },
-  { "id": 1031, "name": "Buğlem Yemek Odası", "price": 83088, "oldPrice": 96398, "cat": "yemek", "img": "images/yemek_odasi.png", "badge": "" },
-  { "id": 1050, "name": "Tokyo Yatak Odası", "price": 88170, "oldPrice": 102206, "cat": "yatak", "img": "images/yatak_odasi.png", "badge": "YENİ" },
-  { "id": 1051, "name": "Tokyo Yemek Odası", "price": 68689, "oldPrice": 79821, "cat": "yemek", "img": "images/yemek_odasi.png", "badge": "" },
-  { "id": 1060, "name": "İnci Yatak Odası", "price": 79700, "oldPrice": 92405, "cat": "yatak", "img": "images/yatak_odasi.png", "badge": "" },
-  { "id": 1061, "name": "İnci Yemek Odası", "price": 66148, "oldPrice": 76917, "cat": "yemek", "img": "images/yemek_odasi.png", "badge": "" }
+  { "id": 1010, "name": "Aynalı Yatak Odası Takımı", "price": 86476, "oldPrice": 100270, "cat": "yatak", "img": "evrensen/Aynalı Yatak Odası/WhatsApp Image 2025-09-01 at 11.43.59 (1).jpeg", "badge": "2026 MODEL" },
+  { "id": 1011, "name": "Aynalı Yemek Odası Takımı", "price": 81394, "oldPrice": 94462, "cat": "yemek", "img": "evrensen/Aynalı Yemek Odası/WhatsApp Image 2025-09-01 at 11.44.04 (2).jpeg", "badge": "YENİ" },
+  { "id": 1020, "name": "Bohem Yatak Odası Takımı", "price": 88170, "oldPrice": 102206, "cat": "yatak", "img": "evrensen/Boğem Yatak odası/page1_img24.jpeg", "badge": "POPÜLER" },
+  { "id": 1021, "name": "Bohem Yemek Odası Takımı", "price": 68689, "oldPrice": 79821, "cat": "yemek", "img": "evrensen/Boğem Yemek Odası/page1_img22.jpeg", "badge": "YENİ" },
+  { "id": 1030, "name": "Buğlem Yatak Odası Takımı", "price": 89864, "oldPrice": 104142, "cat": "yatak", "img": "evrensen/Buğlem Yatak Odası/page1_img17.jpeg", "badge": "POPÜLER" },
+  { "id": 1031, "name": "Buğlem Yemek Odası Takımı", "price": 83088, "oldPrice": 96398, "cat": "yemek", "img": "evrensen/Buğlem Yemek Odası/page1_img18.jpeg", "badge": "" },
+  { "id": 1060, "name": "İnci Yatak Odası Takımı", "price": 79700, "oldPrice": 92405, "cat": "yatak", "img": "evrensen/İnci Yatak Odası/page1_img11.jpeg", "badge": "FIRSAT" },
+  { "id": 1061, "name": "İnci Yemek Odası Takımı", "price": 66148, "oldPrice": 76917, "cat": "yemek", "img": "evrensen/İnci Yemek Odası/page1_img10.jpeg", "badge": "" }
 ];
 
 // YARDIMCILAR
@@ -492,3 +492,40 @@ function renderTrackingTimeline(order) {
     `;
 }
 
+
+
+// 11. E-BULTEN (ABONE OL) FORMU - Doğrudan evserenmobilya@gmail.com adresine iletir ve kaydeder
+document.addEventListener('DOMContentLoaded', () => {
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const emailInput = document.getElementById('newsletterEmail');
+            const email = emailInput ? emailInput.value.trim() : '';
+            if (!email) return;
+            const btn = newsletterForm.querySelector('button[type="submit"]');
+            const origText = btn ? btn.innerText : 'Abone Ol';
+            if (btn) { btn.innerText = 'Gönderiliyor...'; btn.disabled = true; }
+            try {
+                const subs = JSON.parse(localStorage.getItem('evseren_subscribers') || '[]');
+                if (!subs.includes(email)) {
+                    subs.push({ email, date: new Date().toISOString() });
+                    localStorage.setItem('evseren_subscribers', JSON.stringify(subs));
+                }
+                await fetch('https://formsubmit.co/ajax/evserenmobilya@gmail.com', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({
+                        _subject: 'Yeni E-Bülten Abonesi - Evseren Mobilya',
+                        Abone_Eposta: email,
+                        Kayit_Tarihi: new Date().toLocaleString('tr-TR')
+                    })
+                });
+            } catch (err) {
+                console.warn('FormSubmit info:', err);
+            }
+            if (emailInput) emailInput.value = '';
+            if (btn) { btn.innerText = '✓ Abone Olundu!'; setTimeout(() => { btn.innerText = origText; btn.disabled = false; }, 3500); }
+        });
+    }
+});

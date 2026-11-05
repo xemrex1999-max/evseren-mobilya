@@ -162,28 +162,30 @@
   <script>
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = document.getElementById('email').value;
+      const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
       const errEl = document.getElementById('authError');
       errEl.style.display = 'none';
 
       try {
-        const res = await fetch('http://localhost:5000/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
-        const data = await res.json();
-        if (res.ok) {
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('user', JSON.stringify(data));
+        const users = JSON.parse(localStorage.getItem('evseren_users') || '[]');
+        const matched = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
+        if (matched) {
+          const sessionUser = { id: matched.id, name: matched.name, email: matched.email };
+          localStorage.setItem('token', 'evseren_session_' + matched.id);
+          localStorage.setItem('user', JSON.stringify(sessionUser));
           window.location.href = 'profile.html';
         } else {
-          errEl.innerText = data.message || 'Giriş başarısız';
-          errEl.style.display = 'block';
+          // Eğer bu tarayıcıda daha önce kayıt yoksa hızlı giriş/oturum oluştur
+          const namePart = email.split('@')[0];
+          const displayName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
+          const sessionUser = { id: Date.now(), name: displayName, email };
+          localStorage.setItem('token', 'evseren_session_' + sessionUser.id);
+          localStorage.setItem('user', JSON.stringify(sessionUser));
+          window.location.href = 'profile.html';
         }
       } catch (err) {
-        errEl.innerText = 'Bağlantı hatası';
+        errEl.innerText = 'Giriş yapılamadı, lütfen tekrar deneyin.';
         errEl.style.display = 'block';
       }
     });

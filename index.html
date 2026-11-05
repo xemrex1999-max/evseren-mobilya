@@ -187,7 +187,7 @@
         <p class="section-sub">İhtiyacınıza göre en uygun mobilya kategorisini seçin</p>
       </div>
       <div class="cat-grid">
-        <a href="products.html?cat=dugun" class="cat-card cat-large">
+        <a href="products.html?cat=dugun" class="cat-card"><span class="cat-badge">ÖZEL PAKET</span>
           <img src="images/dugun_paketi.png" alt="Düğün Paketi" loading="lazy" />
           <div class="cat-info">
             <h3>♥ Düğün Paketleri</h3>
@@ -281,13 +281,15 @@
   </section>
 
   <!-- MÜŞTERİ YORUMLARI -->
-  <section class="section" style="background:var(--bg2)">
+  <section class="section testimonials-section" style="background:var(--bg2); overflow:hidden;">
     <div class="container">
       <div class="section-header">
         <span class="section-tag">YORUMLAR</span>
         <h2 class="section-title">Müşterilerimiz Ne Diyor?</h2>
       </div>
-      <div class="testimonials-grid">
+    </div>
+    <div class="testimonials-marquee">
+      <div class="testimonials-track" id="testimonialsTrack">
         <div class="testimonial-card">
           <div class="testimonial-stars">★★★★★</div>
           <p>"Düğün paketimizi buradan aldık. Kalite ve fiyat dengesi mükemmel. Kurulum ekibi de çok profesyoneldi."</p>
@@ -310,6 +312,111 @@
           <div class="testimonial-author">
             <div class="testimonial-avatar">FY</div>
             <div><strong>Fatma Y.</strong><span>İzmir</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"İnegöl'den Kocaeli'ye sorunsuz ve çiziksiz ulaştı. Bohem yemek odası takımına misafirlerimiz bayıldı."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SD</div>
+            <div><strong>Selin D.</strong><span>Kocaeli</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"Buğlem yatak odası takımını aldık, dolap iç hacmi ve malzeme kalitesi beklentimizin çok üzerinde çıktı."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">BT</div>
+            <div><strong>Burak T.</strong><span>Bursa</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"Müşteri temsilcileri siparişten kuruluma kadar her aşamada bilgilendirdi. Köşe takımımız salonumuza çok yakıştı."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">ZE</div>
+            <div><strong>Zeynep E.</strong><span>Antalya</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"İnci yemek odası ve TV ünitesini takım olarak aldık. Hem modern hem de çok sağlam, emeğinize sağlık."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">HÇ</div>
+            <div><strong>Hakan Ç.</strong><span>Eskişehir</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"Ücretsiz nakliye ve kurulum sözünü eksiksiz tuttular. Fiyat-performans olarak İnegöl'ün en güvenilir firması."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">EA</div>
+            <div><strong>Elif A.</strong><span>Sakarya</span></div>
+          </div>
+        </div>
+        <!-- Infinite Scroll Clones -->
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"Düğün paketimizi buradan aldık. Kalite ve fiyat dengesi mükemmel. Kurulum ekibi de çok profesyoneldi."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AK</div>
+            <div><strong>Ayşe K.</strong><span>İstanbul</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"Yatak odamızı sipariş ettik, 10 gün içinde teslim ettiler ve kurulumu da ücretsiz yaptılar. Teşekkürler!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MÖ</div>
+            <div><strong>Mehmet Ö.</strong><span>Ankara</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"Ürün kalitesi resimlerden çok daha iyi. Koltuk takımımız harika, herkese tavsiye ederim."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">FY</div>
+            <div><strong>Fatma Y.</strong><span>İzmir</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"İnegöl'den Kocaeli'ye sorunsuz ve çiziksiz ulaştı. Bohem yemek odası takımına misafirlerimiz bayıldı."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SD</div>
+            <div><strong>Selin D.</strong><span>Kocaeli</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"Buğlem yatak odası takımını aldık, dolap iç hacmi ve malzeme kalitesi beklentimizin çok üzerinde çıktı."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">BT</div>
+            <div><strong>Burak T.</strong><span>Bursa</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"Müşteri temsilcileri siparişten kuruluma kadar her aşamada bilgilendirdi. Köşe takımımız salonumuza çok yakıştı."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">ZE</div>
+            <div><strong>Zeynep E.</strong><span>Antalya</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"İnci yemek odası ve TV ünitesini takım olarak aldık. Hem modern hem de çok sağlam, emeğinize sağlık."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">HÇ</div>
+            <div><strong>Hakan Ç.</strong><span>Eskişehir</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"Ücretsiz nakliye ve kurulum sözünü eksiksiz tuttular. Fiyat-performans olarak İnegöl'ün en güvenilir firması."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">EA</div>
+            <div><strong>Elif A.</strong><span>Sakarya</span></div>
           </div>
         </div>
       </div>

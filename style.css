@@ -1656,3 +1656,50 @@ body.cart-open .scroll-top.visible {
 .docs-content h1 { font-family: 'Playfair Display', serif; margin-bottom: 24px; color: #1a1209; }
 .docs-content p, .docs-content li { line-height: 1.8; color: #7a6552; margin-bottom: 16px; }
 .docs-content h3 { margin: 30px 0 15px; color: #1a1209; }
+
+
+/* ==========================================
+   KAYAN YORUMLAR ŞERİDİ & KATEGORİ DÜZENİ
+   ========================================== */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.cat-card {
+  aspect-ratio: 4/3 !important;
+  min-height: 250px;
+}
+.testimonials-marquee {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 10px 0 20px;
+}
+.testimonials-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: scrollTestimonials 42s linear infinite;
+}
+.testimonials-marquee:hover .testimonials-track {
+  animation-play-state: paused;
+}
+.testimonials-track .testimonial-card {
+  width: 360px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+@keyframes scrollTestimonials {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@media (max-width: 900px) {
+  .cat-grid { grid-template-columns: repeat(2, 1fr); }
+  .testimonials-track .testimonial-card { width: 300px; }
+}
+@media (max-width: 600px) {
+  .cat-grid { grid-template-columns: 1fr; }
+}
