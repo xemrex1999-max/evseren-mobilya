@@ -1763,3 +1763,12 @@ body.cart-open .scroll-top.visible {
     max-width: 75px;
   }
 }
+
+/* Footer Logo Visibility Fix on Dark Background */
+.footer-brand .logo img, .footer .logo img {
+  background: #ffffff !important;
+  padding: 8px 16px !important;
+  border-radius: 12px !important;
+  mix-blend-mode: normal !important;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18) !important;
+}

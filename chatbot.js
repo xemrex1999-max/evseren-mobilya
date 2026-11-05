@@ -1,138 +1,69 @@
 // ==========================================
-// MOBILYA DÜKKANIM — AI CHATBOT (Gemini API)
+// EVSEREN MOBİLYA — AKILLI MÜŞTERİ ASİSTANI
 // ==========================================
 
-// ⚡ AYAR: Google AI Studio'dan ücretsiz API key alın:
-// https://aistudio.google.com/app/apikey
-// Buraya yapıştırın:
-const GEMINI_API_KEY = 'BURAYA_API_KEY_YAZIN';
+const BOT_NAME = 'Evseren Mobilya Asistanı';
+const STORE_NAME = 'Evseren Mobilya';
+const WHATSAPP_NUMBER = '+90 507 756 78 87';
+const WHATSAPP_LINK = 'https://wa.me/905077567887';
+const STORE_ADDRESS = 'Mahmudiye Mh. 14 Mob. Nil Sk. No:33, İnegöl / BURSA';
 
-// Chatbot sabitler
-const BOT_NAME = 'Mobilya Asistanım';
-const STORE_NAME = 'Mobilya Dükkanım';
-
-// Sistem promptu — botun "kişiliği" ve ürün bilgileri
-const SYSTEM_PROMPT = `Sen ${STORE_NAME} adlı Türk mobilya mağazasının yapay zeka müşteri hizmetleri asistanısın. Adın "Mobilya Asistanım".
-
-MAĞAZA HAKKINDA:
-- Türkiye geneli ücretsiz nakliye ve kurulum hizmeti veriyoruz
-- 25+ yıl deneyim, 10.000+ mutlu müşteri
-- İnegöl, Bursa merkezli üretim
-- Ürünler masif ahşap ve gerçek deri kullanılarak üretiliyor
-- Tüm ürünlerde 2 yıl garanti
-- 12 aya kadar faizsiz taksit imkânı
-- Telefon: 0850 XXX XX XX | WhatsApp: 0532 XXX XX XX
-
-ÜRÜN KATEGORİLERİ VE FİYATLAR:
-1. Düğün Paketleri: Majeste (₺89.500 → ₺105.000 indirimli), Delta (₺72.000 → ₺85.000), komple ev mobilyası
-2. Yatak Odası: Zara (₺42.500), Lotta (₺38.900 YENİ), Vanessa (₺55.000 indirimli), Life (₺31.500), Trend (₺47.200)
-3. Yemek Odası: Zara (₺28.750), Zara Siyah (₺33.400 YENİ)
-4. Koltuk Takımı: Nova (₺15.600 YENİ)
-5. Köşe Takımı: Puma (₺19.900 indirimli)
-6. TV Ünitesi: Asil (₺8.750)
-
-GÖREVLERIN:
-- Müşterilere ürün önerisi sun
-- Fiyat, teslimat, garanti sorularını yanıtla
-- Sipariş vermelerini teşvik et
-- WhatsApp: 0532 XXX XX XX numarasına yönlendir
-- Sıcak, samimi ve kısa cevaplar ver
-- Emoji kullanabilirsin ama fazla olmadan
-- Her zaman Türkçe konuş
-
-ÖNEMLI: Eğer özel ölçü, renk veya konfigürasyon isteniyorsa WhatsApp'a yönlendir.
-Cevapların 2-3 cümleyi geçmesin. Kısa ve net ol.`;
-
-// Mesaj geçmişi
 let conversationHistory = [];
 let isTyping = false;
 
-// YARDIMCI: API durumu kontrol
-function isApiKeySet() {
-  return GEMINI_API_KEY && GEMINI_API_KEY !== 'BURAYA_API_KEY_YAZIN' && GEMINI_API_KEY.length > 10;
+function getSmartEvserenResponse(message) {
+  const msg = message.toLocaleLowerCase('tr-TR');
+  const products = (typeof window.getEffectiveProducts === 'function')
+    ? window.getEffectiveProducts()
+    : (window.allProductsData || window.fallbackProductsData || []);
+
+  // Specific model queries
+  if (msg.includes('aynalı') || msg.includes('aynali')) {
+    return '✨ <strong>Aynalı Koleksiyonumuz:</strong><br>• <strong>Aynalı Yatak Odası Takımı:</strong> ₺86.476 (14 parça detaylı görsel)<br>• <strong>Aynalı Yemek Odası Takımı:</strong> ₺81.394<br>Türkiye geneli ücretsiz nakliye ve kurulum dahildir! Detaylar için <a href="products.html?search=Aynal%C4%B1" style="color:#8b5e3c;font-weight:700;">buraya tıklayabilirsiniz</a>.';
+  }
+  if (msg.includes('bohem') || msg.includes('boğem')) {
+    return '🌿 <strong>Bohem Koleksiyonumuz:</strong><br>• <strong>Bohem Yatak Odası Takımı:</strong> ₺88.170<br>• <strong>Bohem Yemek Odası Takımı:</strong> ₺68.689<br>1. sınıf fırınlanmış gürgen iskelet ve MDF kalitesiyle üretilmektedir. <a href="products.html?search=Bohem" style="color:#8b5e3c;font-weight:700;">Modelleri İncele →</a>';
+  }
+  if (msg.includes('buğlem') || msg.includes('buglem')) {
+    return '👑 <strong>Buğlem Koleksiyonumuz:</strong><br>• <strong>Buğlem Yatak Odası Takımı:</strong> ₺89.864<br>• <strong>Buğlem Yemek Odası Takımı:</strong> ₺83.088<br>Geniş iç hacimli dolap ve frenli kapak sistemiyle çok tercih edilen modelimizdir.';
+  }
+  if (msg.includes('inci')) {
+    return '💎 <strong>İnci Koleksiyonumuz (Fırsat Modeli):</strong><br>• <strong>İnci Yatak Odası Takımı:</strong> ₺79.700<br>• <strong>İnci Yemek Odası Takımı:</strong> ₺66.148<br>Hem şık hem ekonomik İnegöl tasarımımızdır.';
+  }
+  if (msg.includes('yatak')) {
+    return '🛏️ <strong>Yatak Odası Takımlarımız:</strong><br>• İnci Yatak Odası: <strong>₺79.700</strong><br>• Aynalı Yatak Odası: <strong>₺86.476</strong><br>• Bohem Yatak Odası: <strong>₺88.170</strong><br>• Buğlem Yatak Odası: <strong>₺89.864</strong><br><a href="products.html?cat=yatak" style="color:#8b5e3c;font-weight:700;">Tüm Yatak Odalarını Gör →</a>';
+  }
+  if (msg.includes('yemek')) {
+    return '🍽️ <strong>Yemek Odası Takımlarımız:</strong><br>• İnci Yemek Odası: <strong>₺66.148</strong><br>• Bohem Yemek Odası: <strong>₺68.689</strong><br>• Aynalı Yemek Odası: <strong>₺81.394</strong><br>• Buğlem Yemek Odası: <strong>₺83.088</strong><br><a href="products.html?cat=yemek" style="color:#8b5e3c;font-weight:700;">Tüm Yemek Odalarını Gör →</a>';
+  }
+  if (msg.includes('düğün') || msg.includes('dugun') || msg.includes('paket') || msg.includes('çeyiz')) {
+    return '💍 <strong>Lüks İnegöl Düğün Paketimiz (%15 İndirimli):</strong><br>Yatak Odası + Yemek Odası + Koltuk Takımı komple setimiz ₺194.000 yerine <strong>₺164.900</strong>! Türkiye geneli ücretsiz nakliye ve kurulum dahildir. <a href="products.html?cat=dugun" style="color:#8b5e3c;font-weight:700;">Düğün Paketini İncele →</a>';
+  }
+  if (msg.includes('fiyat') || msg.includes('kaç') || msg.includes('ücret') || msg.includes('ne kadar')) {
+    return '💰 <strong>Güncel Fiyat Aralıklarımız:</strong><br>• Yemek Odası Takımları: <strong>₺66.148 – ₺83.088</strong><br>• Yatak Odası Takımları: <strong>₺79.700 – ₺89.864</strong><br>• Komple Düğün Paketi: <strong>₺164.900</strong> (%15 İndirimli)<br>Tüm fiyatlarımıza KDV, tüm Türkiye nakliye ve uzman kurulum dahildir!';
+  }
+  if (msg.includes('teslimat') || msg.includes('kargo') || msg.includes('nakliye') || msg.includes('kurulum')) {
+    return '🚚 <strong>Ücretsiz Nakliye & Kurulum:</strong><br>Bursa İnegöl üretim tesislerimizden Türkiye\'nin 81 iline kendi uzman ekibimizle <strong>ücretsiz teslimat ve evinizde kurulum</strong> yapıyoruz. Ortalama teslimat süremiz 7-14 iş günüdür.';
+  }
+  if (msg.includes('takip') || msg.includes('sipariş') || msg.includes('nerede') || msg.includes('evs-')) {
+    return '📦 Siparişinizin durumunu <a href="track-order.html" style="color:#8b5e3c;font-weight:700;">Sipariş Takibi</a> sayfamızdan <strong>EVS-...</strong> sipariş kodunuzla anlık olarak sorgulayabilirsiniz.';
+  }
+  if (msg.includes('taksit') || msg.includes('ödeme') || msg.includes('kredi') || msg.includes('havale')) {
+    return '💳 <strong>Ödeme Seçeneklerimiz:</strong><br>Kredi kartına 6 aya varan taksit veya Havale/EFT ile güvenli ödeme yapabilirsiniz. Sepetinizde <code>EVSEREN10</code> kupon koduyla ekstra %10 indirim kazanabilirsiniz!';
+  }
+  if (msg.includes('adres') || msg.includes('nerede') || msg.includes('mağaza') || msg.includes('inegöl') || msg.includes('iletisim') || msg.includes('iletişim') || msg.includes('telefon')) {
+    return `📍 <strong>Mağaza Adresimiz:</strong> ${STORE_ADDRESS}<br>📞 <strong>Telefon & WhatsApp:</strong> <a href="${WHATSAPP_LINK}" target="_blank" style="color:#8b5e3c;font-weight:700;">${WHATSAPP_NUMBER}</a><br>🕘 Çalışma Saatleri: Pzt–Cts 09:00–18:00`;
+  }
+  if (msg.includes('garanti') || msg.includes('iade') || msg.includes('malzeme') || msg.includes('kalite')) {
+    return '🛡️ Tüm ürünlerimiz 1. sınıf fırınlanmış gürgen iskelet ve E1 kalitesinde MDF malzemeden üretilir, <strong>2 yıl tam garanti</strong> ve 30 gün kolay iade güvencesi altındadır.';
+  }
+  if (msg.includes('merhaba') || msg.includes('selam') || msg.includes('iyi günler')) {
+    return 'Merhaba! 👋 <strong>Evseren Mobilya</strong> İnegöl mağazamıza hoş geldiniz. Yatak odası, yemek odası, düğün paketleri, fiyatlar veya ücretsiz kurulum hakkında her şeyi bana sorabilirsiniz!';
+  }
+
+  return `Size hemen yardımcı olalım! 🛋️ Güncel modellerimizi <a href="products.html" style="color:#8b5e3c;font-weight:700;">Ürünler</a> sayfamızdan inceleyebilir veya özel ölçü/renk talepleriniz için doğrudan WhatsApp hattımızdan bize ulaşabilirsiniz: <a href="${WHATSAPP_LINK}" target="_blank" style="color:#25D366;font-weight:700;">${WHATSAPP_NUMBER}</a>`;
 }
 
-// MESAJ GÖNDER — Gemini API
-async function sendToGemini(userMessage) {
-  if (!isApiKeySet()) {
-    return getDemoResponse(userMessage);
-  }
-
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
-
-  // Geçmiş mesajları formatla
-  const contents = [
-    {
-      role: 'user',
-      parts: [{ text: SYSTEM_PROMPT }]
-    },
-    {
-      role: 'model',
-      parts: [{ text: 'Anlıyorum, Mobilya Dükkanım müşteri asistanıyım. Müşterilere yardımcı olmaya hazırım! 🛋️' }]
-    },
-    ...conversationHistory.map(msg => ({
-      role: msg.role === 'user' ? 'user' : 'model',
-      parts: [{ text: msg.content }]
-    })),
-    {
-      role: 'user',
-      parts: [{ text: userMessage }]
-    }
-  ];
-
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents,
-        generationConfig: {
-          temperature: 0.7,
-          maxOutputTokens: 256,
-          topP: 0.9,
-        }
-      })
-    });
-
-    if (!response.ok) {
-      const err = await response.json();
-      console.error('Gemini API hatası:', err);
-      return 'Üzgünüm, şu anda yanıt veremiyorum. Lütfen WhatsApp\'tan ulaşın: 0532 XXX XX XX 📱';
-    }
-
-    const data = await response.json();
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || 'Anlamadım, tekrar sorar mısınız?';
-  } catch (error) {
-    console.error('Bağlantı hatası:', error);
-    return 'Bağlantı sorunu. Lütfen WhatsApp\'tan yazın: 0532 XXX XX XX 📱';
-  }
-}
-
-// DEMO MODU — API key yokken çalışır
-function getDemoResponse(message) {
-  const msg = message.toLowerCase();
-  if (msg.includes('fiyat') || msg.includes('kaç') || msg.includes('ücret')) {
-    return 'Ürün fiyatlarımız ₺8.750\'den başlamaktadır. Yatak odaları ₺31.500\'den, düğün paketleri ₺72.000\'den başlar. Özel fiyat için WhatsApp: 0532 XXX XX XX 💰';
-  }
-  if (msg.includes('teslimat') || msg.includes('kargo') || msg.includes('kurulum')) {
-    return 'Türkiye genelinde ücretsiz nakliye ve kurulum yapıyoruz! Standart teslimat 7-14 iş günü, hızlı teslimat 3-5 iş günündür. 🚚';
-  }
-  if (msg.includes('düğün') || msg.includes('evlilik') || msg.includes('nikah')) {
-    return 'Düğün paketlerimiz ₺72.000\'den başlıyor ve tüm ev mobilyasını kapsıyor! Ücretsiz kurulum dahil. Detaylı bilgi için WhatsApp: 0532 XXX XX XX 💍';
-  }
-  if (msg.includes('taksit') || msg.includes('ödeme') || msg.includes('kredi')) {
-    return '6 aya kadar faizsiz taksit imkânımız var! Kredi kartı veya havale seçeneklerimiz mevcut. 💳';
-  }
-  if (msg.includes('garanti') || msg.includes('iade')) {
-    return 'Tüm ürünlerimizde 2 yıl garanti ve 30 gün iade hakkı sunuyoruz. Kalite güvencemizdir! 🛡️';
-  }
-  if (msg.includes('merhaba') || msg.includes('selam') || msg.includes('iyi')) {
-    return 'Merhaba! Mobilya Dükkanım\'a hoş geldiniz 😊 Size nasıl yardımcı olabilirim? Ürün bilgisi, fiyat veya sipariş için buradayım!';
-  }
-  return 'Size en iyi şekilde yardımcı olmak için WhatsApp\'tan da yazabilirsiniz: 0532 XXX XX XX 📞 Ya da sorularınızı sormaya devam edebilirsiniz!';
-}
-
-// WIDGET OLUŞTUR
 function createChatbotWidget() {
   if (document.getElementById('chatbotWrapper')) return;
 
@@ -140,14 +71,13 @@ function createChatbotWidget() {
   wrapper.id = 'chatbotWrapper';
 
   wrapper.innerHTML = `
-    <!-- CHAT WINDOW -->
     <div class="chatbot-window" id="chatbotWindow">
       <div class="chatbot-header">
-        <div class="chatbot-avatar"><i class="fas fa-robot"></i></div>
+        <div class="chatbot-avatar"><i class="fas fa-couch"></i></div>
         <div class="chatbot-header-info">
           <div class="chatbot-header-name">${BOT_NAME}</div>
           <div class="chatbot-header-status">
-            <span class="chatbot-online-dot"></span> Çevrimiçi — Gemini AI
+            <span class="chatbot-online-dot"></span> Çevrimiçi — İnegöl Müşteri Destek
           </div>
         </div>
         <button class="chatbot-close" id="chatbotClose" title="Kapat">
@@ -162,7 +92,7 @@ function createChatbotWidget() {
           type="text"
           class="chatbot-input"
           id="chatbotInput"
-          placeholder="Soru sorun..."
+          placeholder="Model, fiyat veya teslimat sorun..."
           maxlength="500"
         />
         <button class="chatbot-send" id="chatbotSend">
@@ -170,42 +100,32 @@ function createChatbotWidget() {
         </button>
       </div>
       <div class="chatbot-footer">
-        Powered by <a href="https://ai.google.dev" target="_blank">Google Gemini AI</a>
+        Evseren Mobilya İnegöl • <a href="${WHATSAPP_LINK}" target="_blank">WhatsApp: ${WHATSAPP_NUMBER}</a>
       </div>
     </div>
 
-    <!-- TOGGLE BUTTON -->
-    <button class="chatbot-toggle" id="chatbotToggle" title="AI Asistan">
-      <i class="fas fa-robot" id="chatbotIcon"></i>
-      <span class="bot-badge">AI</span>
+    <button class="chatbot-toggle" id="chatbotToggle" title="Evseren Mobilya Asistanı">
+      <i class="fas fa-comments" id="chatbotIcon"></i>
+      <span class="bot-badge">Canlı</span>
     </button>
   `;
 
   document.body.appendChild(wrapper);
 
-  // Karşılama mesajı
   setTimeout(() => {
-    addMessage('bot', 'Merhaba! 👋 ${STORE_NAME} yapay zeka asistanıyım.\n\nFiyat, teslimat, ürün bilgisi veya sipariş konusunda yardımcı olabilirim!'
-      .replace('${STORE_NAME}', STORE_NAME));
-
-    // API yoksa uyarı ekle
-    if (!isApiKeySet()) {
-      addApiWarning();
-    }
-
-    // Hızlı cevap butonları
+    addMessage('bot', 'Merhaba! 👋 <strong>Evseren Mobilya</strong> dijital asistanıyım.<br><br>İnegöl yatak odası, yemek odası, düğün paketleri, fiyatlar veya ücretsiz kurulum hakkında size nasıl yardımcı olabilirim?');
     addQuickReplies([
       '💰 Fiyatlar nedir?',
-      '🚚 Teslimat ne zaman?',
+      '🛏️ Yatak odası modelleri',
       '💍 Düğün paketleri',
-      '💳 Taksit seçenekleri'
+      '🚚 Teslimat & Kurulum',
+      '📍 Mağaza adresiniz'
     ]);
-  }, 800);
+  }, 400);
 
   bindEvents();
 }
 
-// OLAY DİNLEYİCİLERİ
 function bindEvents() {
   const toggle = document.getElementById('chatbotToggle');
   const closeBtn = document.getElementById('chatbotClose');
@@ -217,13 +137,13 @@ function bindEvents() {
     const isOpen = window_.classList.contains('active');
     window_.classList.toggle('active');
     const icon = document.getElementById('chatbotIcon');
-    if (icon) icon.className = isOpen ? 'fas fa-robot' : 'fas fa-times';
+    if (icon) icon.className = isOpen ? 'fas fa-comments' : 'fas fa-times';
   });
 
   closeBtn?.addEventListener('click', () => {
     window_.classList.remove('active');
     const icon = document.getElementById('chatbotIcon');
-    if (icon) icon.className = 'fas fa-robot';
+    if (icon) icon.className = 'fas fa-comments';
   });
 
   sendBtn?.addEventListener('click', handleSend);
@@ -232,7 +152,6 @@ function bindEvents() {
   });
 }
 
-// GÖNDERİM İŞLEYİCİSİ
 async function handleSend() {
   const input = document.getElementById('chatbotInput');
   const sendBtn = document.getElementById('chatbotSend');
@@ -243,12 +162,12 @@ async function handleSend() {
   addMessage('user', text);
   conversationHistory.push({ role: 'user', content: text });
 
-  // Yazıyor göstergesi
   isTyping = true;
   sendBtn.disabled = true;
   const typingId = showTyping();
 
-  const reply = await sendToGemini(text);
+  await new Promise(r => setTimeout(r, 350));
+  const reply = getSmartEvserenResponse(text);
 
   removeTyping(typingId);
   isTyping = false;
@@ -256,14 +175,8 @@ async function handleSend() {
 
   addMessage('bot', reply);
   conversationHistory.push({ role: 'bot', content: reply });
-
-  // Geçmişi en fazla 10 mesajda tut (token tasarrufu)
-  if (conversationHistory.length > 10) {
-    conversationHistory = conversationHistory.slice(-10);
-  }
 }
 
-// MESAJ EKLE
 function addMessage(role, text) {
   const container = document.getElementById('chatbotMessages');
   if (!container) return;
@@ -271,7 +184,7 @@ function addMessage(role, text) {
   const msg = document.createElement('div');
   msg.className = `chat-msg ${role}`;
 
-  const avatarIcon = role === 'bot' ? 'fa-robot' : 'fa-user';
+  const avatarIcon = role === 'bot' ? 'fa-couch' : 'fa-user';
   const formattedText = text.replace(/\n/g, '<br>');
 
   msg.innerHTML = `
@@ -282,7 +195,6 @@ function addMessage(role, text) {
   container.scrollTop = container.scrollHeight;
 }
 
-// YAZMA GÖSTERGESİ
 function showTyping() {
   const container = document.getElementById('chatbotMessages');
   const id = 'typing-' + Date.now();
@@ -290,7 +202,7 @@ function showTyping() {
   el.id = id;
   el.className = 'chat-msg bot';
   el.innerHTML = `
-    <div class="chat-msg-avatar"><i class="fas fa-robot"></i></div>
+    <div class="chat-msg-avatar"><i class="fas fa-couch"></i></div>
     <div class="chat-msg-bubble">
       <div class="typing-indicator">
         <div class="typing-dot"></div>
@@ -307,7 +219,6 @@ function removeTyping(id) {
   document.getElementById(id)?.remove();
 }
 
-// HIZLI CEVAP BUTONLARI
 function addQuickReplies(options) {
   const container = document.getElementById('chatbotMessages');
   if (!container) return;
@@ -324,7 +235,7 @@ function addQuickReplies(options) {
 
   qr.querySelectorAll('.quick-reply-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.getElementById('chatbotInput').value = btn.textContent.replace(/^[^\w\s]+\s/, '');
+      document.getElementById('chatbotInput').value = btn.textContent.replace(/^[^\w\sÇĞİÖŞÜçğıöşü]+\s*/, '');
       document.getElementById('quickRepliesBlock')?.remove();
       handleSend();
     });
@@ -332,19 +243,4 @@ function addQuickReplies(options) {
   container.scrollTop = container.scrollHeight;
 }
 
-// API UYARISI
-function addApiWarning() {
-  const container = document.getElementById('chatbotMessages');
-  if (!container) return;
-  const el = document.createElement('div');
-  el.innerHTML = `
-    <div class="chatbot-api-warning">
-      ⚡ Demo mod aktif. Tam AI için
-      <a href="https://aistudio.google.com/app/apikey" target="_blank">buradan</a>
-      ücretsiz API key alın ve <code>chatbot.js</code>'ye ekleyin.
-    </div>`;
-  container.appendChild(el);
-}
-
-// BAŞLAT
 document.addEventListener('DOMContentLoaded', createChatbotWidget);
