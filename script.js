@@ -935,11 +935,15 @@ window.applySiteBanners = function() {
     if (bgEl && safeUrl) {
       bgEl.style.backgroundImage = `url('${safeUrl}')`;
     }
-    if (b.id === 'vip_curtain' && safeUrl && !window.location.pathname.includes('product-detail')) {
-      const leftC = document.getElementById('evserenCurtainLeftImg');
-      const rightC = document.getElementById('evserenCurtainRightImg');
-      if (leftC) leftC.src = safeUrl;
-      if (rightC) rightC.src = safeUrl;
+    if (b.id === 'vip_curtain' && safeUrl) {
+      let hasCustomCurtain = false;
+      try {
+        const rawSaved = JSON.parse(localStorage.getItem('evseren_site_banners') || '[]');
+        hasCustomCurtain = Array.isArray(rawSaved) && rawSaved.some(x => x.id === 'vip_curtain' && x.img);
+      } catch (e) {}
+      if (hasCustomCurtain && document.getElementById('evserenSplitCurtain')?.getAttribute('data-curtain-page') === 'home') {
+        if (window.setEvserenCurtainPhoto) window.setEvserenCurtainPhoto(safeUrl, b.badge);
+      }
     }
     const imgEl = document.querySelector(`[data-banner-img="${b.id}"]`);
     if (imgEl && safeUrl) {
@@ -974,3 +978,67 @@ window.addEventListener('storage', (e) => {
     refreshUIs();
   }
 });
+
+
+// 14. MOBIL MENU DRAWER (TUM SAYFALARDA HAMBURGER MENU AKTIF)
+document.addEventListener('DOMContentLoaded', () => {
+  const menuBtn = document.getElementById('menuBtn');
+  if (!menuBtn) return;
+
+  if (!document.getElementById('evserenMobileDrawer')) {
+    const overlay = document.createElement('div');
+    overlay.id = 'evserenMobileOverlay';
+    overlay.className = 'ev-mobile-drawer-overlay';
+
+    const drawer = document.createElement('nav');
+    drawer.id = 'evserenMobileDrawer';
+    drawer.className = 'ev-mobile-drawer';
+    drawer.innerHTML = `
+      <div class="ev-drawer-head">
+        <a href="index.html"><img src="images/logo.jpeg" alt="Evseren Mobilya" /></a>
+        <button type="button" class="ev-drawer-close" id="evDrawerClose" aria-label="Kapat"><i class="fas fa-times"></i></button>
+      </div>
+      <ul class="ev-drawer-links">
+        <li><a href="index.html"><span>Ana Sayfa</span><i class="fas fa-chevron-right"></i></a></li>
+        <li>
+          <a href="products.html"><span>Koleksiyonlar & Ürünler</span><i class="fas fa-chevron-right"></i></a>
+          <div class="ev-drawer-sub">
+            <a href="products.html?cat=dugun">♥ Düğün Paketi</a>
+            <a href="products.html?cat=yatak">Yatak Odası</a>
+            <a href="products.html?cat=yemek">Yemek Odası</a>
+            <a href="products.html?cat=koltuk">Koltuk Takımı</a>
+            <a href="products.html?cat=kose">Köşe Takımı</a>
+            <a href="products.html?cat=tv">TV Ünitesi</a>
+          </div>
+        </li>
+        <li><a href="track-order.html"><span>Sipariş Takibi</span><i class="fas fa-truck-fast"></i></a></li>
+        <li><a href="about.html"><span>Hakkımızda</span><i class="fas fa-chevron-right"></i></a></li>
+        <li><a href="contact.html"><span>İletişim & Mağaza</span><i class="fas fa-map-marker-alt"></i></a></li>
+        <li><a href="login.html"><span>Giriş Yap / Hesabım</span><i class="fas fa-user"></i></a></li>
+      </ul>
+      <div class="ev-drawer-foot">
+        <a href="https://wa.me/905077567887" target="_blank" class="btn btn-primary w-full" style="background:#25D366;border-color:#25D366;padding:11px 16px;font-size:0.86rem;">
+          <i class="fab fa-whatsapp"></i> WhatsApp Hızlı Destek
+        </a>
+        <a href="tel:+905077567887" class="btn btn-outline-dark w-full" style="padding:10px 16px;font-size:0.84rem;">
+          <i class="fas fa-phone-alt"></i> +90 507 756 78 87
+        </a>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    document.body.appendChild(drawer);
+
+    const closeDrawer = () => {
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+    };
+    menuBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+    });
+    overlay.addEventListener('click', closeDrawer);
+    document.getElementById('evDrawerClose')?.addEventListener('click', closeDrawer);
+  }
+});
+
