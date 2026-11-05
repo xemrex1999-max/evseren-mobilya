@@ -240,7 +240,17 @@ const searchClose = document.getElementById('searchClose');
 const scrollTopBtn = document.getElementById('scrollTop');
 
 // 3. SAYFA YUKLENDIGINDE
-window.allProductsData = window.fallbackProductsData;
+window.getEffectiveProducts = function() {
+    const base = window.fallbackProductsData || [];
+    let custom = [];
+    let deleted = [];
+    try { custom = JSON.parse(localStorage.getItem('evseren_custom_products') || '[]'); } catch(e) {}
+    try { deleted = JSON.parse(localStorage.getItem('evseren_deleted_products') || '[]').map(String); } catch(e) {}
+    const customIds = new Set(custom.map(p => String(p.id)));
+    const filteredBase = base.filter(p => !deleted.includes(String(p.id)) && !customIds.has(String(p.id)));
+    return [...custom, ...filteredBase];
+};
+window.allProductsData = window.getEffectiveProducts();
 document.addEventListener('DOMContentLoaded', async () => {
     // 1. Instant UI Updates (Auth & Cart)
     const userBtn = document.getElementById('userBtn');

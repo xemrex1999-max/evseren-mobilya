@@ -12,8 +12,8 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="style.css?v=20261105e" />
-    <link rel="stylesheet" href="checkout.css?v=20261105e" />
+    <link rel="stylesheet" href="style.css?v=20261105f" />
+    <link rel="stylesheet" href="checkout.css?v=20261105f" />
     <!-- Leaflet.js for Maps -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -92,7 +92,7 @@
                         <label>Kupon Kodu</label>
                         <div class="co-coupon-row">
                             <input type="text" id="couponInput" placeholder="Kupon kodunuz varsa girin" />
-                            <button class="btn btn-outline-dark" id="applyCoupon">Uygula</button>
+                            <button type="button" class="btn btn-outline-dark" id="applyCoupon" onclick="window.applyCouponCode && window.applyCouponCode(event)">Uygula</button>
                         </div>
                         <p class="coupon-msg" id="couponMsg"></p>
                     </div>
@@ -100,7 +100,7 @@
                     <div class="co-btns">
                         <a href="products.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Alışverişe
                             Devam</a>
-                        <button class="btn btn-primary" id="goToStep2" disabled>
+                        <button type="button" class="btn btn-primary" id="goToStep2" onclick="window.goToStep && window.goToStep(2)">
                             Teslimat Bilgilerine Geç <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
@@ -571,8 +571,8 @@
 
     <a href="https://wa.me/905077567887" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
-    <script src="script.js?v=20261105e"></script>
-    <script src="checkout.js?v=20261105e"></script>
+    <script src="script.js?v=20261105f"></script>
+    <script src="checkout.js?v=20261105f"></script>
 </body>
 
 </html>
